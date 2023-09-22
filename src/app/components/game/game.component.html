@@ -1,0 +1,9 @@
+<p>game works!</p>
+<button (click)="spawn()">Spawn</button>
+
+<div>Current Tadpoles: {{ (inventory$ | async)?.tadpoles }}</div>
+
+<div *ngIf="inventory">
+  <app-pond></app-pond>
+  <app-shop></app-shop>
+</div>

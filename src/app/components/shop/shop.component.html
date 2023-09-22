@@ -1,0 +1,9 @@
+
+<!-- Available shop items -->
+<p class="text-lg font-bold">Shop</p>
+<div class="grid grid-cols-3 gap-4">
+
+  <div *ngFor="let item of shop.items | keyvalue">
+    <app-shop-item [item]="shop.items[item.key]"></app-shop-item>
+  </div>
+</div>
