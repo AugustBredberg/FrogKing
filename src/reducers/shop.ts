@@ -3,6 +3,7 @@ import { ShopState } from '../models/states';
 import { createReducer, on } from '@ngrx/store';
 import { INITIAL_SHOP, SHOP} from '../models/shop-items';
 import { add, remove } from 'src/app/shop-actions';
+import { upgrade_pond } from 'src/app/inventory-actions';
 
 export var SHOP_INITIAL_STATE: ShopState = {
   items: INITIAL_SHOP
@@ -13,18 +14,28 @@ export var SHOP_INITIAL_STATE: ShopState = {
 export const shopReducer = createReducer(
   SHOP_INITIAL_STATE,
   on(add, (shop_state, action) => {
+    // Get item type
+    let item_type = action.item_type;
+    // Get product
+    let product = action.product;
+
     // Add product to shop
-    let new_items = { ...shop_state.items };
-    new_items[action.product] = SHOP[action.product];
+    let new_items = structuredClone(shop_state.items);
+    new_items[item_type][product] = SHOP[item_type][product];
     return {
       ...shop_state,
       items: new_items
     }
   }),
   on(remove, (shop_state, action) => {
+    // Get item type
+    let item_type = action.item_type;
+    // Get product
+    let product = action.product;
+
     // Remove product from shop
-    let new_items = { ...shop_state.items };
-    delete new_items[action.product];
+    let new_items = structuredClone(shop_state.items);
+    delete new_items[item_type][product];
     return {
       ...shop_state,
       items: new_items

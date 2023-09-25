@@ -3,7 +3,13 @@
 <p class="text-lg font-bold">Shop</p>
 <div class="grid grid-cols-3 gap-4">
 
-  <div *ngFor="let item of shop.items | keyvalue">
-    <app-shop-item [item]="shop.items[item.key]"></app-shop-item>
+
+  <div *ngFor="let item_type of shop.items | keyvalue">
+    <!-- Iterate through PONDS, EVOLUTIONS, ETC-->
+    <div *ngFor="let item of shop.items[item_type.key] | keyvalue;">
+
+      <app-shop-item [inventoryState]="inventoryState" [item]="shop.items[item_type.key][item.key]" (click)="upgradePond(shop.items[item_type.key][item.key])"></app-shop-item>
+
+    </div>
   </div>
 </div>

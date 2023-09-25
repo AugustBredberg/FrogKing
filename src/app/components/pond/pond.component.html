@@ -6,6 +6,6 @@
 <button (click)="evolveTadpole()" class="rounded-md bg-green-800 p-2">Evolve tadpole</button>
 
 <!-- Create frog component for each frog in inventory -->
-<div *ngFor="let frog of inventory.frogs | keyvalue">
-  <app-frog [frog]="frog.value"></app-frog>
+<div *ngFor="let frog of inventory.frogs">
+  <app-frog [frog]="frog"></app-frog>
 </div>

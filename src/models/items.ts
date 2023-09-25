@@ -1,21 +1,23 @@
 
 
 export interface Item {
-  id: number;
   name: string;
 }
 
 export interface FrogItem extends Item {
+  id: string,
+  kind: EVOLUTION_ENUM;
   evolves_into: EVOLUTION_ENUM[];
-  count: number;
   level: number;
   level_multiplier: number;
   production_rate: number;
 }
 
 export interface PondItem extends Item {
+  kind: POND_ENUM;
   tadpole_capacity: number;
   frog_capacity: number;
+  next_pond: POND_ENUM;
 }
 
 export enum INVENTORY_ENUM {
@@ -31,24 +33,26 @@ export enum EVOLUTION_ENUM {
 
 export enum POND_ENUM {
   SIMPLE_POND,
-  FANCY_POND
+  FANCY_POND,
+  SPECTACULAR_POND,
+  NO_UPGRADE = -1
 }
 
-export const FROGS: { [id: string]: FrogItem } = {
+export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.FROG]: {
-      id: EVOLUTION_ENUM.FROG,
+      id: crypto.randomUUID(),
       name: 'Frog',
+      kind: EVOLUTION_ENUM.FROG,
       evolves_into: [EVOLUTION_ENUM.TOAD],
-      count: 0,
       level: 1,
       level_multiplier: 0.05,
       production_rate: 2
   },
   [EVOLUTION_ENUM.TOAD]: {
-    id: EVOLUTION_ENUM.TOAD,
+    id: crypto.randomUUID(),
     name: 'Toad',
+    kind: EVOLUTION_ENUM.TOAD,
     evolves_into: [],
-    count: 0,
     level: 1,
     level_multiplier: 0.05,
     production_rate: 10
@@ -57,15 +61,24 @@ export const FROGS: { [id: string]: FrogItem } = {
 
 export const PONDS: { [id: string]: PondItem } = {
   [POND_ENUM.SIMPLE_POND]: {
-      id: POND_ENUM.SIMPLE_POND,
+      kind: POND_ENUM.SIMPLE_POND,
       name: 'Simple pond',
       tadpole_capacity: 50,
       frog_capacity: 2,
+      next_pond: POND_ENUM.FANCY_POND
   },
   [POND_ENUM.FANCY_POND]: {
-    id: POND_ENUM.FANCY_POND,
+    kind: POND_ENUM.FANCY_POND,
     name: 'Fancy pond',
     tadpole_capacity: 200,
     frog_capacity: 3,
-},
+    next_pond: POND_ENUM.SPECTACULAR_POND
+  },
+  [POND_ENUM.SPECTACULAR_POND]: {
+    kind: POND_ENUM.SPECTACULAR_POND,
+    name: 'Spectacular pond',
+    tadpole_capacity: 500,
+    frog_capacity: 4,
+    next_pond: POND_ENUM.NO_UPGRADE
+  },
 };

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { add } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState } from 'src/models/states';
+import { FrogItem } from 'src/models/items';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,9 @@ export class GameService {
     // TODO: Call add() with the production rate of each frog in the inventory
     var frogs = this.inventory.frogs;
     var store = this.store;
-    Object.keys(frogs).forEach(function(frog : string){
-      var frogItem = frogs[frog];
+    //Object.keys(frogs)
+    frogs.forEach(function(frogItem : FrogItem){
+      //var frogItem = frogs[frog];
 
       // Find tadpole rate for frog
       var bonus_production_level = (frogItem.level - 1) * frogItem.level_multiplier * frogItem.production_rate;

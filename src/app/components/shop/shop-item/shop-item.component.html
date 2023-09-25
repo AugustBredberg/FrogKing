@@ -1,6 +1,6 @@
 
 <!-- ShopItem properties -->
-<div class="bg-yellow-500">
+<button class="bg-yellow-500" [disabled]="item.cost < inventoryState.tadpoles">
   <p>{{item.name}}</p>
   <p>{{item.cost}}</p>
-</div>
+</button>

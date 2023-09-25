@@ -1,4 +1,4 @@
-import { Item, INVENTORY_ENUM, EVOLUTION_ENUM, FROGS, POND_ENUM, PondItem } from './items';
+import { Item, INVENTORY_ENUM, EVOLUTION_ENUM, DEFAULT_FROGS, POND_ENUM, PondItem } from './items';
 
 export enum SHOP_ITEM_TYPES {
     EVOLUTION, // Evolves a specific frog
@@ -8,6 +8,7 @@ export enum SHOP_ITEM_TYPES {
 }
 
 export interface ShopItem extends Item {
+  id: number;
   type: SHOP_ITEM_TYPES;
   rate: number;
   for: INVENTORY_ENUM;
@@ -27,11 +28,41 @@ export const POND_SHOP: { [id: string]: ShopItem } = {
       qty: 0,
       multiplier: 0 // Cost multiplier
   },
+  [POND_ENUM.SPECTACULAR_POND]: {
+    id: POND_ENUM.SPECTACULAR_POND,
+    name: 'Spectacular pond',
+    type: SHOP_ITEM_TYPES.POND,
+    cost: 200, // Costs 50 tadpoles
+    rate: 0, // Tadpoles per second
+    for: INVENTORY_ENUM.TADPOLE, // Costs tadpoles
+    qty: 0,
+    multiplier: 0 // Cost multiplier
+},
 };
-export const SHOP: { [id: string]: ShopItem } = POND_SHOP;
 
-export const INITIAL_SHOP: { [id: string]: ShopItem } = {
-  [POND_ENUM.FANCY_POND]: POND_SHOP[POND_ENUM.FANCY_POND]
+//export const SHOP: { [id: string]: ShopItem } = POND_SHOP;
+export const SHOP: {
+  [id: string]: {
+    [id: string]: ShopItem
+  }
+} = {
+  [SHOP_ITEM_TYPES.EVOLUTION]: {},
+  [SHOP_ITEM_TYPES.LEVELUP]: {},
+  [SHOP_ITEM_TYPES.FROGJUICE]: {},
+  [SHOP_ITEM_TYPES.POND]: POND_SHOP
+}
+
+export const INITIAL_SHOP: {
+  [id: string]: {
+    [id: string]: ShopItem
+  }
+} = {
+  [SHOP_ITEM_TYPES.EVOLUTION]: {},
+  [SHOP_ITEM_TYPES.LEVELUP]: {},
+  [SHOP_ITEM_TYPES.FROGJUICE]: {},
+  [SHOP_ITEM_TYPES.POND]: {
+    [POND_ENUM.FANCY_POND]: POND_SHOP[POND_ENUM.FANCY_POND]
+  }
 }
 
 

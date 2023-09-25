@@ -5,5 +5,5 @@
 
 <div *ngIf="inventory">
   <app-pond></app-pond>
-  <app-shop></app-shop>
+  <app-shop [inventoryState]="inventory"></app-shop>
 </div>

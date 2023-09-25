@@ -1,12 +1,12 @@
 import { InventoryState } from '../models/states';
-import { EVOLUTION_ENUM, FROGS, FrogItem, INVENTORY_ENUM, PONDS, POND_ENUM, PondItem } from '../models/items'; // Inventory is initially empty
+import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, INVENTORY_ENUM, PONDS, POND_ENUM, PondItem } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
-import { add, add_frog, evolve_frog, remove } from '../app/inventory-actions';
+import { add, add_frog, evolve_frog, remove, upgrade_pond } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
-  frogs: {}, // Initially empty
+  frogs: [], // Initially empty
   /*
   {
     [EVOLUTION_ENUM.FROG]: FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
@@ -38,29 +38,14 @@ export const inventoryReducer = createReducer(
   }),
   on(add_frog, (inventory_state, action) => {
     // Put given frog evolution in inventory of frogs
-    let current_frogs = { ...inventory_state.frogs };
+    let new_frog = structuredClone(DEFAULT_FROGS[action.evolution])
+    new_frog.id = crypto.randomUUID();
 
-    // Check if frog evolution is already in inventory
-    if (current_frogs[action.evolution]) {
-      // If so, increase count
-      //current_frogs[action.evolution].count++;
-      return {
-        ...inventory_state,
-        frogs: {
-          ...inventory_state.frogs,
-          [action.evolution]: inventory_state.frogs[action.evolution].count + 1
-        }
-      }
-    }
-    // If not, add frog evolution to inventory
-    let new_frogs = { ...inventory_state.frogs };
-    let new_frog = { ...FROGS[action.evolution] };
-    new_frog.count++;
-    new_frog.level = 1;
-    new_frogs[action.evolution] = new_frog;
     return {
       ...inventory_state,
-      frogs: new_frogs
+      frogs: inventory_state.frogs.length >= inventory_state.pond.frog_capacity // If frog capacity is reached, don't add
+        ? inventory_state.frogs
+        : inventory_state.frogs.concat(new_frog)
     }
   }),
   on(evolve_frog, (inventory_state, action) => {
@@ -68,7 +53,8 @@ export const inventoryReducer = createReducer(
     let new_frogs = { ...inventory_state.frogs };
 
     // Get the frog evolution
-    let new_frog = FROGS[action.evolution]
+    let new_frog = DEFAULT_FROGS[action.evolution];
+    new_frog.id = crypto.randomUUID();
 
     //let new_frog = { ...new_frogs[action.evolution] };
     //new_frog.count++;
@@ -80,6 +66,19 @@ export const inventoryReducer = createReducer(
         ...inventory_state.frogs,
         [action.evolution]: new_frog
       }
+    }
+  }),
+  on(upgrade_pond, (inventory_state, action) => {
+
+    // Set pond to given pond
+    var new_pond = PONDS[action.shop_item.id];
+
+    // Remove tadpoles from inventory
+    remove({ cost: action.shop_item.cost });
+
+    return {
+      ...inventory_state,
+      pond: new_pond
     }
   }),
 );
