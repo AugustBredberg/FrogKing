@@ -1,9 +1,11 @@
-<p>pond works!</p>
+<div class="pt-3" >
+  <p>pond works!</p>
 
-<p>Tadpole capacity: {{inventory.pond.tadpole_capacity}}</p>
-<p>Frog capacity: {{inventory.pond.frog_capacity}}</p>
+  <p>Tadpole capacity: {{ inventory.pond.tadpole_capacity }}</p>
+  <p>Frog capacity: {{ inventory.pond.frog_capacity }}</p>
 
-<!-- Create frog component for each frog in inventory -->
-<div *ngFor="let frog of inventory.frogs | keyvalue" class="pt-3">
-  <app-frog [frog]="frog.value" [inventory]="inventory"></app-frog>
+  <!-- Create frog component for each frog in inventory -->
+  <div class="pt-3 w-full justify-center flex" *ngFor="let frog of inventory.frogs | keyvalue" >
+    <app-frog class="w-11/12" [frog]="frog.value" [inventory]="inventory"></app-frog>
+  </div>
 </div>

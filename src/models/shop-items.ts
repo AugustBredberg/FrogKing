@@ -52,7 +52,7 @@ export const EVOLUTION_SHOP: { [id: string]: ShopItem } = {
       id: EVOLUTION_ENUM.TOAD,
       name: 'Evolve Frog into Toad',
       type: SHOP_ITEM_TYPES.EVOLUTION,
-      cost: 1, // Costs 100 tadpoles
+      cost: 100, // Costs 100 tadpoles
       rate: DEFAULT_FROGS[EVOLUTION_ENUM.TOAD].production_rate, // Tadpoles per second
       for: INVENTORY_ENUM.TADPOLE, // Costs tadpoles
       cost_multiplier: 0 // Cost multiplier

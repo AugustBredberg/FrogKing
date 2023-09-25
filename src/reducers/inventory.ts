@@ -9,7 +9,7 @@ export var INVENTORY_INITIAL_STATE: InventoryState = {
   frogs: {}, //[], // Initially empty
   /*
   {
-    [EVOLUTION_ENUM.FROG]: FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
+    [EVOLUTION_ENUM.FROG]: DEFAULT_FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
   },*/
   pond: PONDS[POND_ENUM.SIMPLE_POND]
 };

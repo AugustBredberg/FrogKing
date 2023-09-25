@@ -11,7 +11,9 @@
   </button>
 
   <div *ngIf="inventory">
-    <app-pond></app-pond>
+    <div class="w-full justify-center flex">
+      <app-pond class="w-full"></app-pond>
+    </div>
     <app-shop [inventoryState]="inventory"></app-shop>
   </div>
 </div>

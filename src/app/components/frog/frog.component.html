@@ -1,26 +1,44 @@
-
-
-
-<div class="bg-green-600 grid grid-cols-2 gap-4">
-  <!-- Frog Info -->
-  <div class="w-full">
-
-    <p class="text-lg font-bold">{{frog.name}}</p>
-    <p>
-      Level: {{frog.level}}
-      <button [disabled]="levelUpCost > inventory.tadpoles" (click)="levelUp()" class="bg-yellow-300" >Level up ({{levelUpCost}} tadpoles)</button>
-    </p>
-    <p>Produces: {{getProductionRate()}} tadpoles / s</p>
-  </div>
-
-  <!-- Frog actions -->
-  <div class="w-full">
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title class="text-white">
+      {{ frog.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <button
+        mat-button
+        [disabled]="levelUpCost > inventory.tadpoles"
+        (click)="levelUp()"
+        style="padding: 0px"
+      >
+        Level: {{ frog.level }}
+        <span> ({{ levelUpCost }} tadpoles) </span>
+      </button>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="absolute right-4 top-2 text-white text-lg">
+      <span class="text-2xl">
+        {{ getProductionRate() }}
+      </span>
+      tadpoles / s
+    </div>
 
     <!-- Evolution buttons -->
-    <div *ngFor="let evolution of frog.evolves_into">
-      <button [disabled]="getEvolutionCost(evolution) > inventory.tadpoles" (click)="evolve(evolution)" class="bg-yellow-300" >
-        Evolve into {{getEvolutionName(evolution)}} ({{getEvolutionCost(evolution)}} tadpoles)
-      </button>
+    <div class="pt-5">
+      <div *ngFor="let evolution of frog.evolves_into">
+        <button
+          mat-button
+          [disabled]="getEvolutionCost(evolution) > inventory.tadpoles"
+          (click)="evolve(evolution)"
+          class="bg-yellow-300"
+        >
+          Evolve into {{ getEvolutionName(evolution) }} ({{
+            getEvolutionCost(evolution)
+          }}
+          tadpoles)
+        </button>
+      </div>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

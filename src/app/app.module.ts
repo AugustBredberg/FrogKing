@@ -12,7 +12,9 @@ import { FrogComponent } from './components/frog/frog.component';
 import { shopReducer } from 'src/reducers/shop';
 import { ShopComponent } from './components/shop/shop.component';
 import { ShopItemComponent } from './components/shop/shop-item/shop-item.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,10 @@ import { ShopItemComponent } from './components/shop/shop-item/shop-item.compone
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ inventory: inventoryReducer, shop: shopReducer}, {})
+    StoreModule.forRoot({ inventory: inventoryReducer, shop: shopReducer}, {}),
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
