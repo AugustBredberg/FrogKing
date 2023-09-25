@@ -4,14 +4,23 @@
 <div class="bg-green-600 grid grid-cols-2 gap-4">
   <!-- Frog Info -->
   <div class="w-full">
-    <p>Frog: {{frog?.name}}</p>
-    <p>Level: {{frog?.level}}</p>
-    <p>Produces: {{frog?.production_rate}} tadpoles / s</p>
+
+    <p class="text-lg font-bold">{{frog.name}}</p>
+    <p>
+      Level: {{frog.level}}
+      <button [disabled]="levelUpCost > inventory.tadpoles" (click)="levelUp()" class="bg-yellow-300" >Level up ({{levelUpCost}} tadpoles)</button>
+    </p>
+    <p>Produces: {{getProductionRate()}} tadpoles / s</p>
   </div>
 
   <!-- Frog actions -->
   <div class="w-full">
-    <p>Unique id: {{frog?.id}}</p>
-    <button class="bg-yellow-300" >Level up</button>
+
+    <!-- Evolution buttons -->
+    <div *ngFor="let evolution of frog.evolves_into">
+      <button [disabled]="getEvolutionCost(evolution) > inventory.tadpoles" (click)="evolve(evolution)" class="bg-yellow-300" >
+        Evolve into {{getEvolutionName(evolution)}} ({{getEvolutionCost(evolution)}} tadpoles)
+      </button>
+    </div>
   </div>
 </div>

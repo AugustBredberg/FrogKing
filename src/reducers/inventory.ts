@@ -2,11 +2,11 @@ import { InventoryState } from '../models/states';
 import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, INVENTORY_ENUM, PONDS, POND_ENUM, PondItem } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
-import { add, add_frog, evolve_frog, remove, upgrade_pond } from '../app/inventory-actions';
+import { add, add_frog, evolve_frog, level_up_frog, remove, upgrade_pond } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
-  frogs: [], // Initially empty
+  frogs: {}, //[], // Initially empty
   /*
   {
     [EVOLUTION_ENUM.FROG]: FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
@@ -40,31 +40,37 @@ export const inventoryReducer = createReducer(
     // Put given frog evolution in inventory of frogs
     let new_frog = structuredClone(DEFAULT_FROGS[action.evolution])
     new_frog.id = crypto.randomUUID();
-
-    return {
-      ...inventory_state,
-      frogs: inventory_state.frogs.length >= inventory_state.pond.frog_capacity // If frog capacity is reached, don't add
-        ? inventory_state.frogs
-        : inventory_state.frogs.concat(new_frog)
-    }
-  }),
-  on(evolve_frog, (inventory_state, action) => {
-    // Put given frog evolution in inventory of frogs
-    let new_frogs = { ...inventory_state.frogs };
-
-    // Get the frog evolution
-    let new_frog = DEFAULT_FROGS[action.evolution];
-    new_frog.id = crypto.randomUUID();
-
-    //let new_frog = { ...new_frogs[action.evolution] };
-    //new_frog.count++;
-    //new_frog.level = 1;
-    new_frogs[action.evolution] = new_frog;
     return {
       ...inventory_state,
       frogs: {
         ...inventory_state.frogs,
-        [action.evolution]: new_frog
+        [new_frog.id]: new_frog
+      }
+    }
+  }),
+  on(level_up_frog, (inventory_state, action) => {
+    // Return inventory with given frog leveled up
+    return {
+      ...inventory_state,
+      frogs: {
+        ...inventory_state.frogs,
+        [action.frogId]: {
+          ...inventory_state.frogs[action.frogId],
+          level: inventory_state.frogs[action.frogId].level + 1,
+          //production_rate: inventory_state.frogs[action.frogId].production_rate * (1 + inventory_state.frogs[action.frogId].level_multiplier)
+        }
+      }
+    }
+  }),
+  on(evolve_frog, (inventory_state, action) => {
+    // Return inventory with given frog evolved
+    var new_frog = structuredClone(DEFAULT_FROGS[action.evolution])
+    new_frog.id = action.frogId;
+    return {
+      ...inventory_state,
+      frogs: {
+        ...inventory_state.frogs,
+        [action.frogId]: new_frog
       }
     }
   }),

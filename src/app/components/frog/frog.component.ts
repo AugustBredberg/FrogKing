@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { FrogItem } from 'src/models/items';
+import { GameService } from 'src/app/services/game.service';
+import { ShopService } from 'src/app/services/shop.service';
+import { DEFAULT_FROGS, EVOLUTION_ENUM, FrogItem } from 'src/models/items';
+import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { InventoryState } from 'src/models/states';
 
 @Component({
   selector: 'app-frog',
@@ -7,8 +11,43 @@ import { FrogItem } from 'src/models/items';
   styleUrls: ['./frog.component.scss']
 })
 export class FrogComponent {
-  @Input() frog: FrogItem | null;
+  @Input() frog: FrogItem;
+  @Input() inventory: InventoryState;
+  levelUpCost: number;
 
+  constructor(private shopService: ShopService, private gameService: GameService) {}
 
-  constructor() {}
+  ngOnInit() {
+    this.levelUpCost = this.getLevelUpCost();
+  }
+
+  levelUp(){
+    var cost = this.levelUpCost;
+    var levelUpShopItem = structuredClone(SHOP[SHOP_ITEM_TYPES.LEVELUP][this.frog.kind]);
+
+    // Update levelup cost for this frog
+    levelUpShopItem.cost = cost;
+    this.shopService.buy(levelUpShopItem, this.frog.id);
+  }
+
+  evolve(evolution: EVOLUTION_ENUM) {
+    var evolutionShopItem = structuredClone(SHOP[SHOP_ITEM_TYPES.EVOLUTION][evolution]);
+    this.shopService.buy(evolutionShopItem, this.frog.id);
+  }
+
+  getProductionRate() {
+    return this.gameService.calculateFrogProductionRate(this.frog);
+  }
+
+  getLevelUpCost() {
+    return this.gameService.calculateFrogLevelUpCost(this.frog);
+  }
+
+  getEvolutionCost(evolution: EVOLUTION_ENUM) {
+    return SHOP[SHOP_ITEM_TYPES.EVOLUTION][evolution].cost;
+  }
+
+  getEvolutionName(evolution: EVOLUTION_ENUM){
+    return DEFAULT_FROGS[evolution].name;
+  }
 }

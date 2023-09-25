@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { ShopState } from 'src/models/states';
 import { add, remove } from '../shop-actions';
-import { PONDS } from 'src/models/items';
+import { EVOLUTION_ENUM, PONDS } from 'src/models/items';
 import { InventoryService } from './inventory.service';
 
 @Injectable({
@@ -13,7 +13,8 @@ export class ShopService {
 
   constructor(private store: Store<{ shop: ShopState }>, private invService: InventoryService) { }
 
-  buy(item: ShopItem) {
+  // User can buy items that are tied to a specific frog etc. Frog is found using uniqueId
+  buy(item: ShopItem, uniqueId: string = "") {
     switch (item.type) {
       case SHOP_ITEM_TYPES.POND:
         console.log("Buying pond")
@@ -37,6 +38,11 @@ export class ShopService {
 
       case SHOP_ITEM_TYPES.EVOLUTION:
         console.log("Buying frog")
+        // Withdraw cost from inventory
+        this.invService.spendTadpoles(item.cost);
+
+        // Add evolution to inventory
+        this.invService.add(item, uniqueId);
         break;
 
       case SHOP_ITEM_TYPES.FROGJUICE:
@@ -45,6 +51,14 @@ export class ShopService {
 
       case SHOP_ITEM_TYPES.LEVELUP:
         console.log("Buying level up")
+        // Withdraw cost from inventory
+        this.invService.spendTadpoles(item.cost);
+
+        // Withdraw cost from inventory
+        this.invService.add(item, uniqueId);
+
+        // Level up frog in inventory
+
         break;
 
     }

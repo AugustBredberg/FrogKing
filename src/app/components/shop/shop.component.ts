@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { upgrade_pond } from 'src/app/inventory-actions';
+import { InventoryService } from 'src/app/services/inventory.service';
 import { ShopService } from 'src/app/services/shop.service';
 import { add, remove } from 'src/app/shop-actions';
 import { POND_ENUM } from 'src/models/items';
@@ -16,25 +17,15 @@ export class ShopComponent {
   @Input() inventoryState: InventoryState;
   shop: ShopState;
 
-  constructor(private store: Store<{ shop: ShopState }>, private shopService: ShopService) {
+  constructor(private store: Store<{ shop: ShopState }>, private shopService: ShopService, private inventoryService: InventoryService) {
     var shop_state = this.store.select('shop');
     shop_state.subscribe((shop) => {
       this.shop = shop;
     });
    }
 
-   buy(item: ShopItem) {
-    this.shopService.buy(item);
-  }
-
    upgradePond(shop_item: ShopItem ) {
-    this.buy(shop_item)
-    // TODO: Dispatch an evolve action
-
-    /*
-    this.store.dispatch(upgrade_pond({
-      shop_item: shop_item
-    }));
-    */
+    this.shopService.buy(shop_item);
+    this.inventoryService.add(shop_item)
   }
 }

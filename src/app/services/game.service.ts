@@ -3,6 +3,7 @@ import { add } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState } from 'src/models/states';
 import { FrogItem } from 'src/models/items';
+import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,31 @@ export class GameService {
   }
 
   private calculate(){
-    // TODO: Call add() with the production rate of each frog in the inventory
     var frogs = this.inventory.frogs;
     var store = this.store;
-    //Object.keys(frogs)
-    frogs.forEach(function(frogItem : FrogItem){
-      //var frogItem = frogs[frog];
+    var frogKeys = Object.keys(frogs)
+    var calculateFrogProductionRate = this.calculateFrogProductionRate;
+
+    frogKeys.forEach(function(frogKey : string){
+      var frogItem = frogs[frogKey];
 
       // Find tadpole rate for frog
-      var bonus_production_level = (frogItem.level - 1) * frogItem.level_multiplier * frogItem.production_rate;
-      var tadpole_rate = frogItem.production_rate + bonus_production_level;
       store.dispatch(add({
-        production_rate: tadpole_rate
+        production_rate: calculateFrogProductionRate(frogItem)
       }));
     });
+  }
+
+  public calculateFrogProductionRate(frogItem: FrogItem){
+    // Find tadpole rate for frog
+    var bonus_production_level = (frogItem.level - 1) * frogItem.level_multiplier * frogItem.production_rate;
+    var tadpole_rate = frogItem.production_rate + bonus_production_level;
+    return +tadpole_rate.toFixed(2);
+  }
+  public calculateFrogLevelUpCost(frogItem: FrogItem){
+    var frog_shop_item = SHOP[SHOP_ITEM_TYPES.LEVELUP][frogItem.kind];
+    var cost = frog_shop_item.cost;
+    cost += cost * frogItem.level * frog_shop_item.cost_multiplier;
+    return +cost.toFixed(2);
   }
 }

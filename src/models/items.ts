@@ -28,7 +28,8 @@ export enum INVENTORY_ENUM {
 
 export enum EVOLUTION_ENUM {
   FROG,
-  TOAD
+  TOAD,
+  GECKO
 }
 
 export enum POND_ENUM {
@@ -43,7 +44,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
       id: crypto.randomUUID(),
       name: 'Frog',
       kind: EVOLUTION_ENUM.FROG,
-      evolves_into: [EVOLUTION_ENUM.TOAD],
+      evolves_into: [EVOLUTION_ENUM.TOAD, EVOLUTION_ENUM.GECKO],
       level: 1,
       level_multiplier: 0.05,
       production_rate: 2
@@ -56,7 +57,16 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level: 1,
     level_multiplier: 0.05,
     production_rate: 10
-}
+  },
+  [EVOLUTION_ENUM.GECKO]: {
+    id: crypto.randomUUID(),
+    name: 'Gecko',
+    kind: EVOLUTION_ENUM.GECKO,
+    evolves_into: [],
+    level: 1,
+    level_multiplier: 0.15,
+    production_rate: 7
+  }
 };
 
 export const PONDS: { [id: string]: PondItem } = {
