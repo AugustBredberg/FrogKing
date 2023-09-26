@@ -3,5 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@700&display=swap");
+
+@import "../src/app/styles/FK-scrollbar.scss";
+@import "../src/app/styles/FK-primaryText.scss";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Inknut Antiqua", serif;
+}
