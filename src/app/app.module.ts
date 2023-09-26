@@ -15,6 +15,7 @@ import { ShopItemComponent } from './components/shop/shop-item/shop-item.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { CountUpDirective } from './directives/count-up.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
     PondComponent,
     FrogComponent,
     ShopComponent,
-    ShopItemComponent
+    ShopItemComponent,
+    CountUpDirective
   ],
   imports: [
     BrowserModule,

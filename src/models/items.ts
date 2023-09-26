@@ -6,6 +6,7 @@ export interface Item {
 
 export interface FrogItem extends Item {
   id: string,
+  description: string;
   kind: EVOLUTION_ENUM;
   evolves_into: EVOLUTION_ENUM[];
   level: number;
@@ -43,6 +44,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.FROG]: {
       id: crypto.randomUUID(),
       name: 'Frog',
+      description: 'A normal, everyday frog. It ribbits. It hops. It eats flies. It\'s a frog.',
       kind: EVOLUTION_ENUM.FROG,
       evolves_into: [EVOLUTION_ENUM.TOAD, EVOLUTION_ENUM.GECKO],
       level: 1,
@@ -52,6 +54,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.TOAD]: {
     id: crypto.randomUUID(),
     name: 'Toad',
+    description: 'A toad. It\'s a frog, but a toad. It\'s a little bigger now than before. A few wart-like bumps have appeared on its back. ',
     kind: EVOLUTION_ENUM.TOAD,
     evolves_into: [],
     level: 1,
@@ -61,6 +64,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.GECKO]: {
     id: crypto.randomUUID(),
     name: 'Gecko',
+    description: 'A gecko. It\'s body is narrower and more sleek than it was. It has a long tongue and can climb walls. An agile little fellow.',
     kind: EVOLUTION_ENUM.GECKO,
     evolves_into: [],
     level: 1,

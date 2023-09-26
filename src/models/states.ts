@@ -4,6 +4,7 @@ import { SHOP_ITEM_TYPES, ShopItem,  } from './shop-items';
 
 export interface InventoryState {
   tadpoles: number;
+  tadpolesPreviousState: number;
   frogs: { [itemName: string]: FrogItem }, //FrogItem[];//{ [itemName: string]: FrogItem };
   pond: PondItem;
 }

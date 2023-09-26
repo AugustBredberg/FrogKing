@@ -1,14 +1,37 @@
-<div>
-  <button class="w-20 h-10 bg-slate-300" (click)="spawn()">Spawn</button>
+<div class="w-full">
+  <!-- Centered  -->
+  <div class="flex justify-center">
+    <div class="text-3xl font-bold">
+      Current Tadpoles:
 
-  <div>Current Tadpoles: {{ (inventory$ | async)?.tadpoles }}</div>
-  <button
-    [disabled]="inventory.tadpoles < evolveTadpoleShopItem.cost || inventory.pond.frog_capacity <= frogsInInventory"
-    (click)="evolveTadpole()"
-    class="rounded-md bg-green-800 p-2"
-  >
-    Evolve tadpole
-  </button>
+      <!--
+        from: previous value.
+        countUp: current value.
+        duration: duration of animation in milliseconds.
+      -->
+      <p
+        [from]="inventory.tadpolesPreviousState"
+        [countUp]="(inventory.tadpoles)"
+        [duration]="1000">
+      </p>
+
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <button class="w-20 h-10 bg-slate-300" (click)="spawn()">Spawn</button>
+  </div>
+  <div class="flex justify-center">
+    <button
+      [disabled]="
+        inventory.tadpoles < evolveTadpoleShopItem.cost ||
+        inventory.pond.frog_capacity <= frogsInInventory
+      "
+      (click)="evolveTadpole()"
+      class="rounded-md bg-green-800 p-2"
+    >
+      Evolve tadpole
+    </button>
+  </div>
 
   <div *ngIf="inventory">
     <div class="w-full justify-center flex">

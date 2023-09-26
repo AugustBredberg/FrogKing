@@ -29,14 +29,19 @@ export class GameService {
     var frogKeys = Object.keys(frogs)
     var calculateFrogProductionRate = this.calculateFrogProductionRate;
 
+    // Only make one dispatch with the accumulated tadpole rate
+    var totalTadpoleRate = 0;
     frogKeys.forEach(function(frogKey : string){
       var frogItem = frogs[frogKey];
 
       // Find tadpole rate for frog
-      store.dispatch(add({
-        production_rate: calculateFrogProductionRate(frogItem)
-      }));
+      var tadpole_rate = calculateFrogProductionRate(frogItem);
+      totalTadpoleRate += tadpole_rate;
+
     });
+    store.dispatch(add({
+      production_rate: totalTadpoleRate
+    }));
   }
 
   public calculateFrogProductionRate(frogItem: FrogItem){

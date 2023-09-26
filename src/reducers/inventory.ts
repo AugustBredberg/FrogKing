@@ -6,6 +6,7 @@ import { add, add_frog, evolve_frog, level_up_frog, remove, upgrade_pond } from 
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
+  tadpolesPreviousState: 0,
   frogs: {}, //[], // Initially empty
   /*
   {
@@ -22,6 +23,7 @@ export const inventoryReducer = createReducer(
     // Increase amount of tadpoles by production rate
     return {
       ...inventory_state,
+      tadpolesPreviousState: inventory_state.tadpoles,
       tadpoles: inventory_state.pond.tadpole_capacity < inventory_state.tadpoles + action.production_rate // If tadpole capacity is reached, max out tadpoles
         ? inventory_state.pond.tadpole_capacity
         : inventory_state.tadpoles + action.production_rate
@@ -31,6 +33,7 @@ export const inventoryReducer = createReducer(
     // Reduce amount of tadpoles by cost
     return {
       ...inventory_state,
+      tadpolesPreviousState: inventory_state.tadpoles,
       tadpoles: inventory_state.tadpoles - action.cost < 0 // If user can't afford, don't remove
         ? inventory_state.tadpoles
         : inventory_state.tadpoles - action.cost
