@@ -114,6 +114,12 @@ export interface FrogPowerUpItem extends Item {
   productionRateMultiplier: number;
   expiration: Date; // Is set when powerup is used
 }
+export interface FrogPowerUpSideEffect extends Item {
+  name: string;
+  kind: FROG_POWERUP_SIDE_EFFECT_ENUM;
+  description: string;
+  risk: number; // 0-1
+}
 export enum FROG_POWERUP_ENUM {
   FROGROIDS,
 }
@@ -135,3 +141,30 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     expiration: new Date(), // Is set when powerup is used
   },
 };
+export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: { [id: string]: FrogPowerUpSideEffect } = {
+  [FROG_POWERUP_SIDE_EFFECT_ENUM.DIE]: {
+    name: 'Die',
+    kind: FROG_POWERUP_SIDE_EFFECT_ENUM.DIE,
+    description: 'The frog dies.',
+    risk: 0.2, // 20% chance of dying
+  },
+  [FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS]: {
+    name: 'Lose all levels',
+    kind: FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS,
+    description: 'The frog loses all levels.',
+    risk: 0.5, // 50% chance of losing all levels
+  },
+  [FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP]: {
+    name: 'Sleep',
+    kind: FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP,
+    description: 'The frog falls asleep.',
+    risk: 0.5, // 50% chance of falling asleep
+  },
+  [FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE]: {
+    name: 'Reduce production rate',
+    kind: FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE,
+    description: 'The frog reduces its production rate.',
+    risk: 1, // 100% chance of reducing production rate
+  },
+};
+

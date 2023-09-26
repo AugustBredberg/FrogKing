@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { add, power_down_frog } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState } from 'src/models/states';
-import { FrogItem } from 'src/models/items';
+import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem } from 'src/models/items';
 import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { InventoryService } from './inventory.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
 export class GameService {
   inventory: InventoryState;
 
-  constructor(private store: Store<{ inventory: InventoryState }>) {
+  constructor(private store: Store<{ inventory: InventoryState }>, private inventoryService: InventoryService) {
     var inventory_state = this.store.select('inventory');
     inventory_state.subscribe((inventory) => {
       this.inventory = inventory;
@@ -77,6 +78,10 @@ export class GameService {
           frogId: frogItem.id,
           powerUp: power_up.kind
         }));
+        // Handle power up side effects
+        power_up.sideEffects.forEach((sideEffect) => {
+          this.inventoryService.handleFrogSideEffect(frogItem.id, sideEffect);
+        });
         return;
       }
 

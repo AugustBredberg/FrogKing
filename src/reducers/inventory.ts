@@ -2,7 +2,7 @@ import { InventoryState } from '../models/states';
 import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem, DEFAULT_FROGPOWERUPS } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
-import { add, add_frog, evolve_frog, level_up_frog, power_down_frog, power_up_frog, remove, upgrade_pond } from '../app/inventory-actions';
+import { add, add_frog, evolve_frog, level_up_frog, power_down_frog, power_up_frog, remove, remove_frog, upgrade_pond } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
@@ -49,6 +49,15 @@ export const inventoryReducer = createReducer(
         ...inventory_state.frogs,
         [new_frog.id]: new_frog
       }
+    }
+  }),
+  on(remove_frog, (inventory_state, action) => {
+    // Remove given frog from inventory of frogs
+    let new_frogs = structuredClone(inventory_state.frogs);
+    delete new_frogs[action.frogId];
+    return {
+      ...inventory_state,
+      frogs: new_frogs
     }
   }),
   on(power_up_frog, (inventory_state, action) => {
