@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ShopState } from 'src/models/states';
-import { add, add_frog, evolve_frog, level_up_frog, remove, upgrade_pond } from '../inventory-actions';
+import { add, add_frog, evolve_frog, level_up_frog, power_up_frog, remove, upgrade_pond } from '../inventory-actions';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { EVOLUTION_ENUM } from 'src/models/items';
 
@@ -43,7 +43,11 @@ export class InventoryService {
         break;
 
       case SHOP_ITEM_TYPES.FROGPOWERUP:
-        console.log("Adding " + product + " " + item_type)
+        console.log("Applying powerup " + product + " " + item_type)
+        this.store.dispatch(power_up_frog({
+            frogId: uniqueId,
+            powerUp: product
+          }));
         break;
 
       case SHOP_ITEM_TYPES.LEVELUP:
