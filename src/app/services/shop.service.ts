@@ -47,6 +47,14 @@ export class ShopService {
 
       case SHOP_ITEM_TYPES.FROGPOWERUP:
         console.log("Buying frog juice")
+        // Withdraw cost from inventory
+        this.invService.spendTadpoles(item.cost);
+
+        // Remove item from shop
+        this.store.dispatch(remove({
+          item_type: SHOP_ITEM_TYPES.FROGPOWERUP,
+          product: item.id
+        }));
         break;
 
       case SHOP_ITEM_TYPES.LEVELUP:

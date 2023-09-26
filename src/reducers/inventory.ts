@@ -1,8 +1,8 @@
 import { InventoryState } from '../models/states';
-import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem } from '../models/items'; // Inventory is initially empty
+import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem, DEFAULT_FROGPOWERUPS } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
-import { add, add_frog, evolve_frog, level_up_frog, remove, upgrade_pond } from '../app/inventory-actions';
+import { add, add_frog, evolve_frog, level_up_frog, power_down_frog, power_up_frog, remove, upgrade_pond } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
@@ -50,6 +50,46 @@ export const inventoryReducer = createReducer(
         [new_frog.id]: new_frog
       }
     }
+  }),
+  on(power_up_frog, (inventory_state, action) => {
+    // Get powerup from default powerups
+    var powerup = DEFAULT_FROGPOWERUPS[action.powerUp];
+    var powerExpiration = new Date();
+    powerExpiration.setSeconds(powerExpiration.getSeconds() + powerup.duration);
+    powerup.expiration = powerExpiration; //new Date(Date.now() + powerup.duration * 1000);
+    //var test = powerup.expiration.toTimeString();
+    //var test2 = powerExpiration.toTimeString();
+
+    // Return inventory with given frog powered up
+    return {
+      ...inventory_state,
+      frogs: {
+        ...inventory_state.frogs,
+        [action.frogId]: {
+          ...inventory_state.frogs[action.frogId],
+          power_ups: [
+            ...inventory_state.frogs[action.frogId].power_ups,
+            powerup
+          ]
+        }
+      }
+    }
+  }),
+  on(power_down_frog, (inventory_state, action) => {
+    // Remove given powerup from frog
+    // Return inventory with given powerup removed from given frog
+    return {
+      ...inventory_state,
+      frogs: {
+        ...inventory_state.frogs,
+        [action.frogId]: {
+          ...inventory_state.frogs[action.frogId],
+          power_ups: inventory_state.frogs[action.frogId].power_ups.filter((power_up) => power_up.kind != action.powerUp)
+        }
+      }
+    }
+
+
   }),
   on(level_up_frog, (inventory_state, action) => {
     // Return inventory with given frog leveled up

@@ -14,11 +14,14 @@ export class FrogComponent {
   @Input() frog: FrogItem;
   @Input() inventory: InventoryState;
   levelUpCost: number;
+  productionRate: number;
 
   constructor(private shopService: ShopService, private gameService: GameService) {}
 
   ngOnInit() {
-    this.levelUpCost = this.getLevelUpCost();
+    //this.levelUpCost = this.getLevelUpCost();
+    this.productionRate = this.gameService.calculateFrogProductionRate(this.frog);
+    this.levelUpCost = this.gameService.calculateFrogLevelUpCost(this.frog);
   }
 
   levelUp(){
@@ -33,14 +36,6 @@ export class FrogComponent {
   evolve(evolution: EVOLUTION_ENUM) {
     var evolutionShopItem = structuredClone(SHOP[SHOP_ITEM_TYPES.EVOLUTION][evolution]);
     this.shopService.buy(evolutionShopItem, this.frog.id);
-  }
-
-  getProductionRate() {
-    return this.gameService.calculateFrogProductionRate(this.frog);
-  }
-
-  getLevelUpCost() {
-    return this.gameService.calculateFrogLevelUpCost(this.frog);
   }
 
   getEvolutionCost(evolution: EVOLUTION_ENUM) {

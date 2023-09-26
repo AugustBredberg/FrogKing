@@ -11,13 +11,14 @@
       (click)="upgradePond(shop.items[SHOP_ITEM_TYPES.POND][item.key])"
     ></app-shop-item>
   </div>
+
   <!-- Iterate through PONDS, EVOLUTIONS, ETC-->
   <p class="text-lg font-bold">{{ SHOP_ITEM_TYPES.FROGPOWERUP }}</p>
   <div *ngFor="let item of shop.items[SHOP_ITEM_TYPES.FROGPOWERUP] | keyvalue">
     <app-shop-item
       [inventoryState]="inventoryState"
       [item]="shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.key]"
-      (click)="upgradePond(shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.key])"
+      (click)="buyPowerUp(shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.key])"
     ></app-shop-item>
   </div>
 </div>
