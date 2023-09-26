@@ -1,15 +1,23 @@
-
 <!-- Available shop items -->
 <p class="text-lg font-bold">Shop</p>
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-1 gap-4">
 
-
-  <div *ngFor="let item_type of shop.items | keyvalue">
-    <!-- Iterate through PONDS, EVOLUTIONS, ETC-->
-    <div *ngFor="let item of shop.items[item_type.key] | keyvalue;">
-
-      <app-shop-item [inventoryState]="inventoryState" [item]="shop.items[item_type.key][item.key]" (click)="upgradePond(shop.items[item_type.key][item.key])"></app-shop-item>
-
-    </div>
+  <!-- Iterate through PONDS, EVOLUTIONS, ETC-->
+  <p class="text-lg font-bold">{{ SHOP_ITEM_TYPES.POND }}</p>
+  <div *ngFor="let item of shop.items[SHOP_ITEM_TYPES.POND] | keyvalue">
+    <app-shop-item
+      [inventoryState]="inventoryState"
+      [item]="shop.items[SHOP_ITEM_TYPES.POND][item.key]"
+      (click)="upgradePond(shop.items[SHOP_ITEM_TYPES.POND][item.key])"
+    ></app-shop-item>
+  </div>
+  <!-- Iterate through PONDS, EVOLUTIONS, ETC-->
+  <p class="text-lg font-bold">{{ SHOP_ITEM_TYPES.FROGPOWERUP }}</p>
+  <div *ngFor="let item of shop.items[SHOP_ITEM_TYPES.FROGPOWERUP] | keyvalue">
+    <app-shop-item
+      [inventoryState]="inventoryState"
+      [item]="shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.key]"
+      (click)="upgradePond(shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.key])"
+    ></app-shop-item>
   </div>
 </div>

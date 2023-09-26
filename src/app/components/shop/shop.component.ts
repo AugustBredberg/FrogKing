@@ -16,6 +16,7 @@ import { InventoryState, ShopState } from 'src/models/states';
 export class ShopComponent {
   @Input() inventoryState: InventoryState;
   shop: ShopState;
+  SHOP_ITEM_TYPES = SHOP_ITEM_TYPES;
 
   constructor(private store: Store<{ shop: ShopState }>, private shopService: ShopService, private inventoryService: InventoryService) {
     var shop_state = this.store.select('shop');

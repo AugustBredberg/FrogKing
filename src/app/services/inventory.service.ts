@@ -42,7 +42,7 @@ export class InventoryService {
         }
         break;
 
-      case SHOP_ITEM_TYPES.FROGJUICE:
+      case SHOP_ITEM_TYPES.FROGPOWERUP:
         console.log("Adding " + product + " " + item_type)
         break;
 

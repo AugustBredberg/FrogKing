@@ -45,7 +45,7 @@ export class ShopService {
         this.invService.add(item, uniqueId);
         break;
 
-      case SHOP_ITEM_TYPES.FROGJUICE:
+      case SHOP_ITEM_TYPES.FROGPOWERUP:
         console.log("Buying frog juice")
         break;
 

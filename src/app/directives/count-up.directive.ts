@@ -38,7 +38,7 @@ export class CountUpDirective implements OnInit {
         // for faster start and slower end of counting
         //map(easeOutQuad),
         // calculate current count
-        map((progress) => Math.round((progress * countInterval) + this.from)),
+        map((progress) => Math.round((progress * countInterval) + this.from) > count ? count : Math.round((progress * countInterval) + this.from)),
         // make sure that last emitted value is count
         endWith(Math.round(count)),
         distinctUntilChanged()

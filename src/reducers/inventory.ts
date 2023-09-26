@@ -1,5 +1,5 @@
 import { InventoryState } from '../models/states';
-import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, INVENTORY_ENUM, PONDS, POND_ENUM, PondItem } from '../models/items'; // Inventory is initially empty
+import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
 import { add, add_frog, evolve_frog, level_up_frog, remove, upgrade_pond } from '../app/inventory-actions';

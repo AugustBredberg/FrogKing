@@ -4,6 +4,13 @@ export interface Item {
   name: string;
 }
 
+export enum CURRENCY_ENUM {
+  TADPOLE,
+  FROGITEM
+}
+////////////////////////////////////////////////////////////
+/// FROGS
+////////////////////////////////////////////////////////////
 export interface FrogItem extends Item {
   id: string,
   description: string;
@@ -13,33 +20,11 @@ export interface FrogItem extends Item {
   level_multiplier: number;
   production_rate: number;
 }
-
-export interface PondItem extends Item {
-  kind: POND_ENUM;
-  tadpole_capacity: number;
-  frog_capacity: number;
-  next_pond: POND_ENUM;
-}
-
-export enum INVENTORY_ENUM {
-  TADPOLE,
-  FROGITEM
-}
-
-
 export enum EVOLUTION_ENUM {
   FROG,
   TOAD,
   GECKO
 }
-
-export enum POND_ENUM {
-  SIMPLE_POND,
-  FANCY_POND,
-  SPECTACULAR_POND,
-  NO_UPGRADE = -1
-}
-
 export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.FROG]: {
       id: crypto.randomUUID(),
@@ -73,6 +58,21 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   }
 };
 
+////////////////////////////////////////////////////////////
+/// PONDS
+////////////////////////////////////////////////////////////
+export interface PondItem extends Item {
+  kind: POND_ENUM;
+  tadpole_capacity: number;
+  frog_capacity: number;
+  next_pond: POND_ENUM;
+}
+export enum POND_ENUM {
+  SIMPLE_POND,
+  FANCY_POND,
+  SPECTACULAR_POND,
+  NO_UPGRADE = -1
+}
 export const PONDS: { [id: string]: PondItem } = {
   [POND_ENUM.SIMPLE_POND]: {
       kind: POND_ENUM.SIMPLE_POND,
@@ -94,5 +94,34 @@ export const PONDS: { [id: string]: PondItem } = {
     tadpole_capacity: 500,
     frog_capacity: 4,
     next_pond: POND_ENUM.NO_UPGRADE
+  },
+};
+
+////////////////////////////////////////////////////////////
+/// POWERUPS
+////////////////////////////////////////////////////////////
+export interface FrogPowerUpItem extends Item {
+  name: string;
+  description: string;
+  duration: number; // In seconds
+  sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM];
+  productionRateMultiplier: number;
+}
+export enum FROG_POWERUP_ENUM {
+  FROGROIDS
+}
+export enum FROG_POWERUP_SIDE_EFFECT_ENUM {
+  DIE,
+  LOSE_ALL_LEVELS,
+  SLEEP,
+  REDUCE_PRODUCTION_RATE,
+}
+export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
+  [FROG_POWERUP_ENUM.FROGROIDS]: {
+      name: 'Frogroids',
+      description: 'Enhance a frog with frogroids. They\'ll be more productive for a while. But be careful, they might die afterwards.',
+      duration: 300, // 5 minutes
+      sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.DIE],
+      productionRateMultiplier: 3
   },
 };
