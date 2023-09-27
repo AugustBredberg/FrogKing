@@ -16,6 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { CountUpDirective } from './directives/count-up.directive';
+import { FrogSectionComponent } from './components/frog-section/frog-section.component';
+import { HeaderSectionComponent } from './components/header-section/header-section.component';
+import { FrogTileComponent } from './components/frog-tile/frog-tile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,10 @@ import { CountUpDirective } from './directives/count-up.directive';
     FrogComponent,
     ShopComponent,
     ShopItemComponent,
-    CountUpDirective
+    CountUpDirective,
+    FrogSectionComponent,
+    HeaderSectionComponent,
+    FrogTileComponent
   ],
   imports: [
     BrowserModule,

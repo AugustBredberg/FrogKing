@@ -6,39 +6,24 @@
       <!-- LeftColumn (Info section and FrogSection) -->
       <div class="w-1/4 min-h-screen h-full flex flex-col">
         <!-- Frog Section  -->
-        <div
-          class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-25"
-        >
-          <!-- Counter -->
-          <div class="flex h-auto w-full">
-            <h1 class="text-white w-full text-center">1000</h1>
-          </div>
-          <div class="flex h-auto w-full">
-            <h1 class="text-white w-full text-center">Tadpoles</h1>
-          </div>
-
-          <div class="flex w-full h-full justify-center">
-            <button class="bg-frog h-full w-[70%] m-auto"></button>
-          </div>
-        </div>
+        <app-frog-section></app-frog-section>
         <!-- Info Section  -->
         <div
           class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-40"
         ></div>
       </div>
       <!-- Middle Column ( Frogs section and header) -->
-      <!-- Header -->
       <div
         class="w-1/2 min-h-screen h-full flex flex-col overflow-y-scroll scrollbar-hide"
       >
-        <div class="flex w-full h-24 bg-black bg-opacity-30">
-          <div class="flex flex-row w-full h-full">
-            <div class="flex flex-col w-3/4 bg-red-300">
-              <h1 class="text-xl primaryText">Guppy Bowl</h1>
-              <h1>Frog Capacity : 1</h1>
-              <h1>Tadpole Capacity : 200</h1>
-            </div>
-            <div class="flex w-1/4 bg-red-800"></div>
+        <!-- Header -->
+        <app-header-section></app-header-section>
+        <div class="pt-4">
+          <div
+            *ngFor="let frog of inventory.frogs | keyvalue"
+            class="w-full max-h-48"
+          >
+            <app-frog-tile></app-frog-tile>
           </div>
         </div>
       </div>
