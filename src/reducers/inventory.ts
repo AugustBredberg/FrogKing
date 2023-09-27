@@ -8,8 +8,8 @@ export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
   tadpolesPreviousState: 0,
   frogs: {}, //[], // Initially empty
-  /*
-  {
+
+  /*{
     [crypto.randomUUID()]: DEFAULT_FROGS[EVOLUTION_ENUM.FROG], // for testing, start with 1 frog
     [crypto.randomUUID()]: DEFAULT_FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
   },*/
