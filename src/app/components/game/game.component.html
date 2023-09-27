@@ -23,7 +23,7 @@
             *ngFor="let frog of inventory.frogs | keyvalue"
             class="w-full max-h-48"
           >
-            <app-frog-tile></app-frog-tile>
+            <app-frog-tile [frogItem]="frog.value"></app-frog-tile>
           </div>
         </div>
       </div>

@@ -13,12 +13,14 @@ import { shopReducer } from 'src/reducers/shop';
 import { ShopComponent } from './components/shop/shop.component';
 import { ShopItemComponent } from './components/shop/shop-item/shop-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { CountUpDirective } from './directives/count-up.directive';
 import { FrogSectionComponent } from './components/frog-section/frog-section.component';
 import { HeaderSectionComponent } from './components/header-section/header-section.component';
 import { FrogTileComponent } from './components/frog-tile/frog-tile.component';
+import { TooltipModule } from './components/tooltip/tooltip.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,17 +32,19 @@ import { FrogTileComponent } from './components/frog-tile/frog-tile.component';
     CountUpDirective,
     FrogSectionComponent,
     HeaderSectionComponent,
-    FrogTileComponent
+    FrogTileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ inventory: inventoryReducer, shop: shopReducer}, {}),
+    StoreModule.forRoot({ inventory: inventoryReducer, shop: shopReducer }, {}),
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    TooltipModule,
   ],
+
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

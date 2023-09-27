@@ -1,0 +1,10 @@
+<div
+  class="tooltip w-32 h-32"
+  [ngClass]="['tooltip--' + position]"
+  [style.left]="left + 'px'"
+  [style.top]="top + 'px'"
+>
+  {{ tooltip.header }}
+  {{ tooltip.body }}
+  {{ tooltip.primaryActionText }}
+</div>
