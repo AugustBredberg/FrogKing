@@ -89,10 +89,9 @@ export class TooltipDirective {
     const { left, right, top, bottom } =
       this.elementRef.nativeElement.getBoundingClientRect();
     if (this.componentRef && this.position === TooltipPosition.DYNAMICLEFT) {
-      this.componentRef.instance.left = $event.clientX;
       this.componentRef.instance.top = $event.clientY;
       this.componentRef.instance.tooltip = this.tooltip;
-      this.componentRef.instance.left = Math.round(left);
+      this.componentRef.instance.left = window.innerWidth * 0.62;
     }
 
     if (this.componentRef && this.position === TooltipPosition.DYNAMICUNDER) {

@@ -1,6 +1,9 @@
 export interface ITooltip {
   header: string;
   body: string;
+  effect?: string[];
+  price?: number;
+  itemId?: number;
   primaryActionText: string;
   secondaryActionText: string;
 }

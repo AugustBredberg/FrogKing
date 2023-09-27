@@ -8,11 +8,11 @@ import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
 import { DEFAULT_FROGPOWERUPS } from 'src/models/items';
 
 @Component({
-  selector: 'app-shop-item',
-  templateUrl: './shop-item.component.html',
-  styleUrls: ['./shop-item.component.scss'],
+  selector: 'app-shop-pond-item',
+  templateUrl: './shop-pond-item.component.html',
+  styleUrls: ['./shop-pond-item.component.scss'],
 })
-export class ShopItemComponent implements OnInit {
+export class ShopPondItemComponent implements OnInit {
   @Input() item: ShopItem;
   @Input() inventoryState: InventoryState;
   SHOP_ITEM_TYPES = SHOP_ITEM_TYPES;

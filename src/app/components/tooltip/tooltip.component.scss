@@ -1,11 +1,8 @@
 .tooltip {
   position: fixed;
-  background-color: black;
-  border-radius: 4px;
-  color: #ffffff;
-  font-family: Arial;
-  padding: 3px 6px;
-  font-size: 13px;
+
+  padding: 12px 12px;
+
   margin-top: 5px;
   transform: translateX(-50%);
 
@@ -34,4 +31,16 @@
       display: none;
     }
   }
+}
+.tooltip-item-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.currency-icon {
+  background-image: url(../../../assets/images/tadpole-currency.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }

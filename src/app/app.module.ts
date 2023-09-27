@@ -16,10 +16,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CountUpDirective } from './directives/count-up.directive';
-import { FrogSectionComponent } from './components/frog-section/frog-section.component';
+import { FrogKingSectionComponent } from './components/frog-king-section/frog-king-section.component';
 import { HeaderSectionComponent } from './components/header-section/header-section.component';
 import { FrogTileComponent } from './components/frog-tile/frog-tile.component';
 import { TooltipModule } from './components/tooltip/tooltip.module';
+import { SpawnFrogTileComponent } from './components/spawn-frog-tile/spawn-frog-tile.component';
+import { ShopPondItemComponent } from './components/shop-pond-item/shop-pond-item.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,11 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
     ShopComponent,
     ShopItemComponent,
     CountUpDirective,
-    FrogSectionComponent,
+    FrogKingSectionComponent,
     HeaderSectionComponent,
     FrogTileComponent,
+    SpawnFrogTileComponent,
+    ShopPondItemComponent,
   ],
   imports: [
     BrowserModule,

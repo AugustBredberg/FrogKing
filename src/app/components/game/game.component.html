@@ -6,10 +6,10 @@
       <!-- LeftColumn (Info section and FrogSection) -->
       <div class="w-1/4 min-h-screen h-full flex flex-col">
         <!-- Frog Section  -->
-        <app-frog-section></app-frog-section>
+        <app-frog-king-section></app-frog-king-section>
         <!-- Info Section  -->
         <div
-          class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-40"
+          class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-40 backdrop-blur-sm"
         ></div>
       </div>
       <!-- Middle Column ( Frogs section and header) -->
@@ -25,12 +25,17 @@
           >
             <app-frog-tile [frogItem]="frog.value"></app-frog-tile>
           </div>
+          <div *ngIf="true">
+            <app-spawn-frog-tile></app-spawn-frog-tile>
+          </div>
         </div>
       </div>
       <!-- Right Column ( Shop ) -->
       <div
-        class="w-1/4 min-h-screen h-full flex flex-col bg-red-500 opacity-25 overflow-y-scroll scrollbar-hide"
-      ></div>
+        class="w-1/4 min-h-screen h-full flex flex-col bg-black bg-opacity-40 overflow-y-scroll scrollbar-hide backdrop-blur-sm"
+      >
+        <app-shop [inventoryState]="inventory"></app-shop>
+      </div>
     </div>
   </div>
 </div>
