@@ -116,16 +116,17 @@ export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
 export const POND_SHOP: { [id: string]: ShopItem } = {
   [POND_ENUM.TOILET]: {
     id: POND_ENUM.TOILET,
-    name: 'Fancy pond',
+    name: 'A Toilet',
     type: SHOP_ITEM_TYPES.POND,
     cost: 50, // Costs 50 tadpoles
     rate: 0, // Tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
     cost_multiplier: 0, // Cost multiplier
   },
+
   [POND_ENUM.SIMPLE_POND]: {
     id: POND_ENUM.SIMPLE_POND,
-    name: 'Fancy pond',
+    name: 'Simple pond',
     type: SHOP_ITEM_TYPES.POND,
     cost: 200, // Costs 50 tadpoles
     rate: 0, // Tadpoles per second

@@ -12,11 +12,10 @@
     </div>
     <button
       [disabled]="
-        false &&
-        (inventory.tadpoles < evolveTadpoleShopItem.cost ||
-          inventory.pond.frog_capacity <= frogsInInventory)
+        inventory.tadpoles < evolveTadpoleShopItem.cost ||
+        inventory.pond.frog_capacity <= frogsInInventory
       "
-      class="flex flex-col h-auto w-1/5 bg-black bg-opacity-20 text-center py-3"
+      class="flex flex-col h-auto w-1/5 bg-black bg-opacity-20 text-center py-3 cursor-pointer"
       (click)="spawnFrog()"
     >
       <div class="flex h-full w-full text-center">
@@ -28,9 +27,13 @@
       </div>
       <div class="flex flex-row h-full w-full text-center">
         <p
-          class="text-md flex primaryText w-full h-full justify-center items-center"
+          class="w-72 h-auto text-left primaryText text-sm flex items-center justify-center"
         >
-          X 20
+          <img
+            class="h-[24px] w-[24px] mr-2"
+            src="../../../assets/images/tadpole-currency.png"
+          />
+          20
         </p>
       </div>
     </button>

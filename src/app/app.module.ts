@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { inventoryReducer } from '../reducers/inventory';
 import { GameComponent } from './components/game/game.component';
@@ -23,6 +24,8 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { SpawnFrogTileComponent } from './components/spawn-frog-tile/spawn-frog-tile.component';
 import { ShopPondItemComponent } from './components/shop-pond-item/shop-pond-item.component';
 import { PondFullTileComponent } from './components/pond-full-tile/pond-full-tile.component';
+import { EvolveDialogComponent } from './components/dialogs/evolve-dialog/evolve-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { PondFullTileComponent } from './components/pond-full-tile/pond-full-til
     SpawnFrogTileComponent,
     ShopPondItemComponent,
     PondFullTileComponent,
+    EvolveDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +52,10 @@ import { PondFullTileComponent } from './components/pond-full-tile/pond-full-til
     MatCardModule,
     MatButtonModule,
     TooltipModule,
+    MatDialogModule,
   ],
 
-  providers: [],
+  providers: [MatDialogModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

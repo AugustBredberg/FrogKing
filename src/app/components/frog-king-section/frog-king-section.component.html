@@ -1,4 +1,4 @@
-<div class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-25">
+<div class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-40">
   <!-- Counter -->
   <div class="flex flex-col h-auto w-full leading-tight">
     <!--
@@ -20,9 +20,15 @@
     </p>
   </div>
 
-  <div class="flex w-full h-full justify-center">
-    <button (click)="spawn()" class="bg-frog h-full w-[70%] m-auto"></button>
+  <div class="flex w-full h-full justify-center relative">
+    <div class="bg-frog h-full w-[70%] m-auto"></div>
+    <button
+      class="h-full w-[70%] m-auto bg-transparent"
+      (click)="spawn($event)"
+      style="position: absolute; z-index: 1"
+    ></button>
   </div>
+
   <div class="flex flex-col h-auto w-full leading-tight">
     <p
       class="flex text-white w-full text-center text-4xl primaryText justify-center"
@@ -34,5 +40,20 @@
     >
       Tadpoles / s
     </p>
+  </div>
+</div>
+
+<div
+  *ngFor="let mark of hitmarks"
+  class="absolute"
+  [ngStyle]="{ 'left.px': mark.x, 'top.px': mark.y }"
+>
+  <div
+    *ngIf="mark.visible"
+    class="fade-in-out primaryText text-2xl absolute"
+    [@fadeInOut]
+    [@moveUp]
+  >
+    +{{ mark.tp }}
   </div>
 </div>

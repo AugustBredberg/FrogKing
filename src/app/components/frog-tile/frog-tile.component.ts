@@ -4,6 +4,10 @@ import { ShopService } from 'src/app/services/shop.service';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
 import { FrogItem } from 'src/models/items';
 import { LEVEL_SHOP, SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.component';
+
 @Component({
   selector: 'app-frog-tile',
   templateUrl: './frog-tile.component.html',
@@ -17,7 +21,8 @@ export class FrogTileComponent implements OnInit {
   productionRate: number;
   constructor(
     private gameService: GameService,
-    private shopService: ShopService
+    private shopService: ShopService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -25,7 +30,9 @@ export class FrogTileComponent implements OnInit {
       this.frogItem
     );
 
-    this.levelUpCost = this.gameService.calculateFrogLevelUpCost(this.frogItem);
+    this.levelUpCost = Math.round(
+      this.gameService.calculateFrogLevelUpCost(this.frogItem)
+    );
   }
   levelUp() {
     var cost = this.levelUpCost;
@@ -36,5 +43,16 @@ export class FrogTileComponent implements OnInit {
     // Update levelup cost for this frog
     levelUpShopItem.cost = cost;
     this.shopService.buy(levelUpShopItem, this.frogItem.id);
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(EvolveDialogComponent, {
+      height: '400px',
+      width: '600px',
+      panelClass: 'evolve-dialog-class',
+    });
+    dialogRef.afterClosed().subscribe((evolution) => {
+      console.log(`Dialog closed`, evolution);
+    });
   }
 }

@@ -43,10 +43,8 @@ export class ShopItemComponent implements OnInit {
       negativeText: shopItemSummary.negativeEffects,
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
-      image: '../../../assets/images/item-image-' + this.item.id + '.png',
+      image: '../../../assets/images/items/item-image-' + this.item.id + '.png',
       itemId: this.item.id,
-      primaryActionText: '',
-      secondaryActionText: '',
     };
   }
   buyPowerUp(shop_item: ShopItem) {

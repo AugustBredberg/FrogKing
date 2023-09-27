@@ -46,8 +46,6 @@ export class ShopPondItemComponent implements OnInit {
       image: '../../../assets/images/bowls/bowl-icon-' + this.item.id + '.png',
 
       itemId: this.item.id,
-      primaryActionText: '',
-      secondaryActionText: '',
     };
   }
 

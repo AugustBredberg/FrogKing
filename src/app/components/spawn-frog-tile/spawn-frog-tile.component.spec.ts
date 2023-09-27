@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpawnFrogTileComponent } from './spawn-frog-tile.component';
+import { SpawnFrogTileComponent } from './SpawnFrogTileComponent';
 
 describe('SpawnFrogTileComponent', () => {
   let component: SpawnFrogTileComponent;
@@ -8,7 +8,7 @@ describe('SpawnFrogTileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SpawnFrogTileComponent]
+      declarations: [SpawnFrogTileComponent],
     });
     fixture = TestBed.createComponent(SpawnFrogTileComponent);
     component = fixture.componentInstance;
