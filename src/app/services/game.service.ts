@@ -45,6 +45,16 @@ export class GameService {
     );
   }
 
+  public calculateTotalProductionRate() {
+    var totalTadpoleRate = 0;
+    Object.keys(this.inventory.frogs).forEach((frogId: string) => {
+      var frogItem = this.inventory.frogs[frogId];
+      var tadpole_rate = this.calculateFrogProductionRate(frogItem);
+      totalTadpoleRate += tadpole_rate;
+    });
+    return totalTadpoleRate;
+  }
+
   public calculateFrogProductionRate(frogItem: FrogItem) {
     // Find tadpole rate for frog
     var bonus_production_level =

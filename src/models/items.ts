@@ -20,45 +20,45 @@ export interface FrogItem extends Item {
   power_ups: FrogPowerUpItem[];
 }
 export enum EVOLUTION_ENUM {
-  FROG,
-  TOAD,
-  GECKO,
+  TIER1,
+  TIER2,
+  TIER3,
 }
 export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
-  [EVOLUTION_ENUM.FROG]: {
+  [EVOLUTION_ENUM.TIER1]: {
     id: crypto.randomUUID(),
     name: 'Frog',
     description:
       "A normal, everyday frog. It ribbits. It hops. It eats flies. It's a frog.",
-    kind: EVOLUTION_ENUM.FROG,
-    evolves_into: [EVOLUTION_ENUM.TOAD, EVOLUTION_ENUM.GECKO],
+    kind: EVOLUTION_ENUM.TIER1,
+    evolves_into: [EVOLUTION_ENUM.TIER2],
     level: 1,
     level_multiplier: 0.05,
     production_rate: 2,
     power_ups: [],
   },
-  [EVOLUTION_ENUM.TOAD]: {
+  [EVOLUTION_ENUM.TIER2]: {
     id: crypto.randomUUID(),
     name: 'Toad',
     description:
       "A toad. It's a frog, but a toad. It's a little bigger now than before. A few wart-like bumps have appeared on its back. ",
-    kind: EVOLUTION_ENUM.TOAD,
-    evolves_into: [],
+    kind: EVOLUTION_ENUM.TIER2,
+    evolves_into: [EVOLUTION_ENUM.TIER3],
     level: 1,
     level_multiplier: 0.05,
-    production_rate: 10,
+    production_rate: 4,
     power_ups: [],
   },
-  [EVOLUTION_ENUM.GECKO]: {
+  [EVOLUTION_ENUM.TIER3]: {
     id: crypto.randomUUID(),
     name: 'Gecko',
     description:
       "A gecko. It's body is narrower and more sleek than it was. It has a long tongue and can climb walls. An agile little fellow.",
-    kind: EVOLUTION_ENUM.GECKO,
+    kind: EVOLUTION_ENUM.TIER3,
     evolves_into: [],
     level: 1,
     level_multiplier: 0.15,
-    production_rate: 7,
+    production_rate: 6,
     power_ups: [],
   },
 };

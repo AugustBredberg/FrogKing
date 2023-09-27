@@ -44,12 +44,12 @@ export class InventoryService {
 
       case SHOP_ITEM_TYPES.EVOLUTION:
         // Check if evolving frog or tadpole
-        if (item.id == EVOLUTION_ENUM.FROG) {
+        if (item.id == EVOLUTION_ENUM.TIER1) {
           // Evolve tadpole
           // Add the evolved frog to the inventory
           this.store.dispatch(
             add_frog({
-              evolution: EVOLUTION_ENUM.FROG,
+              evolution: EVOLUTION_ENUM.TIER1,
             })
           );
         } else {

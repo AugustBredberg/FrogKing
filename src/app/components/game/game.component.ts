@@ -17,7 +17,7 @@ import { EVOLUTION_ENUM } from 'src/models/items';
 export class GameComponent implements OnInit {
   inventory$: Observable<InventoryState>
   inventory: InventoryState
-  evolveTadpoleShopItem = SHOP[SHOP_ITEM_TYPES.EVOLUTION][EVOLUTION_ENUM.FROG];
+  evolveTadpoleShopItem = SHOP[SHOP_ITEM_TYPES.EVOLUTION][EVOLUTION_ENUM.TIER1];
 
   frogsInInventory: number = 0;
 
