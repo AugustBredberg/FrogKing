@@ -3,8 +3,8 @@ import { Item, CURRENCY_ENUM, EVOLUTION_ENUM, DEFAULT_FROGS, POND_ENUM, PondItem
 export enum SHOP_ITEM_TYPES {
     EVOLUTION, // Evolves a specific frog
     LEVELUP, // Levels up a specific frog
-    FROGPOWERUP = "Frog power-ups", // Powers up the frog type that it is applied on (e.g. Runners shoes, FrogRoids, etc.)
-    POND = "Ponds" // Increases the capacity of the pond
+    FROGPOWERUP, // Powers up the frog type that it is applied on (e.g. Runners shoes, FrogRoids, etc.)
+    POND // Increases the capacity of the pond
 }
 
 export interface ShopItem extends Item {
