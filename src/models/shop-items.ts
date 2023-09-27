@@ -85,6 +85,24 @@ export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
       for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
       cost_multiplier: 0 // Cost multiplier
   },
+  [FROG_POWERUP_ENUM.FRODKA]: {
+      id: FROG_POWERUP_ENUM.FRODKA,
+      name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FRODKA].name,
+      type: SHOP_ITEM_TYPES.FROGPOWERUP,
+      cost: 10, // Costs 20 tadpoles
+      rate: 0, // Tadpoles per second
+      for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+      cost_multiplier: 0 // Cost multiplier
+  },
+  [FROG_POWERUP_ENUM.FRABIES]: {
+      id: FROG_POWERUP_ENUM.FRABIES,
+      name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FRABIES].name,
+      type: SHOP_ITEM_TYPES.FROGPOWERUP,
+      cost: 15, // Costs 20 tadpoles
+      rate: 0, // Tadpoles per second
+      for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+      cost_multiplier: 0 // Cost multiplier
+  },
 };
 export const POND_SHOP: { [id: string]: ShopItem } = {
   [POND_ENUM.FANCY_POND]: {
@@ -126,9 +144,10 @@ export const INITIAL_SHOP: {
 } = {
   [SHOP_ITEM_TYPES.EVOLUTION]: {},
   [SHOP_ITEM_TYPES.LEVELUP]: {},
-  [SHOP_ITEM_TYPES.FROGPOWERUP]: {
+  [SHOP_ITEM_TYPES.FROGPOWERUP]: FROGPOWERUP_SHOP,
+  /* {
     [FROG_POWERUP_ENUM.FROGROIDS]: FROGPOWERUP_SHOP[FROG_POWERUP_ENUM.FROGROIDS]
-  },
+  },*/
   [SHOP_ITEM_TYPES.POND]: {
     [POND_ENUM.FANCY_POND]: POND_SHOP[POND_ENUM.FANCY_POND]
   }

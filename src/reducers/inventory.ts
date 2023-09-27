@@ -2,7 +2,7 @@ import { InventoryState } from '../models/states';
 import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem, DEFAULT_FROGPOWERUPS } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
-import { add, add_frog, evolve_frog, level_up_frog, power_down_frog, power_up_frog, remove, remove_frog, upgrade_pond } from '../app/inventory-actions';
+import { add, add_frog, evolve_frog, level_down_frog, level_up_frog, power_down_frog, power_up_frog, remove, remove_frog, upgrade_pond } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
@@ -10,7 +10,8 @@ export var INVENTORY_INITIAL_STATE: InventoryState = {
   frogs: {}, //[], // Initially empty
   /*
   {
-    [EVOLUTION_ENUM.FROG]: DEFAULT_FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
+    [crypto.randomUUID()]: DEFAULT_FROGS[EVOLUTION_ENUM.FROG], // for testing, start with 1 frog
+    [crypto.randomUUID()]: DEFAULT_FROGS[EVOLUTION_ENUM.FROG] // for testing, start with 1 frog
   },*/
   pond: PONDS[POND_ENUM.SIMPLE_POND]
 };
@@ -110,6 +111,28 @@ export const inventoryReducer = createReducer(
           ...inventory_state.frogs[action.frogId],
           level: inventory_state.frogs[action.frogId].level + 1,
           //production_rate: inventory_state.frogs[action.frogId].production_rate * (1 + inventory_state.frogs[action.frogId].level_multiplier)
+        }
+      }
+    }
+  }),
+  on(level_down_frog, (inventory_state, action) => {
+    // Does frog exist?
+    if(!inventory_state.frogs[action.frogId]) {
+      return inventory_state;
+    }
+
+    // Return inventory with given frog leveled down by given levels
+    var new_level = inventory_state.frogs[action.frogId].level - action.levels;
+    if (new_level < 1) {
+      new_level = 1;
+    }
+    return {
+      ...inventory_state,
+      frogs: {
+        ...inventory_state.frogs,
+        [action.frogId]: {
+          ...inventory_state.frogs[action.frogId],
+          level: new_level
         }
       }
     }

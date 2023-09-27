@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { add, power_down_frog } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState } from 'src/models/states';
-import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem } from 'src/models/items';
+import { DEFAULT_FROGPOWERUPS_SIDE_EFFECTS, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem } from 'src/models/items';
 import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
 
@@ -52,11 +52,11 @@ export class GameService {
       frogItem.level_multiplier *
       frogItem.production_rate;
     var tadpole_rate = frogItem.production_rate + bonus_production_level;
-    // Find production rate from powerups
 
+    // Find new production rate after applying powerups
     if (frogItem.power_ups.length > 0) {
-      var power_up_production = this.calculateFrogPowerUpProduction(frogItem);
-      tadpole_rate += power_up_production;
+      var power_up_production = this.calculateFrogPowerUpProduction(frogItem, tadpole_rate);
+      tadpole_rate = power_up_production;
     }
     return +tadpole_rate.toFixed(2);
   }
@@ -67,9 +67,9 @@ export class GameService {
     return +cost.toFixed(2);
   }
 
-  public calculateFrogPowerUpProduction(frogItem: FrogItem) {
+  public calculateFrogPowerUpProduction(frogItem: FrogItem, currentTadpoleRate: number) {
     var power_ups = frogItem.power_ups;
-    var power_up_production = 0;
+    //var power_up_production = 0;
     power_ups.forEach( (power_up) => {
       // Remove power-up if expired
       if (new Date() > power_up.expiration) {
@@ -80,14 +80,14 @@ export class GameService {
         }));
         // Handle power up side effects
         power_up.sideEffects.forEach((sideEffect) => {
-          this.inventoryService.handleFrogSideEffect(frogItem.id, sideEffect);
+          var sideEffectItem = DEFAULT_FROGPOWERUPS_SIDE_EFFECTS[sideEffect];
+          this.inventoryService.handleFrogSideEffect(frogItem.id, sideEffectItem);
         });
         return;
       }
 
-      power_up_production +=
-        power_up.productionRateMultiplier * frogItem.production_rate;
+      currentTadpoleRate *= power_up.productionRateMultiplier;
     });
-    return power_up_production;
+    return currentTadpoleRate;
   }
 }

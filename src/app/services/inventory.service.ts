@@ -5,6 +5,7 @@ import {
   add,
   add_frog,
   evolve_frog,
+  level_down_frog,
   level_up_frog,
   power_up_frog,
   remove,
@@ -15,7 +16,9 @@ import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import {
   DEFAULT_FROGPOWERUPS_SIDE_EFFECTS,
   EVOLUTION_ENUM,
+  FROG_POWERUP_ENUM,
   FROG_POWERUP_SIDE_EFFECT_ENUM,
+  FrogPowerUpSideEffect,
 } from 'src/models/items';
 
 @Injectable({
@@ -84,45 +87,53 @@ export class InventoryService {
 
   handleFrogSideEffect(
     frogId: string,
-    sideEffect: FROG_POWERUP_SIDE_EFFECT_ENUM
+    sideEffectItem: FrogPowerUpSideEffect
   ) {
+    var sideEffect = sideEffectItem.kind;
     switch (sideEffect) {
       case FROG_POWERUP_SIDE_EFFECT_ENUM.DIE:
-        var sideEffectItem = DEFAULT_FROGPOWERUPS_SIDE_EFFECTS[sideEffect];
-        var risk = sideEffectItem.risk
-        // Determine if frog dies depending on side effect risk
-        var roll = Math.random();
-        if (roll > risk) {
-          // Kill frog
-          this.store.dispatch(
-            remove_frog({
-              frogId: frogId,
-            })
-          );
-        }
-
+        var sideEffectOccurs = this.willFrogSideEffectOccur(sideEffectItem.risk);
+        if (!sideEffectOccurs) return;
+        // Kill frog
+        this.store.dispatch(
+          remove_frog({
+            frogId: frogId,
+          })
+        );
         break;
       case FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS:
+        var sideEffectOccurs = this.willFrogSideEffectOccur(sideEffectItem.risk);
+        if (!sideEffectOccurs) return;
         // Level down frog
-        /*
-              this.store.dispatch(level_down_frog({
-                frogId: frogItem.id
-              }));*/
+        this.store.dispatch(
+          level_down_frog({
+            frogId: frogId,
+            levels: 1000,
+          })
+        );
         break;
 
       case FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP:
-        // Put frog to sleep
-        /*
-              this.store.dispatch(sleep_frog({
-                frogId: frogItem.id
-              }));*/
+        var sideEffectOccurs = this.willFrogSideEffectOccur(sideEffectItem.risk);
+        if (!sideEffectOccurs) return;
+        // Put frog to sleep (apply SLEEPING power up)
+        this.store.dispatch(
+          power_up_frog({
+            frogId: frogId,
+            powerUp: FROG_POWERUP_ENUM.SLEEPING,
+          })
+        );
         break;
       case FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE:
-        // Slow production
-        /*
-              this.store.dispatch(slow_production({
-                frogId: frogItem.id
-              }));*/
+        var sideEffectOccurs = this.willFrogSideEffectOccur(sideEffectItem.risk);
+        if (!sideEffectOccurs) return;
+        // Make frog weak (apply WEAK power up)
+        this.store.dispatch(
+          power_up_frog({
+            frogId: frogId,
+            powerUp: FROG_POWERUP_ENUM.WEAK,
+          })
+        );
         break;
     }
   }
@@ -145,5 +156,16 @@ export class InventoryService {
         cost: tadpoles,
       })
     );
+  }
+
+
+  private willFrogSideEffectOccur(risk: number) {
+    // Determine if frog dies depending on side effect risk
+    var roll = Math.random();
+    if (roll < risk) {
+      // Kill frog
+      return true;
+    }
+    return false;
   }
 }
