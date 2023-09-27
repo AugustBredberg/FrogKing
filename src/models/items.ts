@@ -68,6 +68,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
 ////////////////////////////////////////////////////////////
 export interface PondItem extends Item {
   kind: POND_ENUM;
+  description: string;
   tadpole_capacity: number;
   frog_capacity: number;
   next_pond: POND_ENUM;
@@ -81,6 +82,7 @@ export enum POND_ENUM {
 export const PONDS: { [id: string]: PondItem } = {
   [POND_ENUM.SIMPLE_POND]: {
     kind: POND_ENUM.SIMPLE_POND,
+    description: 'A simple pond.',
     name: 'Simple pond',
     tadpole_capacity: 50,
     frog_capacity: 2,
@@ -88,6 +90,7 @@ export const PONDS: { [id: string]: PondItem } = {
   },
   [POND_ENUM.FANCY_POND]: {
     kind: POND_ENUM.FANCY_POND,
+    description: 'A fancy pond.',
     name: 'Fancy pond',
     tadpole_capacity: 200,
     frog_capacity: 3,
@@ -95,6 +98,7 @@ export const PONDS: { [id: string]: PondItem } = {
   },
   [POND_ENUM.SPECTACULAR_POND]: {
     kind: POND_ENUM.SPECTACULAR_POND,
+    description: 'A spectacular pond.',
     name: 'Spectacular pond',
     tadpole_capacity: 500,
     frog_capacity: 4,
@@ -193,25 +197,25 @@ export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: { [id: string]: FrogPowerUpSideE
   [FROG_POWERUP_SIDE_EFFECT_ENUM.DIE]: {
     name: 'Die',
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.DIE,
-    description: 'The frog dies.',
+    description: 'Risk of frog dying.',
     risk: 0.2, // 20% chance of dying
   },
   [FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS]: {
     name: 'Lose all levels',
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS,
-    description: 'The frog loses all levels.',
+    description: 'Risk that frog loses all levels.',
     risk: 0.5, // 50% chance of losing all levels
   },
   [FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP]: {
     name: 'Sleep',
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP,
-    description: 'The frog falls asleep.',
+    description: 'Risk that frog falls asleep.',
     risk: 0.7, // 70% chance of falling asleep
   },
   [FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE]: {
     name: 'Reduce production rate',
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE,
-    description: 'The frog\'s production rate is halved.',
+    description: 'Risk that the frog\'s production rate is halved.',
     risk: 1, // 100% chance of reducing production rate
   },
 };
