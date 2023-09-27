@@ -28,10 +28,8 @@ import {
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
   tadpolesPreviousState: 0,
-  frogs: {
-    [EVOLUTION_ENUM.TIER1]: DEFAULT_FROGS[EVOLUTION_ENUM.TIER1], // for testing, start with 1 frog
-  },
-  pond: PONDS[POND_ENUM.SIMPLE_POND],
+  frogs: {},
+  pond: PONDS[POND_ENUM.WATER_GLASS],
 };
 
 // Reduces all inventory actions and automatic updates to inventory

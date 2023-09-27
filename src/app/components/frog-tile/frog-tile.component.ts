@@ -21,13 +21,6 @@ export class FrogTileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.frogTooltip = {
-      header: this.frogItem.name,
-      body: this.frogItem.description,
-      primaryActionText: 'Evolve',
-      secondaryActionText: 'Sell',
-    };
-
     this.productionRate = this.gameService.calculateFrogProductionRate(
       this.frogItem
     );

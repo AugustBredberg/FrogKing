@@ -8,7 +8,7 @@
   <button
     [disabled]="item.cost > inventoryState.tadpoles"
     (click)="buyPowerUp(shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.id])"
-    class="flex bg-black bg-opacity-40 rounded-md w-[64px] h-[64px] p-2"
+    class="flex bg-black bg-opacity-40 rounded-md w-[64px] h-[64px] p-2 cursor-pointer"
     [ngClass]="
       item.cost > inventoryState.tadpoles ? 'opacity-50' : 'hover:bg-opacity-70'
     "

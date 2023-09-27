@@ -1,8 +1,11 @@
 export interface ITooltip {
   header: string;
+  positiveText: string[];
+  negativeText: string[];
   body: string;
   effect?: string[];
   price?: number;
+  image?: string;
   itemId?: number;
   primaryActionText: string;
   secondaryActionText: string;

@@ -22,6 +22,7 @@ import { FrogTileComponent } from './components/frog-tile/frog-tile.component';
 import { TooltipModule } from './components/tooltip/tooltip.module';
 import { SpawnFrogTileComponent } from './components/spawn-frog-tile/spawn-frog-tile.component';
 import { ShopPondItemComponent } from './components/shop-pond-item/shop-pond-item.component';
+import { PondFullTileComponent } from './components/pond-full-tile/pond-full-tile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ShopPondItemComponent } from './components/shop-pond-item/shop-pond-ite
     FrogTileComponent,
     SpawnFrogTileComponent,
     ShopPondItemComponent,
+    PondFullTileComponent,
   ],
   imports: [
     BrowserModule,

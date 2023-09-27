@@ -100,6 +100,9 @@ export class TooltipDirective {
       this.componentRef.instance.top = Math.round(bottom);
     }
   }
+  onMouseClick($event: MouseEvent): void {
+    this.destroy();
+  }
 
   @HostListener('mouseleave')
   onMouseLeave(): void {

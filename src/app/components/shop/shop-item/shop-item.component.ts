@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InventoryService } from 'src/app/services/inventory.service';
-import { ShopService } from 'src/app/services/shop.service';
+import { ShopItemSummary, ShopService } from 'src/app/services/shop.service';
 import { InventoryState, ShopState } from 'src/models/states';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { Store } from '@ngrx/store';
@@ -33,10 +33,17 @@ export class ShopItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    const shopItemSummary: ShopItemSummary = this.shopService.lookupShopItem(
+      this.item
+    );
+
     this.tooltipData = {
       header: this.item.name,
-      body: DEFAULT_FROGPOWERUPS[this.item.id].description,
-      price: this.item.cost,
+      positiveText: shopItemSummary.positiveEffects,
+      negativeText: shopItemSummary.negativeEffects,
+      body: shopItemSummary.description,
+      price: shopItemSummary.cost,
+      image: '../../../assets/images/item-image-' + this.item.id + '.png',
       itemId: this.item.id,
       primaryActionText: '',
       secondaryActionText: '',

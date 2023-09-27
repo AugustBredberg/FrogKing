@@ -25,8 +25,11 @@
           >
             <app-frog-tile [frogItem]="frog.value"></app-frog-tile>
           </div>
-          <div *ngIf="true">
+          <div *ngIf="inventory.pond.frog_capacity > frogsInInventory">
             <app-spawn-frog-tile></app-spawn-frog-tile>
+          </div>
+          <div *ngIf="inventory.pond.frog_capacity <= frogsInInventory">
+            <app-pond-full-tile></app-pond-full-tile>
           </div>
         </div>
       </div>

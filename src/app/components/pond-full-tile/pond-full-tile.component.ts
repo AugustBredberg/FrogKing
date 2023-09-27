@@ -7,11 +7,11 @@ import { InventoryState } from 'src/models/states';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-spawn-frog-tile',
-  templateUrl: './spawn-frog-tile.component.html',
-  styleUrls: ['./spawn-frog-tile.component.scss'],
+  selector: 'app-pond-full-tile',
+  templateUrl: './pond-full-tile.component.html',
+  styleUrls: ['./pond-full-tile.component.scss'],
 })
-export class SpawnFrogTileComponent {
+export class PondFullTileComponent {
   evolveTadpoleShopItem = SHOP[SHOP_ITEM_TYPES.EVOLUTION][EVOLUTION_ENUM.TIER1];
   inventory$: Observable<InventoryState>;
   inventory: InventoryState;
