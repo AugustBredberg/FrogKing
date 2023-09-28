@@ -1,0 +1,104 @@
+<div
+  class="tooltip w-[400px] h-auto rounded-md bg-black bg-opacity-40 backdrop-blur-xl"
+  [ngClass]="['tooltip--' + position]"
+  [style.left]="left + 'px'"
+  [style.top]="top + 'px'"
+>
+  <div class="flex flex-col">
+    <div class="flex flex-row h-2/3">
+      <div class="flex flex-col w-1/3 h-full">
+        <div class="flex w-[100px] h-[100px] bg-black bg-opacity-20 rounded-lg">
+          <div
+            class="flex h-[82px] w-[82px] m-auto justify-center items-center tooltip-item-image"
+            [style.background-image]="'url(' + tooltip.image + ')'"
+          ></div>
+        </div>
+      </div>
+      <div class="flex flex-col w-2/3 h-full">
+        <div class="flex w-full h-1/4">
+          <p
+            class="w-full text-center justify-center items-center primaryText text-2xl"
+          >
+            {{ tooltip.name }} Lvl {{ tooltip.level }}
+          </p>
+        </div>
+        <div class="flex w-full h-full flex-col mx-4">
+          <ul class="list-disc space-y-2">
+            <li
+              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+            >
+              {{ tooltip.tps }} Tadpoles / s
+            </li>
+            <li
+              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+            >
+              Stage {{ tooltip.evolveStage }}
+            </li>
+            <li
+              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+            >
+              Total produced: {{ tadpolesProduced }}
+            </li>
+          </ul>
+          <ul class="list-disc mt-2">
+            <li
+              *ngFor="let positiveText of tooltip.positiveText"
+              class="w-full text-left justify-center items-center positiveText text-xs px-2"
+            >
+              {{ positiveText }}
+            </li>
+          </ul>
+          <ul class="list-disc mt-2">
+            <li
+              *ngFor="let negativeText of tooltip.negativeText"
+              class="w-full text-left justify-center items-center negativeText text-xs px-2"
+            >
+              {{ negativeText }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="flex h-auto w-full mt-4">
+      <!-- Frog elements grid -->
+      <div class="flex flex-row w-full">
+        <div *ngFor="let element of tooltip.elements | keyvalue" class="h-full">
+          <ng-container *ngIf="element.value !== 0">
+            <div
+              class="bg-element bg-opacity-20 h-full rounded-md mr-2"
+              [ngClass]="'bg-element--' + element.key"
+            >
+              <p
+                class="primaryText text-sm py-1 px-3 flex justify-center items-center h-full w-full"
+              >
+                {{ element.value > 1 ? element.value + "x" : "" }}
+                {{ element.key }}
+              </p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="flex w-full h-auto mt-4">
+      <p class="w-full h-auto text-left primaryText text-xs flex items-center">
+        {{ tooltip.description }}
+      </p>
+    </div>
+    <div *ngIf="tooltip.evolveCost" class="flex w-full h-1/4 flex-col">
+      <p *ngIf="tooltip.evolvesInto" class="flex positiveText">
+        Click to Evolve!
+      </p>
+
+      <p class="w-72 h-auto text-left primaryText text-sm flex items-center">
+        <img
+          class="h-[24px] w-[24px] mr-2"
+          src="../../../assets/images/tadpole-currency.png"
+        />
+        {{ tooltip.evolveCost }}
+      </p>
+    </div>
+    <div *ngIf="!tooltip.evolvesInto" class="flex w-full h-1/4 flex-col">
+      <p class="flex primaryText">Cannot Evolve Further.</p>
+    </div>
+  </div>
+</div>

@@ -5,13 +5,9 @@ import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
 })
-export class TooltipComponent implements OnInit {
+export class TooltipComponent {
   tooltip: ITooltip;
   left: number = 0;
   top: number = 0;
   position: TooltipPosition = TooltipPosition.DEFAULT;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

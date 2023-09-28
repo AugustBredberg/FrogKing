@@ -1,0 +1,13 @@
+.bg-passive-sphere {
+  background-image: url(../../../assets/images/passives-sphere-big.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease; /* Add a transition for smooth hover effect */
+}
+
+.bg-passive-sphere:hover {
+  transform: translateY(
+    -15px
+  ); /* Move the element 15 pixels upwards on hover */
+}

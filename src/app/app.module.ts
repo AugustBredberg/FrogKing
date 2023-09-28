@@ -24,6 +24,8 @@ import { ShopPondItemComponent } from './components/shop-pond-item/shop-pond-ite
 import { PondFullTileComponent } from './components/pond-full-tile/pond-full-tile.component';
 import { EvolveDialogComponent } from './components/dialogs/evolve-dialog/evolve-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PassivesSectionComponent } from './components/passives-section/passives-section.component';
+import { PassiveComponent } from './components/passive/passive.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { MatDialog } from '@angular/material/dialog';
     ShopPondItemComponent,
     PondFullTileComponent,
     EvolveDialogComponent,
+    PassivesSectionComponent,
+    PassiveComponent,
   ],
   imports: [
     BrowserModule,

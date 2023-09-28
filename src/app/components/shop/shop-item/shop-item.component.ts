@@ -18,7 +18,6 @@ export class ShopItemComponent implements OnInit {
   SHOP_ITEM_TYPES = SHOP_ITEM_TYPES;
   shop: ShopState;
   TooltipPosition = TooltipPosition;
-
   tooltipData: ITooltip;
 
   constructor(
@@ -43,7 +42,10 @@ export class ShopItemComponent implements OnInit {
       negativeText: shopItemSummary.negativeEffects,
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
-      image: '../../../assets/images/items/item-image-' + this.item.defaultItemId + '.png',
+      image:
+        '../../../assets/images/items/item-image-' +
+        this.item.defaultItemId +
+        '.png',
       itemId: this.item.defaultItemId,
     };
   }

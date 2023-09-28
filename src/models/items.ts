@@ -19,26 +19,24 @@ export interface FrogItem extends Item {
   production_rate: number;
   lifetime_tadpoles_produced: number;
   power_ups: FrogPowerUpItem[];
-  elementType: { [id: string]: number } // Example: { [FROG_ELEMENT_ENUM.HOLY]: 2, [FROG_ELEMENT_ENUM.DARK]: 1 }
+  elementType: { [id: string]: number }; // Example: { [FROG_ELEMENT_ENUM.HOLY]: 2, [FROG_ELEMENT_ENUM.DARK]: 1 }
 }
 export enum EVOLUTION_ENUM {
   TIER1,
   TIER2,
   TIER3,
 
-  NO_EVOLUTION
+  NO_EVOLUTION,
 }
 export enum FROG_ELEMENT_ENUM {
   //FIRE,
   //PSYCHIC,
-  HOLY, // Less likely to die. Can't be affected by negative powerups
-  DARK, // Powerful, but might kill other frogs
-  UNDEAD, // Can't be affected by positive powerups. Can't die?
+  HOLY = 'Holy', // Less likely to die. Can't be affected by negative powerups
+  DARK = 'Dark', // Powerful, but might kill other frogs
+  UNDEAD = 'Undead', // Can't be affected by positive powerups. Can't die?
 
-
-  NONE // No element
+  NONE = '', // No element
 }
-
 
 ////////////////////////////////////////////////////////////
 /// PONDS
@@ -140,4 +138,3 @@ export enum FROG_POWERUP_SIDE_EFFECT_ENUM {
   SLEEP,
   REDUCE_PRODUCTION_RATE,
 }
-
