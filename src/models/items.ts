@@ -18,11 +18,22 @@ export interface FrogItem extends Item {
   level_multiplier: number;
   production_rate: number;
   power_ups: FrogPowerUpItem[];
+  elementType: { [id: string]: number } // Example: { [FROG_ELEMENT_ENUM.HOLY]: 2, [FROG_ELEMENT_ENUM.DARK]: 1 }
 }
 export enum EVOLUTION_ENUM {
   TIER1,
   TIER2,
   TIER3,
+}
+export enum FROG_ELEMENT_ENUM {
+  //FIRE,
+  //PSYCHIC,
+  HOLY, // Less likely to die. Can't be affected by negative powerups
+  DARK, // Powerful, but might kill other frogs
+  UNDEAD, // Can't be affected by positive powerups. Can't die?
+
+
+  NONE // No element
 }
 export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.TIER1]: {
@@ -36,6 +47,11 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level_multiplier: 0.05,
     production_rate: 2,
     power_ups: [],
+    elementType: {
+      [FROG_ELEMENT_ENUM.HOLY]: 0,
+      [FROG_ELEMENT_ENUM.DARK]: 0,
+      [FROG_ELEMENT_ENUM.UNDEAD]: 0,
+    }
   },
   [EVOLUTION_ENUM.TIER2]: {
     id: crypto.randomUUID(),
@@ -48,6 +64,11 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level_multiplier: 0.05,
     production_rate: 4,
     power_ups: [],
+    elementType: {
+      [FROG_ELEMENT_ENUM.HOLY]: 0,
+      [FROG_ELEMENT_ENUM.DARK]: 0,
+      [FROG_ELEMENT_ENUM.UNDEAD]: 0,
+    }
   },
   [EVOLUTION_ENUM.TIER3]: {
     id: crypto.randomUUID(),
@@ -60,6 +81,11 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level_multiplier: 0.15,
     production_rate: 6,
     power_ups: [],
+    elementType: {
+      [FROG_ELEMENT_ENUM.HOLY]: 0,
+      [FROG_ELEMENT_ENUM.DARK]: 0,
+      [FROG_ELEMENT_ENUM.UNDEAD]: 0,
+    }
   },
 };
 

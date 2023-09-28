@@ -16,6 +16,7 @@ import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import {
   DEFAULT_FROGPOWERUPS_SIDE_EFFECTS,
   EVOLUTION_ENUM,
+  FROG_ELEMENT_ENUM,
   FROG_POWERUP_ENUM,
   FROG_POWERUP_SIDE_EFFECT_ENUM,
   FrogPowerUpSideEffect,
@@ -28,7 +29,7 @@ export class InventoryService {
   constructor(private store: Store<{ shop: ShopState }>) {}
 
   // User can add items that are tied to a specific frog etc. Frog is found using uniqueId
-  add(item: ShopItem, uniqueId: string = '') {
+  add(item: ShopItem, uniqueId: string = '', newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE) {
     var item_type = item.type; // Example: SHOP_ITEM_TYPES.POND
     var product = item.id; // Example: POND_ENUM.FANCY_POND
 
@@ -49,7 +50,7 @@ export class InventoryService {
           // Add the evolved frog to the inventory
           this.store.dispatch(
             add_frog({
-              evolution: EVOLUTION_ENUM.TIER1,
+              evolution: EVOLUTION_ENUM.TIER1
             })
           );
         } else {
@@ -58,6 +59,7 @@ export class InventoryService {
             evolve_frog({
               frogId: uniqueId,
               evolution: product,
+              newElement: newFrogElement,
             })
           );
         }

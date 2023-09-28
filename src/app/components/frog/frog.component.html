@@ -29,6 +29,11 @@
     <div *ngFor="let powerUp of frog.power_ups">
       <p>Power Up: {{powerUp.name}}</p>
     </div>
+
+    <!-- Elements -->
+    <div *ngFor="let element of frog.elementType | keyvalue">
+      <p>Element: {{element.key}} level: {{element.value}}</p>
+    </div>
     <!-- Evolution buttons -->
     <div class="pt-5">
       <div *ngFor="let evolution of frog.evolves_into">
