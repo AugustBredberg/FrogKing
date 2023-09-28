@@ -6,6 +6,16 @@
       <p class="flex text-xl primaryText">Frog Consumables</p>
       <div class="flex w-full h-auto max-h-[50vh]">
         <div class="grid grid-flow-row grid-cols-3">
+          <ng-container *ngFor="let item of currentlyAvailablePowerUpShopItems">
+            <div *ngIf="item.type === SHOP_ITEM_TYPES.FROGPOWERUP">
+              <app-shop-item
+                [inventoryState]="inventoryState"
+                [item]="item"
+              ></app-shop-item>
+            </div>
+          </ng-container>
+
+          <!--
           <div
             *ngFor="
               let item of shop.items[SHOP_ITEM_TYPES.FROGPOWERUP] | keyvalue
@@ -16,6 +26,7 @@
               [item]="shop.items[SHOP_ITEM_TYPES.FROGPOWERUP][item.key]"
             ></app-shop-item>
           </div>
+          -->
         </div>
       </div>
     </div>

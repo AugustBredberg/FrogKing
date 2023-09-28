@@ -11,23 +11,33 @@ import { InventoryState, ShopState } from 'src/models/states';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss']
+  styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent {
   @Input() inventoryState: InventoryState;
   shop: ShopState;
   SHOP_ITEM_TYPES = SHOP_ITEM_TYPES;
+  currentlyAvailablePowerUpShopItems: ShopItem[] = [];
 
-  constructor(private store: Store<{ shop: ShopState }>, private shopService: ShopService, private inventoryService: InventoryService) {
+  constructor(
+    private store: Store<{ shop: ShopState }>,
+    private shopService: ShopService,
+    private inventoryService: InventoryService
+  ) {
     var shop_state = this.store.select('shop');
     shop_state.subscribe((shop) => {
       this.shop = shop;
+      // Extract all shop items, filter by shopType "test," flatten them into an array, and sort them by cost
+      this.currentlyAvailablePowerUpShopItems = Object.values(this.shop.items)
+        .flatMap((shopType) => Object.values(shopType).filter(item => item.type === SHOP_ITEM_TYPES.FROGPOWERUP))
+        .sort((a, b) => a.cost - b.cost)
+        .slice(0, 12); // Limit the array length to 15 items with shopType FROGPOWERUP
     });
-   }
+  }
 
-   upgradePond(shop_item: ShopItem ) {
+  upgradePond(shop_item: ShopItem) {
     this.shopService.buy(shop_item);
-    this.inventoryService.add(shop_item)
+    this.inventoryService.add(shop_item);
   }
 
   buyPowerUp(shop_item: ShopItem) {
