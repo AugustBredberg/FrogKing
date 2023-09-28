@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 
 import { TooltipComponent } from '../tooltip.component';
+import { FrogTooltipComponent } from '../frog-tooltip/frog-tooltip.component';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
 
 @Directive({
