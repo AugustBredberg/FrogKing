@@ -1,5 +1,5 @@
 import { InventoryState } from '../models/states';
-import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem, DEFAULT_FROGPOWERUPS } from '../models/items'; // Inventory is initially empty
+import { EVOLUTION_ENUM, DEFAULT_FROGS, FrogItem, CURRENCY_ENUM, PONDS, POND_ENUM, PondItem, DEFAULT_FROGPOWERUPS, FROG_ELEMENT_ENUM } from '../models/items'; // Inventory is initially empty
 
 import { createReducer, on } from '@ngrx/store';
 import { add, add_frog, evolve_frog, level_down_frog, level_up_frog, power_down_frog, power_up_frog, remove, remove_frog, upgrade_pond } from '../app/inventory-actions';
@@ -138,9 +138,18 @@ export const inventoryReducer = createReducer(
     }
   }),
   on(evolve_frog, (inventory_state, action) => {
-    // Return inventory with given frog evolved
+
     var new_frog = structuredClone(DEFAULT_FROGS[action.evolution])
     new_frog.id = action.frogId;
+    new_frog.elementType = structuredClone(inventory_state.frogs[action.frogId].elementType);
+
+    // If we recieved a new element, add the new element to the frog
+    var newElement = action.newElement;
+    if(newElement != FROG_ELEMENT_ENUM.NONE) {
+      new_frog.elementType[newElement] += 1;
+    }
+
+    // Return inventory with given frog evolved and new element if applicable
     return {
       ...inventory_state,
       frogs: {
