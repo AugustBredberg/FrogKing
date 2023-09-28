@@ -11,7 +11,7 @@ import { ShopItem } from 'src/models/shop-items';
 
 export const add = createAction(
   '[Tadpoles] Add',
-  props<{ production_rate: number }>()
+  props<{ production_rate: number, frogId?: string }>()
 );
 
 export const remove = createAction(

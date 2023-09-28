@@ -140,7 +140,7 @@ export class InventoryService {
     }
   }
 
-  gainTadpoles(tadpoles: number) {
+  kingClicked(tadpoles: number) {
     console.log('Adding ' + tadpoles + ' tadpoles');
     // Remove item from shop
     this.store.dispatch(

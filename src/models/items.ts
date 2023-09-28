@@ -17,6 +17,7 @@ export interface FrogItem extends Item {
   level: number;
   level_multiplier: number;
   production_rate: number;
+  lifetime_tadpoles_produced: number;
   power_ups: FrogPowerUpItem[];
   elementType: { [id: string]: number } // Example: { [FROG_ELEMENT_ENUM.HOLY]: 2, [FROG_ELEMENT_ENUM.DARK]: 1 }
 }
@@ -117,6 +118,7 @@ export interface FrogPowerUpItem extends Item {
   sideEffects: FROG_POWERUP_SIDE_EFFECT_ENUM[];
   productionRateMultiplier: number;
   expiration: Date; // Is set when powerup is used
+  effectIsPositive: boolean;
 }
 export interface FrogPowerUpSideEffect extends Item {
   name: string;

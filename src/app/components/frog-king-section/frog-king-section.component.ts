@@ -70,6 +70,6 @@ export class FrogKingSectionComponent {
     }
     this.removeHitmarkAfterDelay(this.hitmarks.length - 1);
 
-    this.inventoryService.gainTadpoles(1);
+    this.inventoryService.kingClicked(1);
   }
 }

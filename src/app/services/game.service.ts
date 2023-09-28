@@ -38,12 +38,13 @@ export class GameService {
       // Find tadpole rate for frog
       var tadpole_rate = this.calculateFrogProductionRate(frogItem);
       totalTadpoleRate += tadpole_rate;
-    });
-    store.dispatch(
+      store.dispatch(
       add({
         production_rate: totalTadpoleRate,
+        frogId: frogItem.id,
       })
     );
+    });
   }
 
   public calculateTotalProductionRate() {

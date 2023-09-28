@@ -14,6 +14,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level: 1,
     level_multiplier: 0.05,
     production_rate: 2,
+    lifetime_tadpoles_produced: 0,
     power_ups: [],
     elementType: {
       [FROG_ELEMENT_ENUM.HOLY]: 0,
@@ -31,6 +32,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level: 1,
     level_multiplier: 0.05,
     production_rate: 4,
+    lifetime_tadpoles_produced: 0,
     power_ups: [],
     elementType: {
       [FROG_ELEMENT_ENUM.HOLY]: 0,
@@ -48,6 +50,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     level: 1,
     level_multiplier: 0.15,
     production_rate: 6,
+    lifetime_tadpoles_produced: 0,
     power_ups: [],
     elementType: {
       [FROG_ELEMENT_ENUM.HOLY]: 0,
@@ -74,6 +77,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     ],
     productionRateMultiplier: 3,
     expiration: new Date(), // Is set when powerup is used
+    effectIsPositive: true,
   },
   [FROG_POWERUP_ENUM.FRODKA]: {
     name: 'Frodka',
@@ -84,6 +88,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP],
     productionRateMultiplier: 1.5,
     expiration: new Date(), // Is set when powerup is used
+    effectIsPositive: true,
   },
   [FROG_POWERUP_ENUM.FRABIES]: {
     name: 'Frabies',
@@ -94,6 +99,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE],
     productionRateMultiplier: 1.5,
     expiration: new Date(), // Is set when powerup is used
+    effectIsPositive: true,
   },
 
   ///// NEGATIVE POWERUPS /////
@@ -105,6 +111,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     sideEffects: [],
     productionRateMultiplier: 0,
     expiration: new Date(), // Is set when powerup is used
+    effectIsPositive: false,
   },
   [FROG_POWERUP_ENUM.WEAK]: {
     name: 'Weak',
@@ -114,6 +121,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     sideEffects: [],
     productionRateMultiplier: 0.5,
     expiration: new Date(), // Is set when powerup is used
+    effectIsPositive: false,
   },
 };
 

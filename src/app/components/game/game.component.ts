@@ -41,7 +41,7 @@ export class GameComponent implements OnInit {
 
   spawn() {
     console.log('Spawn');
-    this.inventoryService.gainTadpoles(1);
+    this.inventoryService.kingClicked(1);
   }
 
   evolveTadpole() {
