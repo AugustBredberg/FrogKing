@@ -3,10 +3,10 @@ import { add, power_down_frog } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState } from 'src/models/states';
 import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem } from 'src/models/items';
-import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
 import { DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
-
+import { SHOP } from 'src/models/default-shop-items';
 @Injectable({
   providedIn: 'root',
 })

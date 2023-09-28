@@ -6,8 +6,9 @@ import { add } from 'src/app/inventory-actions';
 import { GameService } from '../../services/game.service';
 import { ShopService } from 'src/app/services/shop.service';
 import { InventoryService } from 'src/app/services/inventory.service';
-import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { EVOLUTION_ENUM } from 'src/models/items';
+import { SHOP } from 'src/models/default-shop-items';
 
 @Component({
   selector: 'app-game',

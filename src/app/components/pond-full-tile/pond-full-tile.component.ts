@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ShopService } from 'src/app/services/shop.service';
 import { EVOLUTION_ENUM } from 'src/models/items';
-import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { SHOP } from 'src/models/default-shop-items';
 import { InventoryState } from 'src/models/states';
 import { Store } from '@ngrx/store';
 

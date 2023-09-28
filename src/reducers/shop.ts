@@ -1,7 +1,7 @@
 import { ShopState } from '../models/states';
 
 import { createReducer, on } from '@ngrx/store';
-import { INITIAL_SHOP, SHOP} from '../models/shop-items';
+import { INITIAL_SHOP, SHOP} from '../models/default-shop-items';
 import { add, remove } from 'src/app/shop-actions';
 import { upgrade_pond } from 'src/app/inventory-actions';
 

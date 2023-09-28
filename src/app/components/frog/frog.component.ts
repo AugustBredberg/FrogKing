@@ -2,9 +2,11 @@ import { Component, Input } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { ShopService } from 'src/app/services/shop.service';
 import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, FrogItem } from 'src/models/items';
-import { SHOP, SHOP_ITEM_TYPES } from 'src/models/shop-items';
+import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryState } from 'src/models/states';
 import { DEFAULT_FROGS } from 'src/models/default-items';
+import { SHOP } from 'src/models/default-shop-items';
+
 @Component({
   selector: 'app-frog',
   templateUrl: './frog.component.html',

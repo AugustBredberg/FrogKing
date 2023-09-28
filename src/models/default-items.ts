@@ -1,5 +1,8 @@
 import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, FROG_POWERUP_ENUM, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, FrogPowerUpItem, FrogPowerUpSideEffect } from "./items";
 
+///////////////////////////////////////////////////////////
+/// FROGS
+///////////////////////////////////////////////////////////
 export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.TIER1]: {
     id: crypto.randomUUID(),
@@ -55,7 +58,9 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
 };
 
 
-
+///////////////////////////////////////////////////////////
+/// FROG POWERUPS
+///////////////////////////////////////////////////////////
 export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
   [FROG_POWERUP_ENUM.FROGROIDS]: {
     name: 'Frogroids',
@@ -111,6 +116,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     expiration: new Date(), // Is set when powerup is used
   },
 };
+
 export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: {
   [id: string]: FrogPowerUpSideEffect;
 } = {
