@@ -32,6 +32,6 @@ export enum SHOP_ITEM_TIER {
   TIER8 = 8,
   TIER9 = 9,
   TIER10 = 10,
-  TIER11 = 11,
-  TIER12 = 12,
+  //TIER11 = 11,
+  //TIER12 = 12,
 }

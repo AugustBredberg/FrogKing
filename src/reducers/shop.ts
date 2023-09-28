@@ -32,7 +32,7 @@ export const shopReducer = createReducer(
     let item_type = action.item_type;
     // Get product
     let product = action.product;
-    debugger
+
     // Remove product from shop
     let new_items = structuredClone(shop_state.items);
     delete new_items[item_type][product];

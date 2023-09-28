@@ -74,44 +74,39 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
 };
 
 // Automatically populate FROGPOWERUP_SHOP with every DEFAULT_FROGPOWERUP for every SHOP_ITEM_TIER
+
 export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {};
 // Loop through all shop tiers (1-12)
-Object.keys(SHOP_ITEM_TIER).forEach((tier) => {
-  var tierNumber = parseInt(tier);
-  if(isNaN(tierNumber)) {
-    return;
-  }
-  // Loop through all powerups (frogroids, frodka, frabies, etc)
-  Object.keys(FROG_POWERUP_ENUM).forEach((powerup) => {
-    // Don't create shop item if powerup is a negative value (negative powerup effect)
-    if (parseInt(powerup) < 0) {
-      return;
-    }
+var tierKeys = Object.keys(SHOP_ITEM_TIER).filter((v) => !isNaN(Number(v))).map((v) => parseInt(v));
+var powerupKeys = Object.keys(FROG_POWERUP_ENUM).filter((v) => !isNaN(Number(v))).map((v) => parseInt(v));
+tierKeys.forEach((tier) => {
+  powerupKeys.forEach((powerup) => {
+    // If negative effect, don't generate item
+    if(powerup < 0) return;
 
-    // Create a powerup id by concatenating the powerup enum and the tier enum
-    var powerUpId = powerup.toString() + tier.toString();
-    var powerUpIdNum = parseInt(powerUpId);
-    console.log('Creating powerup id: ', powerUpIdNum);
-
-    //var defaultPowerUp = DEFAULT_FROGPOWERUPS[powerup];
-    if (!isNaN(powerUpIdNum) && powerUpIdNum > 0) {
-      FROGPOWERUP_SHOP[powerUpIdNum] = {
-        id: parseInt(powerup),
-        defaultItemId: parseInt(powerup),
-        name: DEFAULT_FROGPOWERUPS[powerup].name + ' tier: ' + tierNumber,
+    var powerUpId = powerup + tier * 1000;
+    FROGPOWERUP_SHOP[powerUpId] = {
+        id: powerUpId,
+        defaultItemId: powerup,
+        name: DEFAULT_FROGPOWERUPS[powerup].name + ' tier: ' + tier,
         type: SHOP_ITEM_TYPES.FROGPOWERUP,
-        cost: 20 * tierNumber, // Costs 20 tadpoles
+        cost: 2 * Math.pow(10, tier), // Costs 20 tadpoles
         rate: 0, // Tadpoles per second
         for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
         cost_multiplier: 0, // Cost multiplier
       };
-    }
+    console.log("Created powerUp: ", powerUpId)
   });
 });
+
+console.log(tierKeys)
+console.log(powerupKeys)
+
 /*
 export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
   [FROG_POWERUP_ENUM.FROGROIDS]: {
     id: FROG_POWERUP_ENUM.FROGROIDS,
+    defaultItemId: FROG_POWERUP_ENUM.FROGROIDS,
     name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FROGROIDS].name,
     type: SHOP_ITEM_TYPES.FROGPOWERUP,
     cost: 20, // Costs 20 tadpoles
@@ -121,6 +116,7 @@ export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
   },
   [FROG_POWERUP_ENUM.FRODKA]: {
     id: FROG_POWERUP_ENUM.FRODKA,
+    defaultItemId: FROG_POWERUP_ENUM.FRODKA,
     name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FRODKA].name,
     type: SHOP_ITEM_TYPES.FROGPOWERUP,
     cost: 10, // Costs 20 tadpoles
@@ -130,6 +126,7 @@ export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
   },
   [FROG_POWERUP_ENUM.FRABIES]: {
     id: FROG_POWERUP_ENUM.FRABIES,
+    defaultItemId: FROG_POWERUP_ENUM.FRABIES,
     name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FRABIES].name,
     type: SHOP_ITEM_TYPES.FROGPOWERUP,
     cost: 15, // Costs 20 tadpoles
@@ -139,6 +136,7 @@ export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
   },
 };
 */
+
 export const POND_SHOP: { [id: string]: ShopItem } = {
   [POND_ENUM.TOILET]: {
     id: POND_ENUM.TOILET,

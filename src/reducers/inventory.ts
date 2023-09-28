@@ -37,7 +37,6 @@ export const inventoryReducer = createReducer(
   INVENTORY_INITIAL_STATE,
   on(add, (inventory_state, action) => {
       // If we recieved a frog ID, add tadpoles to that frog's lifetime production AND the inventory
-      console.log("frogId: " + action.frogId)
       // Return inventory updated tadpoles and with given frog's lifetime production increased
       return {
         ...inventory_state,
@@ -191,7 +190,7 @@ export const inventoryReducer = createReducer(
   }),
   on(upgrade_pond, (inventory_state, action) => {
     // Set pond to given pond
-    var new_pond = PONDS[action.shop_item.id];
+    var new_pond = PONDS[action.shop_item.defaultItemId];
 
     // Remove tadpoles from inventory
     remove({ cost: action.shop_item.cost });

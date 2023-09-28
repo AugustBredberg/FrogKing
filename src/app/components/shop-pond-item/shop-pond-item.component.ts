@@ -43,9 +43,9 @@ export class ShopPondItemComponent implements OnInit {
       negativeText: shopItemSummary.negativeEffects,
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
-      image: '../../../assets/images/bowls/bowl-icon-' + this.item.id + '.png',
+      image: '../../../assets/images/bowls/bowl-icon-' + this.item.defaultItemId + '.png',
 
-      itemId: this.item.id,
+      itemId: this.item.defaultItemId,
     };
   }
 

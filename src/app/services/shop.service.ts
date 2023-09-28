@@ -16,7 +16,6 @@ export class ShopService {
 
   // User can buy items that are tied to a specific item.
   // Examples: Frog can be found using uniqueId
-  //           Frog powerup can be found using uniqueId
   buy(item: ShopItem, uniqueId: string = "", newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE) {
     switch (item.type) {
       case SHOP_ITEM_TYPES.POND:
@@ -31,7 +30,7 @@ export class ShopService {
         }));
 
         // Add next pond upgrade to shop
-        if(PONDS[item.id].next_pond == -1) break;
+        if(PONDS[item.defaultItemId].next_pond == -1) break;
         var next_pond = PONDS[item.id].next_pond;
         this.store.dispatch(add({
           item_type: SHOP_ITEM_TYPES.POND,
@@ -54,10 +53,9 @@ export class ShopService {
         this.invService.spendTadpoles(item.cost);
         // PROBLEM: ID IS NOT SAME AS LOOKUP ID (1 VS 11 FOR EXAMPLE. NEED KEY FROM STORE)
         // Remove item from shop
-        debugger
         this.store.dispatch(remove({
           item_type: SHOP_ITEM_TYPES.FROGPOWERUP,
-          product: parseInt(uniqueId)
+          product: item.id
         }));
         break;
 
@@ -81,7 +79,7 @@ export class ShopService {
 
   lookupShopItem(shopItem: ShopItem): ShopItemSummary {
     var item_type = shopItem.type;
-    var product = shopItem.id;
+    var product = shopItem.defaultItemId;
     switch (item_type) {
       //////////////////
       /// POND ITEMS ///

@@ -46,7 +46,7 @@ export class InventoryService {
 
       case SHOP_ITEM_TYPES.EVOLUTION:
         // Check if evolving frog or tadpole
-        if (item.id == EVOLUTION_ENUM.TIER1) {
+        if (item.defaultItemId == EVOLUTION_ENUM.TIER1) {
           // Evolve tadpole
           // Add the evolved frog to the inventory
           this.store.dispatch(
@@ -142,7 +142,6 @@ export class InventoryService {
   }
 
   kingClicked(tadpoles: number) {
-    console.log('Adding ' + tadpoles + ' tadpoles');
     // Remove item from shop
     this.store.dispatch(
       add({
