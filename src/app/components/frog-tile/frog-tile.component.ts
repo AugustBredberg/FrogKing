@@ -6,7 +6,7 @@ import {
   ITooltip,
   TooltipPosition,
 } from 'src/models/components/tooltips';
-import { FROG_ELEMENT_ENUM, FrogItem } from 'src/models/items';
+import { FROG_ELEMENT_ENUM, FrogItem, FrogPowerUpItem } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import {
   SHOP,
@@ -53,8 +53,8 @@ export class FrogTileComponent implements OnInit {
       description: this.frogItem.description,
       image: '../../../../assets/images/frogs/default_frog.png',
       level: this.frogItem.level,
-      negativeText: ['Sleeping...'],
-      positiveText: ['Roided!'],
+      negativeText: this.getNegativePowerupTexts(this.frogItem.power_ups),
+      positiveText: this.getPositivePowerupTexts(this.frogItem.power_ups),
       evolveStage: this.frogItem.evolves_into,
       evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into]?.cost,
       evolvesInto: EVOLUTION_SHOP[this.frogItem.evolves_into]?.name,
@@ -73,6 +73,17 @@ export class FrogTileComponent implements OnInit {
     // Update levelup cost for this frog
     levelUpShopItem.cost = cost;
     this.shopService.buy(levelUpShopItem, this.frogItem.id);
+  }
+
+  getPositivePowerupTexts(powerUpItems: FrogPowerUpItem[]): string[] {
+    return powerUpItems
+      .filter((item) => item.effectIsPositive)
+      .map((item) => item.description);
+  }
+  getNegativePowerupTexts(powerUpItems: FrogPowerUpItem[]): string[] {
+    return powerUpItems
+      .filter((item) => !item.effectIsPositive)
+      .map((item) => item.description);
   }
 
   openDialog() {
