@@ -46,6 +46,15 @@ export const evolve_frog = createAction(
   }>()
 );
 
+export const power_up_frog = createAction(
+  '[Frog] Power Up',
+  props<{ frogId: string; powerUp: FROG_POWERUP_ENUM }>()
+);
+export const power_down_frog = createAction(
+  '[Frog] Power Down',
+  props<{ frogId: string; powerUp: FROG_POWERUP_ENUM }>()
+);
+
 export const upgrade_pond = createAction(
   '[Pond] Upgrade',
   props<{ shop_item: ShopItem }>()
