@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { ShopService } from 'src/app/services/shop.service';
-import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
+import {
+  IFrogTooltip,
+  ITooltip,
+  TooltipPosition,
+} from 'src/models/components/tooltips';
 import { FrogItem } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { SHOP, LEVEL_SHOP } from 'src/models/default-shop-items';
@@ -16,10 +20,11 @@ import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.co
 })
 export class FrogTileComponent implements OnInit {
   @Input() frogItem: FrogItem;
-  frogTooltip: ITooltip;
+  tooltipData: IFrogTooltip;
   levelUpCost: number;
   TooltipPosition = TooltipPosition;
   productionRate: number;
+
   constructor(
     private gameService: GameService,
     private shopService: ShopService,
@@ -34,6 +39,16 @@ export class FrogTileComponent implements OnInit {
     this.levelUpCost = Math.round(
       this.gameService.calculateFrogLevelUpCost(this.frogItem)
     );
+
+    this.tooltipData = {
+      name: this.frogItem.name,
+      description: this.frogItem.description,
+      image: '../../../assets/images/frogs/default-frog.png',
+      level: this.frogItem.level,
+      evolveCost: 1, //EVOLUTION_SHOP[this.frogItem.evolves_into],
+      tps: this.frogItem.production_rate,
+      type: 'frog',
+    };
   }
   levelUp() {
     var cost = this.levelUpCost;

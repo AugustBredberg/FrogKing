@@ -1,13 +1,24 @@
 export interface ITooltip {
-  header: string;
-  positiveText: string[];
-  negativeText: string[];
-  body: string;
+  header?: string;
+  positiveText?: string[];
+  negativeText?: string[];
+  body?: string;
   effect?: string[];
   price?: number;
   image?: string;
   itemId?: number;
   type?: string;
+}
+
+export interface IFrogTooltip extends ITooltip {
+  name: string;
+  description: string;
+  image: string;
+  level: number;
+  tps: number;
+  evolveCost?: number;
+  elements?: { [id: string]: number };
+  type: string;
 }
 
 export interface ITooltipActions {

@@ -13,13 +13,17 @@ import {
 
 import { TooltipComponent } from '../tooltip.component';
 import { FrogTooltipComponent } from '../frog-tooltip/frog-tooltip.component';
-import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
+import {
+  IFrogTooltip,
+  ITooltip,
+  TooltipPosition,
+} from 'src/models/components/tooltips';
 
 @Directive({
   selector: '[tooltip]',
 })
 export class TooltipDirective {
-  @Input() tooltip: ITooltip;
+  @Input() tooltip: ITooltip | IFrogTooltip;
   @Input() position: TooltipPosition = TooltipPosition.DEFAULT;
 
   private componentRef: ComponentRef<any> | null;
@@ -72,9 +76,24 @@ export class TooltipDirective {
   }
   @HostListener('mouseenter')
   onMouseEnter(): void {
+    let tooltipComponent;
+    console.log('type', this.tooltip);
+    switch (this.tooltip.type) {
+      case 'item':
+        tooltipComponent = TooltipComponent;
+        break;
+      case 'frog':
+        tooltipComponent = FrogTooltipComponent;
+        break;
+      default:
+        // Handle other cases if needed
+        tooltipComponent = TooltipComponent;
+        break;
+    }
+
     if (!this.componentRef) {
       const componentFactory =
-        this.componentFactoryResolver.resolveComponentFactory(TooltipComponent);
+        this.componentFactoryResolver.resolveComponentFactory(tooltipComponent);
       this.componentRef = componentFactory.create(this.injector);
 
       this.appRef.attachView(this.componentRef.hostView);
