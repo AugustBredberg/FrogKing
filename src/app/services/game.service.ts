@@ -45,7 +45,7 @@ export class GameService {
       // Make one dispatch with this frog's accumulated tadpole rate
       store.dispatch(
       add({
-        production_rate: totalTadpoleRate,
+        production_rate: tadpole_rate,
         frogId: frogItem.id,
       })
     );
