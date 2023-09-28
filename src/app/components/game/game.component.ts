@@ -12,11 +12,11 @@ import { EVOLUTION_ENUM } from 'src/models/items';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  inventory$: Observable<InventoryState>
-  inventory: InventoryState
+  inventory$: Observable<InventoryState>;
+  inventory: InventoryState;
   evolveTadpoleShopItem = SHOP[SHOP_ITEM_TYPES.EVOLUTION][EVOLUTION_ENUM.TIER1];
 
   frogsInInventory: number = 0;
@@ -25,7 +25,8 @@ export class GameComponent implements OnInit {
     private store: Store<{ inventory: InventoryState }>,
     private gameService: GameService,
     private shopService: ShopService,
-    private inventoryService: InventoryService) {
+    private inventoryService: InventoryService
+  ) {
     this.inventory$ = store.select('inventory');
     this.inventory$.subscribe((inventory) => {
       this.inventory = inventory;
@@ -38,14 +39,12 @@ export class GameComponent implements OnInit {
   }
 
   spawn() {
-    console.log("Spawn")
+    console.log('Spawn');
     this.inventoryService.gainTadpoles(1);
   }
 
   evolveTadpole() {
-    console.log("Evolve tadpole")
+    console.log('Evolve tadpole');
     this.shopService.buy(this.evolveTadpoleShopItem);
   }
-
-
 }

@@ -1,15 +1,58 @@
 <div class="w-full">
-  <!-- Centered  -->
-  <div class="flex justify-center">
+  <!-- Body -->
+  <div class="w-screen min-h-screen h-screen bg-game">
+    <!-- Columns container -->
+    <div class="w-screen min-h-screen h-full flex-row flex">
+      <!-- LeftColumn (Info section and FrogSection) -->
+      <div class="w-1/4 min-h-screen h-full flex flex-col">
+        <!-- Frog Section  -->
+        <app-frog-king-section></app-frog-king-section>
+        <!-- Info Section  -->
+        <div
+          class="w-full min-h-[50vh] h-[50vh] bg-black flex flex-col bg-opacity-40 backdrop-blur-sm"
+        ></div>
+      </div>
+      <!-- Middle Column ( Frogs section and header) -->
+      <div
+        class="w-1/2 min-h-screen h-full flex flex-col overflow-y-scroll scrollbar-hide"
+      >
+        <!-- Header -->
+        <app-header-section></app-header-section>
+        <div class="pt-4">
+          <div
+            *ngFor="let frog of inventory.frogs | keyvalue"
+            class="w-full max-h-48"
+          >
+            <app-frog-tile [frogItem]="frog.value"></app-frog-tile>
+          </div>
+          <div *ngIf="inventory.pond.frog_capacity > frogsInInventory">
+            <app-spawn-frog-tile></app-spawn-frog-tile>
+          </div>
+          <div *ngIf="inventory.pond.frog_capacity <= frogsInInventory">
+            <app-pond-full-tile></app-pond-full-tile>
+          </div>
+        </div>
+      </div>
+      <!-- Right Column ( Shop ) -->
+      <div
+        class="w-1/4 min-h-screen h-full flex flex-col bg-black bg-opacity-40 overflow-y-scroll scrollbar-hide backdrop-blur-sm"
+      >
+        <app-shop [inventoryState]="inventory"></app-shop>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Centered  -->
+<!-- <div class="flex justify-center">
     <div class="text-3xl font-bold">
-      Current Tadpoles:
+      Current Tadpoles: -->
 
-      <!--
+<!--
         from: previous value.
         countUp: current value.
         duration: duration of animation in milliseconds.
       -->
-      <p
+<!-- <p
         [from]="inventory.tadpolesPreviousState"
         [countUp]="(inventory.tadpoles)"
         [duration]="1000">
@@ -38,5 +81,4 @@
       <app-pond class="w-full"></app-pond>
     </div>
     <app-shop [inventoryState]="inventory"></app-shop>
-  </div>
-</div>
+  </div> -->

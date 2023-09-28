@@ -1,6 +1,24 @@
-import { Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { Destroy } from './destroy';
-import { BehaviorSubject, animationFrameScheduler, combineLatest, switchMap, interval, distinctUntilChanged, endWith, map, takeUntil, takeWhile } from 'rxjs';
+import {
+  BehaviorSubject,
+  animationFrameScheduler,
+  combineLatest,
+  switchMap,
+  interval,
+  distinctUntilChanged,
+  endWith,
+  map,
+  takeUntil,
+  takeWhile,
+} from 'rxjs';
 
 /**
  * Quadratic Ease-Out Function: f(x) = x * (2 - x)
@@ -38,14 +56,17 @@ export class CountUpDirective implements OnInit {
         // for faster start and slower end of counting
         //map(easeOutQuad),
         // calculate current count
-        map((progress) => Math.round((progress * countInterval) + this.from) > count ? count : Math.round((progress * countInterval) + this.from)),
+        map((progress) =>
+          Math.round(progress * countInterval + this.from) > count
+            ? Math.round(count)
+            : Math.round(progress * countInterval + this.from)
+        ),
         // make sure that last emitted value is count
         endWith(Math.round(count)),
         distinctUntilChanged()
       );
-    }),
+    })
   );
-
 
   @Input('countUp')
   set count(count: number) {
@@ -64,9 +85,9 @@ export class CountUpDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      //this.count$.next(this.from);
-      this.displayCurrentCount();
-    }
+    //this.count$.next(this.from);
+    this.displayCurrentCount();
+  }
 
   private displayCurrentCount(): void {
     this.currentCount$

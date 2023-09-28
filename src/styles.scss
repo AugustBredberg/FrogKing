@@ -3,5 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "../src/app/styles/FK-scrollbar.scss";
+@import "../src/app/styles/FK-primaryText.scss";
+@import "../src/app/styles/FK-evolveDialog.scss";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Inknut Antiqua", serif !important;
+}

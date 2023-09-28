@@ -100,17 +100,35 @@ export interface PondItem extends Item {
   next_pond: POND_ENUM;
 }
 export enum POND_ENUM {
+  WATER_GLASS,
+  TOILET,
   SIMPLE_POND,
   FANCY_POND,
   SPECTACULAR_POND,
   NO_UPGRADE = -1,
 }
 export const PONDS: { [id: string]: PondItem } = {
+  [POND_ENUM.WATER_GLASS]: {
+    kind: POND_ENUM.WATER_GLASS,
+    description: 'A glass of water.',
+    name: 'Glass of Water',
+    tadpole_capacity: 50,
+    frog_capacity: 1,
+    next_pond: POND_ENUM.TOILET,
+  },
+  [POND_ENUM.TOILET]: {
+    kind: POND_ENUM.TOILET,
+    description: 'A low flow toilet.',
+    name: 'Toilet',
+    tadpole_capacity: 200,
+    frog_capacity: 1,
+    next_pond: POND_ENUM.SIMPLE_POND,
+  },
   [POND_ENUM.SIMPLE_POND]: {
     kind: POND_ENUM.SIMPLE_POND,
     description: 'A simple pond.',
     name: 'Simple pond',
-    tadpole_capacity: 50,
+    tadpole_capacity: 500,
     frog_capacity: 2,
     next_pond: POND_ENUM.FANCY_POND,
   },
@@ -156,7 +174,7 @@ export enum FROG_POWERUP_ENUM {
   FRABIES,
   ///// NEGATIVE POWERUPS /////
   SLEEPING,
-  WEAK
+  WEAK,
 }
 export enum FROG_POWERUP_SIDE_EFFECT_ENUM {
   DIE,
@@ -171,7 +189,10 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     description:
       "Enhance a frog with frogroids. They'll be more productive for a while. But be careful, they might die afterwards.",
     duration: 5, // 5 seconds
-    sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.DIE, FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS],
+    sideEffects: [
+      FROG_POWERUP_SIDE_EFFECT_ENUM.DIE,
+      FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS,
+    ],
     productionRateMultiplier: 3,
     expiration: new Date(), // Is set when powerup is used
   },
@@ -196,13 +217,11 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     expiration: new Date(), // Is set when powerup is used
   },
 
-
   ///// NEGATIVE POWERUPS /////
   [FROG_POWERUP_ENUM.SLEEPING]: {
     name: 'Sleeping',
     kind: FROG_POWERUP_ENUM.SLEEPING,
-    description:
-      "Frog is asleep.",
+    description: 'Frog is asleep.',
     duration: 60, // 60 seconds
     sideEffects: [],
     productionRateMultiplier: 0,
@@ -211,15 +230,16 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
   [FROG_POWERUP_ENUM.WEAK]: {
     name: 'Weak',
     kind: FROG_POWERUP_ENUM.WEAK,
-    description:
-      "Frog is weak, production rate is halved.",
+    description: 'Frog is weak, production rate is halved.',
     duration: 30, // 60 seconds
     sideEffects: [],
     productionRateMultiplier: 0.5,
     expiration: new Date(), // Is set when powerup is used
   },
 };
-export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: { [id: string]: FrogPowerUpSideEffect } = {
+export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: {
+  [id: string]: FrogPowerUpSideEffect;
+} = {
   [FROG_POWERUP_SIDE_EFFECT_ENUM.DIE]: {
     name: 'Die',
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.DIE,
@@ -241,8 +261,7 @@ export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: { [id: string]: FrogPowerUpSideE
   [FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE]: {
     name: 'Reduce production rate',
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE,
-    description: 'Risk that the frog\'s production rate is halved.',
+    description: "Risk that the frog's production rate is halved.",
     risk: 1, // 100% chance of reducing production rate
   },
 };
-
