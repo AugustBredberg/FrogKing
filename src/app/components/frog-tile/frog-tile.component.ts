@@ -8,7 +8,11 @@ import {
 } from 'src/models/components/tooltips';
 import { FrogItem } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
-import { SHOP, LEVEL_SHOP } from 'src/models/default-shop-items';
+import {
+  SHOP,
+  LEVEL_SHOP,
+  EVOLUTION_SHOP,
+} from 'src/models/default-shop-items';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.component';
@@ -43,9 +47,12 @@ export class FrogTileComponent implements OnInit {
     this.tooltipData = {
       name: this.frogItem.name,
       description: this.frogItem.description,
-      image: '../../../assets/images/frogs/default-frog.png',
+      image: '../../../../assets/images/frogs/default_frog.png',
       level: this.frogItem.level,
-      evolveCost: 1, //EVOLUTION_SHOP[this.frogItem.evolves_into],
+      negativeText: ['Sleeping...'],
+      positiveText: ['Roided!'],
+      evolveStage: this.frogItem.evolves_into,
+      evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into].cost,
       tps: this.frogItem.production_rate,
       type: 'frog',
     };

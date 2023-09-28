@@ -14,40 +14,66 @@
           ></div>
         </div>
       </div>
-      <div class="flex flex-col w-2/3">
+      <div class="flex flex-col w-2/3 h-full">
         <div class="flex w-full h-1/4">
           <p
             class="w-full text-center justify-center items-center primaryText text-2xl"
           >
-            {{ tooltip.name }}
+            {{ tooltip.name }} Lvl {{ tooltip.level }}
           </p>
         </div>
-        <div class="flex w-full h-full flex-col mt-2">
-          <!-- <ul class="list-disc w-[90%] ml-[10%]">
+        <div class="flex w-full h-full flex-col mx-4">
+          <ul class="list-disc space-y-2">
+            <li
+              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+            >
+              {{ tooltip.tps }} Tadpoles / s
+            </li>
+            <li
+              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+            >
+              Stage {{ tooltip.evolveStage }}
+            </li>
+            <li
+              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+            >
+              {{ tooltip.tps }} Tadpoles / s
+            </li>
+          </ul>
+          <ul class="list-disc mt-2">
             <li
               *ngFor="let positiveText of tooltip.positiveText"
-              class="w-full text-left justify-center items-center primaryText text-xs px-2"
+              class="w-full text-left justify-center items-center positiveText text-xs px-2"
             >
               {{ positiveText }}
             </li>
-          </ul> -->
-          <!-- <ul class="list-disc w-[90%] ml-[10%] mt-2">
+          </ul>
+          <ul class="list-disc mt-2">
             <li
               *ngFor="let negativeText of tooltip.negativeText"
               class="w-full text-left justify-center items-center negativeText text-xs px-2"
             >
               {{ negativeText }}
             </li>
-          </ul> -->
+          </ul>
         </div>
       </div>
     </div>
-    <div class="flex w-full h-auto">
+    <div class="flex h-auto w-full mt-4">
+      <div class="grid grid-cols-4 h-24 w-full justify-evenly grid-flow-row">
+        <div class="bg-black bg-opacity-20 h-full w-full"></div>
+        <div class="bg-black bg-opacity-30 h-full w-full"></div>
+        <div class="bg-black bg-opacity-40 h-full w-full"></div>
+        <div class="bg-black bg-opacity-50 h-full w-full"></div>
+      </div>
+    </div>
+    <div class="flex w-full h-auto mt-4">
       <p class="w-full h-auto text-left primaryText text-xs flex items-center">
         {{ tooltip.description }}
       </p>
     </div>
-    <div *ngIf="tooltip.evolveCost" class="flex w-full h-1/4">
+    <div *ngIf="tooltip.evolveCost" class="flex w-full h-1/4 flex-col">
+      <p class="flex positiveText">Click to Evolve!</p>
       <p class="w-72 h-auto text-left primaryText text-sm flex items-center">
         <img
           class="h-[24px] w-[24px] mr-2"

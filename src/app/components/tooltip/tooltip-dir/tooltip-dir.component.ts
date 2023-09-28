@@ -77,7 +77,7 @@ export class TooltipDirective {
   @HostListener('mouseenter')
   onMouseEnter(): void {
     let tooltipComponent;
-    console.log('type', this.tooltip);
+
     switch (this.tooltip.type) {
       case 'item':
         tooltipComponent = TooltipComponent;

@@ -17,6 +17,7 @@ export interface IFrogTooltip extends ITooltip {
   level: number;
   tps: number;
   evolveCost?: number;
+  evolveStage: number;
   elements?: { [id: string]: number };
   type: string;
 }
