@@ -6,7 +6,7 @@ import {
   ITooltip,
   TooltipPosition,
 } from 'src/models/components/tooltips';
-import { FrogItem } from 'src/models/items';
+import { FROG_ELEMENT_ENUM, FrogItem } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import {
   SHOP,
@@ -16,6 +16,7 @@ import {
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.component';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-frog-tile',
@@ -28,8 +29,10 @@ export class FrogTileComponent implements OnInit {
   levelUpCost: number;
   TooltipPosition = TooltipPosition;
   productionRate: number;
+  nextEvolution: string;
 
   constructor(
+    private inventoryService: InventoryService,
     private gameService: GameService,
     private shopService: ShopService,
     public dialog: MatDialog
@@ -39,6 +42,7 @@ export class FrogTileComponent implements OnInit {
     this.productionRate = this.gameService.calculateFrogProductionRate(
       this.frogItem
     );
+    this.nextEvolution = EVOLUTION_SHOP[this.frogItem.evolves_into]?.name;
 
     this.levelUpCost = Math.round(
       this.gameService.calculateFrogLevelUpCost(this.frogItem)
@@ -52,8 +56,11 @@ export class FrogTileComponent implements OnInit {
       negativeText: ['Sleeping...'],
       positiveText: ['Roided!'],
       evolveStage: this.frogItem.evolves_into,
-      evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into].cost,
-      tps: this.frogItem.production_rate,
+      evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into]?.cost,
+      evolvesInto: EVOLUTION_SHOP[this.frogItem.evolves_into]?.name,
+      tps: this.productionRate,
+      tadpolesProduced: this.frogItem.lifetime_tadpoles_produced,
+      elements: this.frogItem.elementType,
       type: 'frog',
     };
   }
@@ -73,9 +80,19 @@ export class FrogTileComponent implements OnInit {
       height: '400px',
       width: '600px',
       panelClass: 'evolve-dialog-class',
+      data: { frogItem: this.frogItem },
     });
-    dialogRef.afterClosed().subscribe((evolution) => {
-      console.log(`Dialog closed`, evolution);
+    dialogRef.afterClosed().subscribe((evolutionElement: FROG_ELEMENT_ENUM) => {
+      if (evolutionElement) {
+        var evolveShopItem = structuredClone(
+          SHOP[SHOP_ITEM_TYPES.EVOLUTION][this.frogItem.evolves_into]
+        );
+        this.inventoryService.add(
+          evolveShopItem,
+          this.frogItem.id,
+          evolutionElement
+        );
+      }
     });
   }
 }

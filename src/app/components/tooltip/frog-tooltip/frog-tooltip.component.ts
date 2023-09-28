@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   IFrogTooltip,
   ITooltip,
@@ -15,8 +15,9 @@ export class FrogTooltipComponent implements OnInit {
   left: number = 0;
   top: number = 0;
   position: TooltipPosition = TooltipPosition.DEFAULT;
+  tadpolesProduced: number;
 
   ngOnInit(): void {
-    console.log('renderinfg');
+    this.tadpolesProduced = Math.round(this.tooltip.tadpolesProduced);
   }
 }

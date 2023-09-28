@@ -36,27 +36,29 @@ export var INVENTORY_INITIAL_STATE: InventoryState = {
 export const inventoryReducer = createReducer(
   INVENTORY_INITIAL_STATE,
   on(add, (inventory_state, action) => {
-      // If we recieved a frog ID, add tadpoles to that frog's lifetime production AND the inventory
-      // Return inventory updated tadpoles and with given frog's lifetime production increased
-      return {
-        ...inventory_state,
-        tadpolesPreviousState: inventory_state.tadpoles,
-        tadpoles:
+    // If we recieved a frog ID, add tadpoles to that frog's lifetime production AND the inventory
+    console.log('frogId: ' + action.frogId);
+    // Return inventory updated tadpoles and with given frog's lifetime production increased
+    return {
+      ...inventory_state,
+      tadpolesPreviousState: inventory_state.tadpoles,
+      tadpoles:
         inventory_state.pond.tadpole_capacity <
         inventory_state.tadpoles + action.production_rate // If tadpole capacity is reached, max out tadpoles
           ? inventory_state.pond.tadpole_capacity
           : inventory_state.tadpoles + action.production_rate,
-        frogs: action.frogId ?
-        {
-          ...inventory_state.frogs,
-          [action.frogId]: {
-            ...inventory_state.frogs[action.frogId],
-            lifetime_tadpoles_produced:
-              inventory_state.frogs[action.frogId].lifetime_tadpoles_produced +
-              action.production_rate,
-          },
-        } : inventory_state.frogs,
-      };
+      frogs: action.frogId
+        ? {
+            ...inventory_state.frogs,
+            [action.frogId]: {
+              ...inventory_state.frogs[action.frogId],
+              lifetime_tadpoles_produced:
+                inventory_state.frogs[action.frogId]
+                  .lifetime_tadpoles_produced + action.production_rate,
+            },
+          }
+        : inventory_state.frogs,
+    };
   }),
   on(remove, (inventory_state, action) => {
     // Reduce amount of tadpoles by cost

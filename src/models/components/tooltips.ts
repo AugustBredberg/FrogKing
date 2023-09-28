@@ -16,8 +16,10 @@ export interface IFrogTooltip extends ITooltip {
   image: string;
   level: number;
   tps: number;
+  tadpolesProduced: number;
   evolveCost?: number;
   evolveStage: number;
+  evolvesInto?: string;
   elements?: { [id: string]: number };
   type: string;
 }
@@ -35,5 +37,6 @@ export enum TooltipPosition {
   DEFAULT = 'above',
   DYNAMIC = 'dynamic',
   DYNAMICLEFT = 'dynamicleft',
+  DYNAMICRIGHT = 'dynamicright',
   DYNAMICUNDER = 'dynamicunder',
 }

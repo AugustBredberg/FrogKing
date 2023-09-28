@@ -1,61 +1,43 @@
 <div class="p-4 class flex-col">
   <p class="primaryText text-xl flex">Choose an evolution</p>
-  <div class="flex flex-row">
-    <div
-      class="flex flex-col w-full mx-2 bg-black bg-opacity-40 h-auto rounded-md cursor-pointer p-4"
-      (click)="selectOption(1)"
-      [ngClass]="{ selected: selectedOption === 1 }"
-      [ngStyle]="{ border: selectedOption === 1 ? '2px solid white' : '' }"
-    >
-      <p class="primaryText">Holy Frog</p>
-      <div class="w-full h-full">
-        <img
-          class="frog-evolve-icon w-full"
-          src="../../../assets/images/frogs/default_frog.png"
-        />
-      </div>
+  <div class="flex flex-col">
+    <div class="flex flex-row">
+      <ng-container *ngFor="let element of elements | keyvalue; let i = index">
+        <div
+          *ngIf="i <= 3 && element.value !== ''"
+          class="flex flex-col w-full mx-2 bg-black bg-opacity-40 h-auto rounded-md cursor-pointer p-4"
+          (click)="selectOption(element.value)"
+          [ngClass]="{ selected: selectedOption === element.value }"
+          [ngStyle]="{
+            border: selectedOption === element.value ? '2px solid white' : ''
+          }"
+        >
+          <p class="primaryText">{{ element.value }} Frog</p>
+          <div class="w-full h-full">
+            <img
+              class="frog-evolve-icon w-full"
+              src="../../../assets/images/frogs/default_frog.png"
+            />
+          </div>
+        </div>
+      </ng-container>
     </div>
-    <div
-      class="flex flex-col w-full mx-2 bg-black bg-opacity-40 h-auto rounded-md cursor-pointer p-4"
-      (click)="selectOption(2)"
-      [ngClass]="{ selected: selectedOption === 2 }"
-      [ngStyle]="{ border: selectedOption === 2 ? '2px solid white' : '' }"
-    >
-      <p class="primaryText">Dark Frog</p>
-      <div class="w-full h-full">
-        <img
-          class="frog-evolve-icon w-full"
-          src="../../../assets/images/frogs/default_frog.png"
-        />
-      </div>
+    <div class="mt-4">
+      <p *ngIf="selectedOption" class="primaryText text-md">
+        {{ frogTexts[selectedOption] }}
+      </p>
     </div>
-    <div
-      class="flex flex-col w-full mx-2 bg-black bg-opacity-40 h-auto rounded-md cursor-pointer p-4"
-      (click)="selectOption(3)"
-      [ngClass]="{ selected: selectedOption === 3 }"
-      [ngStyle]="{ border: selectedOption === 3 ? '2px solid white' : '' }"
-    >
-      <p class="primaryText">Undead Frog</p>
-      <div class="w-full h-full">
-        <img
-          class="frog-evolve-icon w-full"
-          src="../../../assets/images/frogs/default_frog.png"
-        />
-      </div>
+    <div class="w-full h-auto">
+      <button
+        [mat-dialog-close]="selectedOption"
+        *ngIf="selectedOption"
+        class="bg-green-600 py-2 px-5 rounded-md justify-center items-end flex m-auto"
+      >
+        <div class="primaryText flex h-full m-auto">Confirm Evolution</div>
+      </button>
     </div>
   </div>
-  <div class="mt-4">
-    <p *ngIf="selectedOption" class="primaryText text-md">
-      {{ frogTexts[selectedOption] }}
-    </p>
-  </div>
-  <div class="w-full h-auto">
-    <button
-      [mat-dialog-close]="selectedOption"
-      *ngIf="selectedOption"
-      class="bg-green-600 py-2 px-5 rounded-md justify-center items-end flex m-auto"
-    >
-      <div class="primaryText flex h-full m-auto">Confirm Evolution</div>
-    </button>
-  </div>
+
+  <!-- [ngClass]="{ selected: selectedOption === 0 }"
+      [ngStyle]="{ border: selectedOption === 0 ? '2px solid white' : '' }" -->
 </div>

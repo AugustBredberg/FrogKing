@@ -44,3 +44,15 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.bg-element {
+  &--Dark {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  &--Undead {
+    background-color: rgba(25, 4, 46, 0.2);
+  }
+  &--Holy {
+    background-color: rgba(94, 255, 66, 0.7);
+  }
+}

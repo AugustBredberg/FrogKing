@@ -37,7 +37,7 @@
             <li
               class="w-full text-left justify-center items-center primaryText text-xs px-2"
             >
-              {{ tooltip.tps }} Tadpoles / s
+              Total produced: {{ tadpolesProduced }}
             </li>
           </ul>
           <ul class="list-disc mt-2">
@@ -60,11 +60,23 @@
       </div>
     </div>
     <div class="flex h-auto w-full mt-4">
-      <div class="grid grid-cols-4 h-24 w-full justify-evenly grid-flow-row">
-        <div class="bg-black bg-opacity-20 h-full w-full"></div>
-        <div class="bg-black bg-opacity-30 h-full w-full"></div>
-        <div class="bg-black bg-opacity-40 h-full w-full"></div>
-        <div class="bg-black bg-opacity-50 h-full w-full"></div>
+      <!-- Frog elements grid -->
+      <div class="flex flex-row w-full">
+        <div *ngFor="let element of tooltip.elements | keyvalue" class="h-full">
+          <ng-container *ngIf="element.value !== 0">
+            <div
+              class="bg-element bg-opacity-20 h-full rounded-md mr-2"
+              [ngClass]="'bg-element--' + element.key"
+            >
+              <p
+                class="primaryText text-sm py-1 px-3 flex justify-center items-center h-full w-full"
+              >
+                {{ element.value > 1 ? element.value + "x" : "" }}
+                {{ element.key }}
+              </p>
+            </div>
+          </ng-container>
+        </div>
       </div>
     </div>
     <div class="flex w-full h-auto mt-4">
@@ -73,7 +85,10 @@
       </p>
     </div>
     <div *ngIf="tooltip.evolveCost" class="flex w-full h-1/4 flex-col">
-      <p class="flex positiveText">Click to Evolve!</p>
+      <p *ngIf="tooltip.evolvesInto" class="flex positiveText">
+        Click to Evolve!
+      </p>
+
       <p class="w-72 h-auto text-left primaryText text-sm flex items-center">
         <img
           class="h-[24px] w-[24px] mr-2"
@@ -81,6 +96,9 @@
         />
         {{ tooltip.evolveCost }}
       </p>
+    </div>
+    <div *ngIf="!tooltip.evolvesInto" class="flex w-full h-1/4 flex-col">
+      <p class="flex primaryText">Cannot Evolve Further.</p>
     </div>
   </div>
 </div>

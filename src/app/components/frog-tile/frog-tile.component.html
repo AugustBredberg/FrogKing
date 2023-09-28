@@ -13,6 +13,7 @@
       />
     </div>
     <button
+      [disabled]="!nextEvolution"
       (click)="openDialog()"
       class="flex flex-col h-full w-3/5 py-2 pl-4 leading-tight"
     >
@@ -22,9 +23,6 @@
       </div>
       <div class="flex w-full h-full">
         <p class="text-md primaryText">{{ productionRate }} Tadpoles / S</p>
-      </div>
-      <div class="flex w-full h-full">
-        <p class="text-md primaryText">Total lifetime production: {{ frogItem.lifetime_tadpoles_produced }} </p>
       </div>
     </button>
     <button

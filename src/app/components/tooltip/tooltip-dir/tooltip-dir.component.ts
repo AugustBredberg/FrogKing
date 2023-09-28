@@ -28,6 +28,9 @@ export class TooltipDirective {
 
   private componentRef: ComponentRef<any> | null;
 
+  lastXPos: number;
+  lastYPos: number;
+
   constructor(
     private elementRef: ElementRef,
     private appRef: ApplicationRef,
@@ -68,14 +71,15 @@ export class TooltipDirective {
           this.componentRef.instance.top = Math.round(top + (bottom - top) / 2);
           break;
         }
+
         default: {
           break;
         }
       }
     }
   }
-  @HostListener('mouseenter')
-  onMouseEnter(): void {
+  @HostListener('mouseenter', ['$event'])
+  onMouseEnter($event: MouseEvent): void {
     let tooltipComponent;
 
     switch (this.tooltip.type) {
@@ -100,6 +104,15 @@ export class TooltipDirective {
       const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
         .rootNodes[0] as HTMLElement;
       document.body.appendChild(domElem);
+      const { left, right, top, bottom } =
+        this.elementRef.nativeElement.getBoundingClientRect();
+      if (this.componentRef) {
+        if (this.componentRef.instance.left == 0)
+          this.componentRef.instance.left = $event.clientX;
+        if (this.componentRef.instance.top == 0)
+          this.componentRef.instance.top = Math.round(bottom);
+      }
+
       this.setTooltipComponentProperties();
     }
   }
@@ -111,7 +124,13 @@ export class TooltipDirective {
     if (this.componentRef && this.position === TooltipPosition.DYNAMICLEFT) {
       this.componentRef.instance.top = $event.clientY;
       this.componentRef.instance.tooltip = this.tooltip;
-      this.componentRef.instance.left = window.innerWidth * 0.62;
+      this.componentRef.instance.left = window.innerWidth * 0.75 - 210;
+    }
+
+    if (this.componentRef && this.position === TooltipPosition.DYNAMICRIGHT) {
+      this.componentRef.instance.top = $event.clientY;
+      this.componentRef.instance.tooltip = this.tooltip;
+      this.componentRef.instance.left = window.innerWidth * 0.25 + 210;
     }
 
     if (this.componentRef && this.position === TooltipPosition.DYNAMICUNDER) {
@@ -120,6 +139,7 @@ export class TooltipDirective {
       this.componentRef.instance.top = Math.round(bottom);
     }
   }
+
   onMouseClick($event: MouseEvent): void {
     this.destroy();
   }
