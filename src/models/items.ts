@@ -93,6 +93,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
 /// PONDS
 ////////////////////////////////////////////////////////////
 export interface PondItem extends Item {
+  id: number;
   kind: POND_ENUM;
   description: string;
   tadpole_capacity: number;
@@ -109,6 +110,7 @@ export enum POND_ENUM {
 }
 export const PONDS: { [id: string]: PondItem } = {
   [POND_ENUM.WATER_GLASS]: {
+    id: POND_ENUM.WATER_GLASS,
     kind: POND_ENUM.WATER_GLASS,
     description: 'A glass of water.',
     name: 'Glass of Water',
@@ -117,6 +119,7 @@ export const PONDS: { [id: string]: PondItem } = {
     next_pond: POND_ENUM.TOILET,
   },
   [POND_ENUM.TOILET]: {
+    id: POND_ENUM.TOILET,
     kind: POND_ENUM.TOILET,
     description: 'A low flow toilet.',
     name: 'Toilet',
@@ -125,6 +128,7 @@ export const PONDS: { [id: string]: PondItem } = {
     next_pond: POND_ENUM.SIMPLE_POND,
   },
   [POND_ENUM.SIMPLE_POND]: {
+    id: POND_ENUM.SIMPLE_POND,
     kind: POND_ENUM.SIMPLE_POND,
     description: 'A simple pond.',
     name: 'Simple pond',
@@ -133,6 +137,7 @@ export const PONDS: { [id: string]: PondItem } = {
     next_pond: POND_ENUM.FANCY_POND,
   },
   [POND_ENUM.FANCY_POND]: {
+    id: POND_ENUM.FANCY_POND,
     kind: POND_ENUM.FANCY_POND,
     description: 'A fancy pond.',
     name: 'Fancy pond',
@@ -141,6 +146,7 @@ export const PONDS: { [id: string]: PondItem } = {
     next_pond: POND_ENUM.SPECTACULAR_POND,
   },
   [POND_ENUM.SPECTACULAR_POND]: {
+    id: POND_ENUM.SPECTACULAR_POND,
     kind: POND_ENUM.SPECTACULAR_POND,
     description: 'A spectacular pond.',
     name: 'Spectacular pond',
