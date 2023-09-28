@@ -7,6 +7,7 @@ export interface ITooltip {
   price?: number;
   image?: string;
   itemId?: number;
+  type?: string;
 }
 
 export interface ITooltipActions {
