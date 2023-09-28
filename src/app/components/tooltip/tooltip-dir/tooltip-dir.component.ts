@@ -13,6 +13,7 @@ import {
 
 import { TooltipComponent } from '../tooltip.component';
 import { FrogTooltipComponent } from '../frog-tooltip/frog-tooltip.component';
+import { PassiveTooltipComponent } from '../passive-tooltip/passive-tooltip.component';
 import {
   IFrogTooltip,
   ITooltip,
@@ -88,6 +89,9 @@ export class TooltipDirective {
         break;
       case 'frog':
         tooltipComponent = FrogTooltipComponent;
+        break;
+      case 'passive':
+        tooltipComponent = PassiveTooltipComponent;
         break;
       default:
         // Handle other cases if needed

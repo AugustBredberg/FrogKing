@@ -14,9 +14,9 @@ export class PassivesSectionComponent {
       levels: [1, 2, 3],
       obtained: 2,
       bonus: {
-        1: 'bonus for having 1 Undead frog',
-        2: 'bonus for having 2 Undead frogs',
-        3: 'bonus for having 3 Undead frogs',
+        1: { required: 1, text: 'bonus for having 1 Undead frog' },
+        2: { required: 2, text: 'bonus for having 2 Undead frogs' },
+        3: { required: 4, text: 'bonus for having 4 Undead frogs' },
       },
     },
     {
@@ -25,9 +25,9 @@ export class PassivesSectionComponent {
       levels: [1, 2, 3],
       obtained: 0,
       bonus: {
-        1: 'bonus for having 1 Holy frog',
-        2: 'bonus for having 2 Holy frogs',
-        3: 'bonus for having 3 Holy frogs',
+        1: { required: 1, text: 'bonus for having 1 Holy frog' },
+        2: { required: 3, text: 'bonus for having 3 Holy frogs' },
+        3: { required: 5, text: 'bonus for having 5 Holy frogs' },
       },
     },
     {
@@ -36,9 +36,9 @@ export class PassivesSectionComponent {
       levels: [1, 2, 3],
       obtained: 1,
       bonus: {
-        1: 'bonus for having 1 Dark frog',
-        2: 'bonus for having 2 Dark frogs',
-        3: 'bonus for having 3 Dark frogs',
+        1: { required: 1, text: 'bonus for having 1 Dark frog' },
+        2: { required: 3, text: 'bonus for having 3 Dark frogs' },
+        3: { required: 5, text: 'bonus for having 5 Dark frogs' },
       },
     },
     {
@@ -47,9 +47,9 @@ export class PassivesSectionComponent {
       levels: [1, 2, 3],
       obtained: 0,
       bonus: {
-        1: 'bonus for having 1 Spirit frog',
-        2: 'bonus for having 2 Spirit frogs',
-        3: 'bonus for having 3 Spirit frogs',
+        1: { required: 1, text: 'bonus for having 1 Spirit frog' },
+        2: { required: 3, text: 'bonus for having 3 Spirit frogs' },
+        3: { required: 5, text: 'bonus for having 5 Spirit frogs' },
       },
     },
     {
@@ -58,9 +58,9 @@ export class PassivesSectionComponent {
       levels: [1, 2, 3],
       obtained: 0,
       bonus: {
-        1: 'bonus for having 1 Worker frog',
-        2: 'bonus for having 2 Worker frogs',
-        3: 'bonus for having 3 Worker frogs',
+        1: { required: 1, text: 'bonus for having 1 Worker frog' },
+        2: { required: 3, text: 'bonus for having 3 Worker frogs' },
+        3: { required: 5, text: 'bonus for having 5 Worker frogs' },
       },
     },
     {
@@ -69,9 +69,9 @@ export class PassivesSectionComponent {
       levels: [1, 2, 3],
       obtained: 0,
       bonus: {
-        1: 'bonus for having 1 Paladin frog',
-        2: 'bonus for having 2 Paladin frogs',
-        3: 'bonus for having 3 Paladin frogs',
+        1: { required: 1, text: 'bonus for having 1 Paladin frog' },
+        2: { required: 3, text: 'bonus for having 3 Paladin frogs' },
+        3: { required: 5, text: 'bonus for having 5 Paladin frogs' },
       },
     },
   ];
