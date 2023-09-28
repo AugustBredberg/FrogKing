@@ -93,7 +93,7 @@ export const inventoryReducer = createReducer(
   }),
   on(power_up_frog, (inventory_state, action) => {
     // Get powerup from default powerups
-    var powerup = DEFAULT_FROGPOWERUPS[action.powerUp];
+    var powerup = structuredClone(DEFAULT_FROGPOWERUPS[action.powerUp]);
     var powerExpiration = new Date();
     powerExpiration.setSeconds(powerExpiration.getSeconds() + powerup.duration);
     powerup.expiration = powerExpiration; //new Date(Date.now() + powerup.duration * 1000);

@@ -127,12 +127,12 @@ export interface FrogPowerUpSideEffect extends Item {
   risk: number; // 0-1
 }
 export enum FROG_POWERUP_ENUM {
-  FROGROIDS,
-  FRODKA,
-  FRABIES,
+  FROGROIDS = 1,
+  FRODKA = 2,
+  FRABIES = 3,
   ///// NEGATIVE POWERUPS /////
-  SLEEPING,
-  WEAK,
+  SLEEPING = -1,
+  WEAK = -2,
 }
 export enum FROG_POWERUP_SIDE_EFFECT_ENUM {
   DIE,

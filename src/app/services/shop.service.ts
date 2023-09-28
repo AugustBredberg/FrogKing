@@ -14,7 +14,9 @@ export class ShopService {
 
   constructor(private store: Store<{ shop: ShopState }>, private invService: InventoryService) { }
 
-  // User can buy items that are tied to a specific frog etc. Frog is found using uniqueId
+  // User can buy items that are tied to a specific item.
+  // Examples: Frog can be found using uniqueId
+  //           Frog powerup can be found using uniqueId
   buy(item: ShopItem, uniqueId: string = "", newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE) {
     switch (item.type) {
       case SHOP_ITEM_TYPES.POND:
@@ -25,7 +27,7 @@ export class ShopService {
         // Remove item from shop
         this.store.dispatch(remove({
           item_type: SHOP_ITEM_TYPES.POND,
-          product: item.id
+          product: item.defaultItemId // Use unique shop item id to remove item from shop
         }));
 
         // Add next pond upgrade to shop
@@ -50,11 +52,12 @@ export class ShopService {
         console.log("Buying frog juice")
         // Withdraw cost from inventory
         this.invService.spendTadpoles(item.cost);
-
+        // PROBLEM: ID IS NOT SAME AS LOOKUP ID (1 VS 11 FOR EXAMPLE. NEED KEY FROM STORE)
         // Remove item from shop
+        debugger
         this.store.dispatch(remove({
           item_type: SHOP_ITEM_TYPES.FROGPOWERUP,
-          product: item.id
+          product: parseInt(uniqueId)
         }));
         break;
 

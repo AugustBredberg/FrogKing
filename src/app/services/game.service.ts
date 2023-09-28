@@ -30,7 +30,6 @@ export class GameService {
     var store = this.store;
     var frogKeys = Object.keys(frogs);
 
-    // Only make one dispatch with the accumulated tadpole rate
     var totalTadpoleRate = 0;
     frogKeys.forEach((frogKey: string) => {
       var frogItem = frogs[frogKey];
@@ -38,6 +37,12 @@ export class GameService {
       // Find tadpole rate for frog
       var tadpole_rate = this.calculateFrogProductionRate(frogItem);
       totalTadpoleRate += tadpole_rate;
+
+      // Don't dispatch if tadpole capacity is full
+      if (this.inventory.pond.tadpole_capacity == this.inventory.tadpoles) {
+        return;
+      }
+      // Make one dispatch with this frog's accumulated tadpole rate
       store.dispatch(
       add({
         production_rate: totalTadpoleRate,

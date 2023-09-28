@@ -28,10 +28,11 @@ import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/mod
 export class InventoryService {
   constructor(private store: Store<{ shop: ShopState }>) {}
 
+
   // User can add items that are tied to a specific frog etc. Frog is found using uniqueId
   add(item: ShopItem, uniqueId: string = '', newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE) {
     var item_type = item.type; // Example: SHOP_ITEM_TYPES.POND
-    var product = item.id; // Example: POND_ENUM.FANCY_POND
+    var product = item.defaultItemId; // Example: POND_ENUM.FANCY_POND
 
     switch (item_type) {
       case SHOP_ITEM_TYPES.POND:
