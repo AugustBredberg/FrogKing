@@ -10,7 +10,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     description:
       "A normal, everyday frog. It ribbits. It hops. It eats flies. It's a frog.",
     kind: EVOLUTION_ENUM.TIER1,
-    evolves_into: [EVOLUTION_ENUM.TIER2],
+    evolves_into: EVOLUTION_ENUM.TIER2,
     level: 1,
     level_multiplier: 0.05,
     production_rate: 2,
@@ -27,7 +27,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     description:
       "A toad. It's a frog, but a toad. It's a little bigger now than before. A few wart-like bumps have appeared on its back. ",
     kind: EVOLUTION_ENUM.TIER2,
-    evolves_into: [EVOLUTION_ENUM.TIER3],
+    evolves_into: EVOLUTION_ENUM.TIER3,
     level: 1,
     level_multiplier: 0.05,
     production_rate: 4,
@@ -44,7 +44,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     description:
       "A gecko. It's body is narrower and more sleek than it was. It has a long tongue and can climb walls. An agile little fellow.",
     kind: EVOLUTION_ENUM.TIER3,
-    evolves_into: [],
+    evolves_into: EVOLUTION_ENUM.NO_EVOLUTION,
     level: 1,
     level_multiplier: 0.15,
     production_rate: 6,

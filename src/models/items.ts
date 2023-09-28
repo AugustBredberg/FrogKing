@@ -13,7 +13,7 @@ export interface FrogItem extends Item {
   id: string;
   description: string;
   kind: EVOLUTION_ENUM;
-  evolves_into: EVOLUTION_ENUM[];
+  evolves_into: EVOLUTION_ENUM;
   level: number;
   level_multiplier: number;
   production_rate: number;
@@ -24,6 +24,8 @@ export enum EVOLUTION_ENUM {
   TIER1,
   TIER2,
   TIER3,
+
+  NO_EVOLUTION
 }
 export enum FROG_ELEMENT_ENUM {
   //FIRE,

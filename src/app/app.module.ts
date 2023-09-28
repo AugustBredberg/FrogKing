@@ -8,8 +8,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { inventoryReducer } from '../reducers/inventory';
 import { GameComponent } from './components/game/game.component';
-import { PondComponent } from './components/pond/pond.component';
-import { FrogComponent } from './components/frog/frog.component';
 import { shopReducer } from 'src/reducers/shop';
 import { ShopComponent } from './components/shop/shop.component';
 import { ShopItemComponent } from './components/shop/shop-item/shop-item.component';
@@ -31,8 +29,6 @@ import { MatDialog } from '@angular/material/dialog';
   declarations: [
     AppComponent,
     GameComponent,
-    PondComponent,
-    FrogComponent,
     ShopComponent,
     ShopItemComponent,
     CountUpDirective,
