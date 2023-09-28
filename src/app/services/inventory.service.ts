@@ -14,13 +14,13 @@ import {
 } from '../inventory-actions';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import {
-  DEFAULT_FROGPOWERUPS_SIDE_EFFECTS,
   EVOLUTION_ENUM,
   FROG_ELEMENT_ENUM,
   FROG_POWERUP_ENUM,
   FROG_POWERUP_SIDE_EFFECT_ENUM,
   FrogPowerUpSideEffect,
 } from 'src/models/items';
+import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
 
 @Injectable({
   providedIn: 'root',

@@ -5,7 +5,7 @@ import { InventoryState, ShopState } from 'src/models/states';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { Store } from '@ngrx/store';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
-import { DEFAULT_FROGPOWERUPS } from 'src/models/items';
+import { DEFAULT_FROGPOWERUPS } from 'src/models/default-items';
 
 @Component({
   selector: 'app-shop-item',

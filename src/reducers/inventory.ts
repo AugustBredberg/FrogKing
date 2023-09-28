@@ -1,15 +1,15 @@
 import { InventoryState } from '../models/states';
 import {
   EVOLUTION_ENUM,
-  DEFAULT_FROGS,
   FrogItem,
   CURRENCY_ENUM,
   PONDS,
   POND_ENUM,
   PondItem,
-  DEFAULT_FROGPOWERUPS,
   FROG_ELEMENT_ENUM,
 } from '../models/items'; // Inventory is initially empty
+
+import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGS } from '../models/default-items';
 
 import { createReducer, on } from '@ngrx/store';
 import {

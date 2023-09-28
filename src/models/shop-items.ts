@@ -2,12 +2,11 @@ import {
   Item,
   CURRENCY_ENUM,
   EVOLUTION_ENUM,
-  DEFAULT_FROGS,
   POND_ENUM,
   PondItem,
   FROG_POWERUP_ENUM,
-  DEFAULT_FROGPOWERUPS,
 } from './items';
+import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGS } from './default-items';
 
 export enum SHOP_ITEM_TYPES {
   EVOLUTION, // Evolves a specific frog

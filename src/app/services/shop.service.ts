@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { ShopState } from 'src/models/states';
 import { add, remove } from '../shop-actions';
-import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS, DEFAULT_FROGS, EVOLUTION_ENUM, FROG_ELEMENT_ENUM, PONDS, POND_ENUM } from 'src/models/items';
+import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, PONDS, POND_ENUM } from 'src/models/items';
+import { DEFAULT_FROGS, DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
 import { InventoryService } from './inventory.service';
 
 @Injectable({
