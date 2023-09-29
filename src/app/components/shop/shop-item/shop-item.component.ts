@@ -20,6 +20,7 @@ export class ShopItemComponent implements OnInit {
   TooltipPosition = TooltipPosition;
   tooltipData: ITooltip;
 
+  frogCount: number;
   constructor(
     private store: Store<{ shop: ShopState }>,
     private shopService: ShopService,
@@ -35,7 +36,7 @@ export class ShopItemComponent implements OnInit {
     const shopItemSummary: ShopItemSummary = this.shopService.lookupShopItem(
       this.item
     );
-
+    this.frogCount = Object.keys(this.inventoryState.frogs).length;
     this.tooltipData = {
       header: this.item.name,
       positiveText: shopItemSummary.positiveEffects,
