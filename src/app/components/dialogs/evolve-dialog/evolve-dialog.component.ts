@@ -22,8 +22,8 @@ export class EvolveDialogComponent {
     [FROG_ELEMENT_ENUM.HOLY]: 'Holy frog text',
     [FROG_ELEMENT_ENUM.DARK]: 'Dark frog text',
     [FROG_ELEMENT_ENUM.SPIRIT]: 'Spirit frog text',
-    [FROG_ELEMENT_ENUM.WORKER]: 'Worker frog text',
-    [FROG_ELEMENT_ENUM.PALADIN]: 'Paladin frog text',
+    [FROG_ELEMENT_ENUM.PSYCHIC]: 'Psychic frog text',
+    [FROG_ELEMENT_ENUM.MIGHTY]: 'Mighty frog text',
   };
 
   selectOption(option: string): void {

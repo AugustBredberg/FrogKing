@@ -8,8 +8,8 @@ var emptyElements = {
       [FROG_ELEMENT_ENUM.HOLY]: 0,
       [FROG_ELEMENT_ENUM.DARK]: 0,
       [FROG_ELEMENT_ENUM.SPIRIT]: 0,
-      [FROG_ELEMENT_ENUM.WORKER]: 0,
-      [FROG_ELEMENT_ENUM.PALADIN]: 0,
+      [FROG_ELEMENT_ENUM.PSYCHIC]: 0,
+      [FROG_ELEMENT_ENUM.MIGHTY]: 0,
     }
 export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.TIER1]: {

@@ -46,7 +46,7 @@ export class SpawnFrogTileComponent implements OnInit {
       negativeText: [],
       body: '',
       price: 20,
-      image: '../../../assets/images/frogs/default_frog.png',
+      image: '../../../assets/images/frogs/frog1.png',
       itemId: 0,
     };
   }

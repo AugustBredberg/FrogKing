@@ -23,7 +23,7 @@ export interface FrogItem extends Item {
   next_possible_element_choices: FROG_ELEMENT_ENUM[];
 }
 export enum EVOLUTION_ENUM {
-  TIER1,
+  TIER1 = 1,
   TIER2,
   TIER3,
   TIER4,
@@ -44,8 +44,8 @@ export enum FROG_ELEMENT_ENUM {
   HOLY = 'Holy', // Less likely to die. Can't be affected by negative powerups
   DARK = 'Dark', // Powerful, but might kill other frogs
   SPIRIT = 'Spirit', // Can't be affected by negative powerups
-  WORKER = 'Worker', // Produces more tadpoles
-  PALADIN = 'Paladin', // Less likely to die
+  PSYCHIC = 'Psychic', // Produces more tadpoles
+  MIGHTY = 'Mighty', // Less likely to die
   NONE = '', // No element
 }
 

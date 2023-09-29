@@ -51,7 +51,7 @@ export class FrogTileComponent implements OnInit {
     this.tooltipData = {
       name: this.frogItem.name,
       description: this.frogItem.description,
-      image: '../../../../assets/images/frogs/default_frog.png',
+      image: '../../../../assets/images/frogs/frog' + this.frogItem.kind + '.png',
       level: this.frogItem.level,
       negativeText: this.getNegativePowerupTexts(this.frogItem.power_ups),
       positiveText: this.getPositivePowerupTexts(this.frogItem.power_ups),
