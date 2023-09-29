@@ -47,7 +47,7 @@ export class FrogTileComponent implements OnInit {
     this.levelUpCost = Math.round(
       this.gameService.calculateFrogLevelUpCost(this.frogItem)
     );
-
+    console.log("evolves into: ", this.frogItem.evolves_into, EVOLUTION_SHOP[this.frogItem.evolves_into]?.name)
     this.tooltipData = {
       name: this.frogItem.name,
       description: this.frogItem.description,
@@ -60,7 +60,7 @@ export class FrogTileComponent implements OnInit {
       evolvesInto: EVOLUTION_SHOP[this.frogItem.evolves_into]?.name,
       tps: this.productionRate,
       tadpolesProduced: this.frogItem.lifetime_tadpoles_produced,
-      elements: this.frogItem.elementType,
+      elements: this.frogItem.element_type,
       type: 'frog',
     };
   }

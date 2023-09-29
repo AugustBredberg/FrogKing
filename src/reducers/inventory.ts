@@ -75,6 +75,13 @@ export const inventoryReducer = createReducer(
     // Put given frog evolution in inventory of frogs
     let new_frog = structuredClone(DEFAULT_FROGS[action.evolution]);
     new_frog.id = crypto.randomUUID();
+
+    // Set next possible element choices for frog (all elements, shuffled)
+    new_frog.next_possible_element_choices = Object.values(
+      FROG_ELEMENT_ENUM
+    ).filter((element) => element != FROG_ELEMENT_ENUM.NONE) as FROG_ELEMENT_ENUM[];
+    new_frog.next_possible_element_choices.sort(() => Math.random() - 0.5);
+
     return {
       ...inventory_state,
       frogs: {
@@ -171,15 +178,56 @@ export const inventoryReducer = createReducer(
   on(evolve_frog, (inventory_state, action) => {
     var new_frog = structuredClone(DEFAULT_FROGS[action.evolution]);
     new_frog.id = action.frogId;
-    new_frog.elementType = structuredClone(
-      inventory_state.frogs[action.frogId].elementType
+    new_frog.element_type = structuredClone(
+      inventory_state.frogs[action.frogId].element_type
     );
 
     // If we recieved a new element, add the new element to the frog
     var newElement = action.newElement;
     if (newElement != FROG_ELEMENT_ENUM.NONE) {
-      new_frog.elementType[newElement] += 1;
+      new_frog.element_type[newElement] += 1;
     }
+
+    // Set next possible element choices for frog
+    // Check if the frog already has 4 different elements
+    var elementCount = 0;
+    Object.keys(new_frog.element_type).forEach((element) => {
+      if (new_frog.element_type[element] > 0) {
+        elementCount += 1;
+      }
+    });
+    // Case 1: Frog has 4 different elements.
+    if (elementCount == 4) {
+      // Set next possible element choices to the 4 elements the frog has
+      new_frog.next_possible_element_choices = Object.keys(
+        new_frog.element_type
+      ).filter(
+        (element) => new_frog.element_type[element as FROG_ELEMENT_ENUM] > 0
+      ) as FROG_ELEMENT_ENUM[];
+
+      // Shuffle the elements
+      new_frog.next_possible_element_choices.sort(() => Math.random() - 0.5);
+      // Append the rest of the elements (except NONE)
+      Object.values(FROG_ELEMENT_ENUM).forEach((element) => {
+        if (
+          !new_frog.next_possible_element_choices.includes(
+            element as FROG_ELEMENT_ENUM
+          ) &&
+          element != FROG_ELEMENT_ENUM.NONE
+        ) {
+          new_frog.next_possible_element_choices.push(
+            element as FROG_ELEMENT_ENUM
+          );
+        }
+      });
+    }
+    // Case 2: Frog has less than 4 different elements. Set next possible element choices to all elements (except NONE)
+    else {
+      new_frog.next_possible_element_choices = Object.values(
+        FROG_ELEMENT_ENUM
+      ).filter((element) => element != FROG_ELEMENT_ENUM.NONE) as FROG_ELEMENT_ENUM[];
+    }
+
 
     // Return inventory with given frog evolved and new element if applicable
     return {

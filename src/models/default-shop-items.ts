@@ -12,7 +12,7 @@ export const EVOLUTION_SHOP: { [id: string]: ShopItem } = {
   [EVOLUTION_ENUM.TIER1]: {
     id: EVOLUTION_ENUM.TIER1,
     defaultItemId: EVOLUTION_ENUM.TIER1,
-    name: 'Evolve tadpole into Frog',
+    name: 'Evolve tadpole into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER1].name,
     type: SHOP_ITEM_TYPES.EVOLUTION,
     cost: 20, // Costs 20 tadpoles
     rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER1].production_rate, // Tadpoles per second
@@ -22,7 +22,7 @@ export const EVOLUTION_SHOP: { [id: string]: ShopItem } = {
   [EVOLUTION_ENUM.TIER2]: {
     id: EVOLUTION_ENUM.TIER2,
     defaultItemId: EVOLUTION_ENUM.TIER2,
-    name: 'Evolve Frog into Toad',
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER1].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER2].name,
     type: SHOP_ITEM_TYPES.EVOLUTION,
     cost: 100, // Costs 100 tadpoles
     rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER2].production_rate, // Tadpoles per second
@@ -32,19 +32,100 @@ export const EVOLUTION_SHOP: { [id: string]: ShopItem } = {
   [EVOLUTION_ENUM.TIER3]: {
     id: EVOLUTION_ENUM.TIER3,
     defaultItemId: EVOLUTION_ENUM.TIER3,
-    name: 'Evolve Frog into Gecko',
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER2].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER3].name,
     type: SHOP_ITEM_TYPES.EVOLUTION,
     cost: 100, // Costs 100 tadpoles
     rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER3].production_rate, // Tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
     cost_multiplier: 0, // Cost multiplier
   },
+  [EVOLUTION_ENUM.TIER4]: {
+    id: EVOLUTION_ENUM.TIER4,
+    defaultItemId: EVOLUTION_ENUM.TIER4,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER3].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER4].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER4].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER5]: {
+    id: EVOLUTION_ENUM.TIER5,
+    defaultItemId: EVOLUTION_ENUM.TIER5,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER4].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER5].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER5].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER6]: {
+    id: EVOLUTION_ENUM.TIER6,
+    defaultItemId: EVOLUTION_ENUM.TIER6,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER5].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER6].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER6].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER7]: {
+    id: EVOLUTION_ENUM.TIER7,
+    defaultItemId: EVOLUTION_ENUM.TIER7,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER6].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER7].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER7].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER8]: {
+    id: EVOLUTION_ENUM.TIER8,
+    defaultItemId: EVOLUTION_ENUM.TIER8,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER7].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER8].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER8].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER9]: {
+    id: EVOLUTION_ENUM.TIER9,
+    defaultItemId: EVOLUTION_ENUM.TIER9,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER8].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER9].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER9].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER10]: {
+    id: EVOLUTION_ENUM.TIER10,
+    defaultItemId: EVOLUTION_ENUM.TIER10,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER9].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER10].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER10].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+
+  },
+  [EVOLUTION_ENUM.TIER11]: {
+    id: EVOLUTION_ENUM.TIER11,
+    defaultItemId: EVOLUTION_ENUM.TIER11,
+    name: 'Evolve ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER10].name + ' into ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER11].name,
+    type: SHOP_ITEM_TYPES.EVOLUTION,
+    cost: 100, // Costs 100 tadpoles
+    rate: DEFAULT_FROGS[EVOLUTION_ENUM.TIER11].production_rate, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0.0, // Cost multiplier
+  },
 };
 export const LEVEL_SHOP: { [id: string]: ShopItem } = {
   [EVOLUTION_ENUM.TIER1]: {
     id: EVOLUTION_ENUM.TIER1,
     defaultItemId: EVOLUTION_ENUM.TIER1,
-    name: 'Level up Frog',
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER1].name,
     type: SHOP_ITEM_TYPES.LEVELUP,
     cost: 30,
     rate: 0, // 0 tadpoles per second
@@ -54,7 +135,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
   [EVOLUTION_ENUM.TIER2]: {
     id: EVOLUTION_ENUM.TIER2,
     defaultItemId: EVOLUTION_ENUM.TIER2,
-    name: 'Level up Toad',
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER2].name,
     type: SHOP_ITEM_TYPES.LEVELUP,
     cost: 100,
     rate: 0, // 0 tadpoles per second
@@ -64,12 +145,93 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
   [EVOLUTION_ENUM.TIER3]: {
     id: EVOLUTION_ENUM.TIER3,
     defaultItemId: EVOLUTION_ENUM.TIER3,
-    name: 'Level up Gecko',
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER3].name,
     type: SHOP_ITEM_TYPES.LEVELUP,
-    cost: 80,
+    cost: 100,
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
     cost_multiplier: 0.05, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER4]: {
+    id: EVOLUTION_ENUM.TIER4,
+    defaultItemId: EVOLUTION_ENUM.TIER4,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER4].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0, // 0 tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0.05, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER5]: {
+    id: EVOLUTION_ENUM.TIER5,
+    defaultItemId: EVOLUTION_ENUM.TIER5,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER5].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0, // 0 tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0.05, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER6]: {
+    id: EVOLUTION_ENUM.TIER6,
+    defaultItemId: EVOLUTION_ENUM.TIER6,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER6].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0, // 0 tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0.05, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER7]: {
+    id: EVOLUTION_ENUM.TIER7,
+    defaultItemId: EVOLUTION_ENUM.TIER7,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER7].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0, // 0 tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0.05, // Cost multiplier
+  },
+  [EVOLUTION_ENUM.TIER8]: {
+    id: EVOLUTION_ENUM.TIER8,
+    defaultItemId: EVOLUTION_ENUM.TIER8,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER8].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0, // 0 tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0.05, // Cost multiplier
+
+  },
+  [EVOLUTION_ENUM.TIER9]: {
+    id: EVOLUTION_ENUM.TIER9,
+    defaultItemId: EVOLUTION_ENUM.TIER9,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER9].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0,
+    for: CURRENCY_ENUM.TADPOLE,
+    cost_multiplier: 0.05,
+  },
+  [EVOLUTION_ENUM.TIER10]: {
+    id: EVOLUTION_ENUM.TIER10,
+    defaultItemId: EVOLUTION_ENUM.TIER10,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER10].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0,
+    for: CURRENCY_ENUM.TADPOLE,
+    cost_multiplier: 0.05,
+  },
+  [EVOLUTION_ENUM.TIER11]: {
+    id: EVOLUTION_ENUM.TIER11,
+    defaultItemId: EVOLUTION_ENUM.TIER11,
+    name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER11].name,
+    type: SHOP_ITEM_TYPES.LEVELUP,
+    cost: 100,
+    rate: 0,
+    for: CURRENCY_ENUM.TADPOLE,
+    cost_multiplier: 0.05,
   },
 };
 
