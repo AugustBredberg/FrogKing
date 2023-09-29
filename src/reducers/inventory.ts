@@ -26,7 +26,7 @@ import {
 } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
-  tadpoles: 20,
+  tadpoles: 50,
   tadpolesPreviousState: 0,
   frogs: {},
   pond: PONDS[POND_ENUM.WATER_GLASS],

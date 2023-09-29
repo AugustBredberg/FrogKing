@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InventoryState } from 'src/models/states';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { EVOLUTION_ENUM } from 'src/models/items';
 import { SHOP } from 'src/models/default-shop-items';
+import { TargetingService } from 'src/app/services/targeting.service';
 
 @Component({
   selector: 'app-game',
@@ -26,7 +27,8 @@ export class GameComponent implements OnInit {
     private store: Store<{ inventory: InventoryState }>,
     private gameService: GameService,
     private shopService: ShopService,
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
+    private targetingService: TargetingService
   ) {
     this.inventory$ = store.select('inventory');
     this.inventory$.subscribe((inventory) => {
@@ -48,4 +50,24 @@ export class GameComponent implements OnInit {
     console.log('Evolve tadpole');
     this.shopService.buy(this.evolveTadpoleShopItem);
   }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove($event: MouseEvent): void {
+    this.targetingService.setTargetCoordinates($event.clientX, $event.clientY);
+  }
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    console.log('click');
+
+    const target = event.target as HTMLElement;
+
+    // Check if the target element or any of its ancestors has the ID "frogTile"
+    if (target.closest('#frogTile')) {
+      console.log('Target is a child of #frogTile');
+    } else {
+      console.log('Target is NOT a child of #frogTile');
+    }
+  }
+
+  // Use nativeElement to access the DOM element directly
 }
