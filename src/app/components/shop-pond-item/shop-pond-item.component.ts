@@ -6,7 +6,7 @@ import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { Store } from '@ngrx/store';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
 import { DEFAULT_FROGPOWERUPS } from 'src/models/default-items';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-shop-pond-item',
   templateUrl: './shop-pond-item.component.html',
@@ -18,6 +18,7 @@ export class ShopPondItemComponent implements OnInit {
   SHOP_ITEM_TYPES = SHOP_ITEM_TYPES;
   shop: ShopState;
   TooltipPosition = TooltipPosition;
+  production: boolean = environment.production;
 
   tooltipData: ITooltip;
 
