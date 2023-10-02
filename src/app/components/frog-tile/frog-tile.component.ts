@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.component';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { InventoryState } from 'src/models/states';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-frog-tile',
@@ -33,6 +34,7 @@ export class FrogTileComponent implements OnInit {
   TooltipPosition = TooltipPosition;
   productionRate: number;
   nextEvolution: string;
+  production = environment.production;
 
   constructor(
     private inventoryService: InventoryService,

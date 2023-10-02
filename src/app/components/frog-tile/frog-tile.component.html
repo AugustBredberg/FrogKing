@@ -13,7 +13,7 @@
       />
     </div>
     <button
-      [disabled]="!nextEvolution || inventoryState.tadpoles < evolutionCost"
+      [disabled]="production && (!nextEvolution || inventoryState.tadpoles < evolutionCost)"
       (click)="openDialog()"
       class="flex flex-col h-full w-3/5 py-2 pl-4 leading-tight"
     >
@@ -27,7 +27,7 @@
     </button>
     <button
       class="flex flex-col h-auto w-1/5 bg-black bg-opacity-20 text-center py-3 rounded-r-md"
-      [disabled]="levelUpCost > inventoryState.tadpoles"
+      [disabled]="production && levelUpCost > inventoryState.tadpoles"
       (click)="levelUp()"
     >
       <div class="flex h-full w-full text-center">
