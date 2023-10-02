@@ -54,7 +54,10 @@ export class ShopService {
         console.log("Buying frog juice")
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
-        // PROBLEM: ID IS NOT SAME AS LOOKUP ID (1 VS 11 FOR EXAMPLE. NEED KEY FROM STORE)
+
+        // Add powerup to frog in inventory
+        this.invService.add(item, uniqueId, newFrogElement);
+
         // Remove item from shop
         this.store.dispatch(remove({
           item_type: SHOP_ITEM_TYPES.FROGPOWERUP,

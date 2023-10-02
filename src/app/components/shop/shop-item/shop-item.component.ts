@@ -57,7 +57,7 @@ export class ShopItemComponent implements OnInit {
     console.log("buying")
 
     var frogId = Object.keys(this.inventoryState.frogs)[0];
-    this.shopService.buy(shop_item);
-    this.inventoryService.add(shop_item, frogId);
+    this.shopService.buy(shop_item, frogId);
+    //this.inventoryService.add(shop_item, frogId);
   }
 }
