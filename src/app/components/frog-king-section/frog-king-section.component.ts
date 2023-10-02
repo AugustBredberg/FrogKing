@@ -1,4 +1,11 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -29,12 +36,27 @@ import { InventoryState } from 'src/models/states';
         animate('3000ms', style({ bottom: 0 })),
       ]),
     ]),
+    trigger('pulsate', [
+      state('normal', style({ transform: 'scale(1)' })),
+      state('pulsating', style({ transform: 'scale(1.2)' })),
+      transition('normal => pulsating', [
+        animate(
+          '75ms',
+          keyframes([
+            style({ transform: 'scale(1)' }),
+            style({ transform: 'scale(0.94)' }),
+            style({ transform: 'scale(0.91)' }),
+          ])
+        ),
+      ]),
+    ]),
   ],
 })
 export class FrogKingSectionComponent {
   inventory$: Observable<InventoryState>;
   inventory: InventoryState;
   production: boolean = environment.production;
+  pulsateState = 'normal';
 
   hitmarks: { tp: number; x: number; y: number; visible: boolean }[] = [];
   productionRate: number = 0;
@@ -83,14 +105,25 @@ export class FrogKingSectionComponent {
     this.removeHitmarkAfterDelay(this.hitmarks.length - 1);
 
     this.inventoryService.kingClicked(kingProduction);
+
+    this.pulsateState = 'pulsating';
+
+    // Reset the animation state after a delay (500ms in this case)
+    setTimeout(() => {
+      this.pulsateState = 'normal';
+    }, 75);
+
+    this.inventoryService.kingClicked(1);
   }
-  levelUpKing(){
+  levelUpKing() {
     // Create copy of king level up shop item
-    var kingLevelUpShopItem = structuredClone(KING_LEVEL_SHOP[KING_ACTIONS.LEVELUP]);
+    var kingLevelUpShopItem = structuredClone(
+      KING_LEVEL_SHOP[KING_ACTIONS.LEVELUP]
+    );
     kingLevelUpShopItem.cost = this.getKingLevelUpCost();
     this.shopService.buy(kingLevelUpShopItem);
   }
-  getKingLevelUpCost(){
+  getKingLevelUpCost() {
     return this.gameService.calculateKingLevelUpCost();
   }
 }

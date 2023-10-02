@@ -21,7 +21,7 @@
   </div>
 
   <div class="flex w-full h-full justify-center relative">
-    <div class="bg-frog h-full w-[70%] m-auto"></div>
+    <div class="bg-frog h-full w-[70%] m-auto" [@pulsate]="pulsateState"></div>
     <button
       class="h-full w-[70%] m-auto bg-transparent"
       (click)="spawn($event)"
