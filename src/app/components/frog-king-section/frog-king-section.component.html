@@ -41,6 +41,17 @@
       Tadpoles / s
     </p>
   </div>
+  <div class="flex flex-col h-auto w-full leading-tight">
+    <p
+      class="flex text-white w-full text-center text-md primaryText justify-center"
+    >
+      King level: {{inventory.frogKing.level}}
+    </p>
+    <button
+      [disabled]="production && inventory.tadpoles < getKingLevelUpCost()"
+      (click)="levelUpKing()">Level up king {{getKingLevelUpCost()}}
+    </button>
+  </div>
 </div>
 
 <div

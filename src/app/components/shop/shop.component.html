@@ -7,7 +7,7 @@
       <div class="flex w-full h-auto max-h-[50vh]">
         <div class="grid grid-flow-row grid-cols-3">
           <ng-container *ngFor="let item of currentlyAvailablePowerUpShopItems">
-            <div *ngIf="item.type === SHOP_ITEM_TYPES.FROGPOWERUP">
+            <div >
               <app-shop-item
                 [inventoryState]="inventoryState"
                 [item]="item"

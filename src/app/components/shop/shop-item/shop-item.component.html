@@ -18,7 +18,9 @@
       itemImage
       class="w-full h-full itemImage"
       [style.background-image]="
-        'url(../../../assets/images/items/item-image-' +
+        'url(../../../assets/images/items/' +
+        item.type + '/' +
+        'item-image-' +
         item.defaultItemId +
         '.png)'
       "

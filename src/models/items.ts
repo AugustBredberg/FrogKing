@@ -6,6 +6,31 @@ export enum CURRENCY_ENUM {
   TADPOLE,
   FROGITEM,
 }
+
+export interface FrogKing {
+  tadpolesPerClick: number;
+  level: number;
+  powerUps: KingPowerUpItem[];
+}
+export enum KING_ACTIONS {
+  LEVELUP,
+  POWERUP
+}
+export enum KING_POWERUP_ENUM {
+  ROYAL_RAGE,
+}
+export interface KingPowerUpItem extends Item {
+  name: string;
+  kind: KING_POWERUP_ENUM;
+  description: string;
+  statusText: string;
+  duration: number; // In seconds
+  //sideEffects: KING_POWERUP_SIDE_EFFECT_ENUM[];
+  productionRateMultiplier: number;
+  expiration: Date; // Is set when powerup is used
+  effectIsPositive: boolean;
+}
+
 ////////////////////////////////////////////////////////////
 /// FROGS
 ////////////////////////////////////////////////////////////
@@ -67,48 +92,6 @@ export enum POND_ENUM {
   SPECTACULAR_POND,
   NO_UPGRADE = -1,
 }
-export const PONDS: { [id: string]: PondItem } = {
-  [POND_ENUM.WATER_GLASS]: {
-    id: POND_ENUM.WATER_GLASS,
-    kind: POND_ENUM.WATER_GLASS,
-    description: 'A glass of water.',
-    name: 'Glass of Water',
-    frog_capacity: 1,
-    next_pond: POND_ENUM.TOILET,
-  },
-  [POND_ENUM.TOILET]: {
-    id: POND_ENUM.TOILET,
-    kind: POND_ENUM.TOILET,
-    description: 'A low flow toilet.',
-    name: 'Toilet',
-    frog_capacity: 1,
-    next_pond: POND_ENUM.SIMPLE_POND,
-  },
-  [POND_ENUM.SIMPLE_POND]: {
-    id: POND_ENUM.SIMPLE_POND,
-    kind: POND_ENUM.SIMPLE_POND,
-    description: 'A simple pond.',
-    name: 'Simple pond',
-    frog_capacity: 2,
-    next_pond: POND_ENUM.FANCY_POND,
-  },
-  [POND_ENUM.FANCY_POND]: {
-    id: POND_ENUM.FANCY_POND,
-    kind: POND_ENUM.FANCY_POND,
-    description: 'A fancy pond.',
-    name: 'Fancy pond',
-    frog_capacity: 3,
-    next_pond: POND_ENUM.SPECTACULAR_POND,
-  },
-  [POND_ENUM.SPECTACULAR_POND]: {
-    id: POND_ENUM.SPECTACULAR_POND,
-    kind: POND_ENUM.SPECTACULAR_POND,
-    description: 'A spectacular pond.',
-    name: 'Spectacular pond',
-    frog_capacity: 4,
-    next_pond: POND_ENUM.NO_UPGRADE,
-  },
-};
 
 ////////////////////////////////////////////////////////////
 /// POWERUPS
@@ -117,6 +100,7 @@ export interface FrogPowerUpItem extends Item {
   name: string;
   kind: FROG_POWERUP_ENUM;
   description: string;
+  statusText: string;
   duration: number; // In seconds
   sideEffects: FROG_POWERUP_SIDE_EFFECT_ENUM[];
   productionRateMultiplier: number;

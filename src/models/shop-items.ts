@@ -5,7 +5,9 @@ import {
 
 export enum SHOP_ITEM_TYPES {
   EVOLUTION, // Evolves a specific frog
-  LEVELUP, // Levels up a specific frog
+  KINGLEVELUP, // Levels up the king
+  KINGPOWERUP, // Levels up the king
+  FROGLEVELUP, // Levels up a specific frog
   FROGPOWERUP, // Powers up the frog type that it is applied on (e.g. Runners shoes, FrogRoids, etc.)
   POND, // Increases the capacity of the pond
 }

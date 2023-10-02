@@ -29,7 +29,9 @@ export class ShopComponent {
       this.shop = shop;
       // Extract all shop items, filter by shopType "test," flatten them into an array, and sort them by cost
       this.currentlyAvailablePowerUpShopItems = Object.values(this.shop.items)
-        .flatMap((shopType) => Object.values(shopType).filter(item => item.type === SHOP_ITEM_TYPES.FROGPOWERUP))
+        .flatMap((shopType) => Object.values(shopType).filter(item =>
+          item.type === SHOP_ITEM_TYPES.FROGPOWERUP ||
+          item.type === SHOP_ITEM_TYPES.KINGPOWERUP))
         .sort((a, b) => a.cost - b.cost)
         .slice(0, 12); // Limit the array length to 15 items with shopType FROGPOWERUP
     });

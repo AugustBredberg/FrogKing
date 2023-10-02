@@ -4,6 +4,7 @@ import {
   FROG_ELEMENT_ENUM,
   FROG_POWERUP_ENUM,
   FrogItem,
+  KING_POWERUP_ENUM,
   POND_ENUM,
   PondItem,
 } from 'src/models/items';
@@ -17,6 +18,18 @@ export const add = createAction(
 export const remove = createAction(
   '[Tadpoles] Remove',
   props<{ cost: number }>()
+);
+
+export const level_up_king = createAction(
+  '[King] Level Up'
+);
+export const power_up_king = createAction(
+  '[Frog] Power Up',
+  props<{ powerUp: KING_POWERUP_ENUM }>()
+);
+export const power_down_king = createAction(
+  '[Frog] Power Down',
+  props<{ powerUp: KING_POWERUP_ENUM }>()
 );
 
 export const add_frog = createAction(

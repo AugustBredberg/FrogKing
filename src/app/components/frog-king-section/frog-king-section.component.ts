@@ -4,6 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { ShopService } from 'src/app/services/shop.service';
+import { environment } from 'src/environments/environment';
+import { KING_LEVEL_SHOP } from 'src/models/default-shop-items';
+import { KING_ACTIONS } from 'src/models/items';
+import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryState } from 'src/models/states';
 
 @Component({
@@ -29,14 +34,16 @@ import { InventoryState } from 'src/models/states';
 export class FrogKingSectionComponent {
   inventory$: Observable<InventoryState>;
   inventory: InventoryState;
+  production: boolean = environment.production;
 
   hitmarks: { tp: number; x: number; y: number; visible: boolean }[] = [];
   productionRate: number = 0;
   constructor(
     private store: Store<{ inventory: InventoryState }>,
     private inventoryService: InventoryService,
-    private elementRef: ElementRef,
-    public gameService: GameService
+    private shopService: ShopService,
+    private gameService: GameService,
+    private elementRef: ElementRef
   ) {
     this.inventory$ = store.select('inventory');
     this.inventory$.subscribe((inventory) => {
@@ -65,13 +72,25 @@ export class FrogKingSectionComponent {
     const newX = mouseX + xOffset;
     const newY = mouseY + yOffset;
 
+    // Get king production rate
+    var kingProduction = this.gameService.calculateKingProductionRate();
+
     // Push the hitmark object into the hitmarks array with the updated coordinates
-    this.hitmarks.push({ tp: 1, x: newX, y: newY, visible: true }); // Call your inventoryService method
+    this.hitmarks.push({ tp: kingProduction, x: newX, y: newY, visible: true }); // Call your inventoryService method
     if (this.hitmarks.length > 250) {
       this.hitmarks = [];
     }
     this.removeHitmarkAfterDelay(this.hitmarks.length - 1);
 
-    this.inventoryService.kingClicked(1);
+    this.inventoryService.kingClicked(kingProduction);
+  }
+  levelUpKing(){
+    // Create copy of king level up shop item
+    var kingLevelUpShopItem = structuredClone(KING_LEVEL_SHOP[KING_ACTIONS.LEVELUP]);
+    kingLevelUpShopItem.cost = this.getKingLevelUpCost();
+    this.shopService.buy(kingLevelUpShopItem);
+  }
+  getKingLevelUpCost(){
+    return this.gameService.calculateKingLevelUpCost();
   }
 }

@@ -55,7 +55,9 @@ export class ShopItemComponent implements OnInit {
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
       image:
-        '../../../assets/images/items/item-image-' +
+        '../../../assets/images/items/' +
+        this.item.type + '/' +
+        'item-image-' +
         this.item.defaultItemId +
         '.png',
       itemId: this.item.defaultItemId,
