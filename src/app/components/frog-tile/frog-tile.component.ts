@@ -93,7 +93,7 @@ export class FrogTileComponent implements OnInit {
   getPositivePowerupTexts(powerUpItems: FrogPowerUpItem[]): string[] {
     return powerUpItems
       .filter((item) => item.effectIsPositive)
-      .map((item) => item.description);
+      .map((item) => item.statusText);
   }
   getNegativePowerupTexts(powerUpItems: FrogPowerUpItem[]): string[] {
     return powerUpItems
