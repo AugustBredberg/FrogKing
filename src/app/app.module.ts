@@ -26,6 +26,7 @@ import { EvolveDialogComponent } from './components/dialogs/evolve-dialog/evolve
 import { MatDialog } from '@angular/material/dialog';
 import { PassivesSectionComponent } from './components/passives-section/passives-section.component';
 import { PassiveComponent } from './components/passive/passive.component';
+import { TargetComponent } from './components/target/target.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PassiveComponent } from './components/passive/passive.component';
     EvolveDialogComponent,
     PassivesSectionComponent,
     PassiveComponent,
+    TargetComponent,
   ],
   imports: [
     BrowserModule,

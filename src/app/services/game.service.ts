@@ -14,7 +14,10 @@ import { SHOP } from 'src/models/default-shop-items';
 export class GameService {
   inventory: InventoryState;
 
-  constructor(private store: Store<{ inventory: InventoryState }>, private inventoryService: InventoryService) {
+  constructor(
+    private store: Store<{ inventory: InventoryState }>,
+    private inventoryService: InventoryService
+  ) {
     var inventory_state = this.store.select('inventory');
     inventory_state.subscribe((inventory) => {
       this.inventory = inventory;
@@ -41,21 +44,32 @@ export class GameService {
 
       // Make one dispatch with this frog's accumulated tadpole rate
       store.dispatch(
-      add({
-        production_rate: tadpole_rate,
-        frogId: frogItem.id,
-      })
-    );
+        add({
+          production_rate: tadpole_rate,
+          frogId: frogItem.id,
+        })
+      );
     });
   }
 
   public calculateTotalProductionRate() {
-    var totalTadpoleRate = 0;
+    let totalTadpoleRate = 0;
+
     Object.keys(this.inventory.frogs).forEach((frogId: string) => {
-      var frogItem = this.inventory.frogs[frogId];
-      var tadpole_rate = this.calculateFrogProductionRate(frogItem);
-      totalTadpoleRate += tadpole_rate;
+      const frogItem = this.inventory.frogs[frogId];
+      const tadpoleRate = this.calculateFrogProductionRate(frogItem);
+      totalTadpoleRate += tadpoleRate;
     });
+
+    // Check if the totalTadpoleRate is greater than 1000
+    if (totalTadpoleRate > 1000) {
+      // Remove the decimal point
+      totalTadpoleRate = Math.floor(totalTadpoleRate);
+    } else {
+      // Limit to one decimal point
+      totalTadpoleRate = parseFloat(totalTadpoleRate.toFixed(1));
+    }
+
     return totalTadpoleRate;
   }
 
@@ -68,8 +82,11 @@ export class GameService {
     var tadpole_rate = frogItem.production_rate + bonus_production_level;
 
     // Find new production rate after applying powerups
-    if (frogItem.power_ups.length > 0) {
-      var power_up_production = this.calculateFrogPowerUpProduction(frogItem, tadpole_rate);
+    if (frogItem.power_ups?.length > 0) {
+      var power_up_production = this.calculateFrogPowerUpProduction(
+        frogItem,
+        tadpole_rate
+      );
       tadpole_rate = power_up_production;
     }
     return +tadpole_rate.toFixed(2);
@@ -81,21 +98,29 @@ export class GameService {
     return +cost.toFixed(2);
   }
 
-  public calculateFrogPowerUpProduction(frogItem: FrogItem, currentTadpoleRate: number) {
+  public calculateFrogPowerUpProduction(
+    frogItem: FrogItem,
+    currentTadpoleRate: number
+  ) {
     var power_ups = frogItem.power_ups;
     //var power_up_production = 0;
-    power_ups.forEach( (power_up) => {
+    power_ups.forEach((power_up) => {
       // Remove power-up if expired
       if (new Date() > power_up.expiration) {
         // Remove power-up
-        this.store.dispatch(power_down_frog({
-          frogId: frogItem.id,
-          powerUp: power_up.kind
-        }));
+        this.store.dispatch(
+          power_down_frog({
+            frogId: frogItem.id,
+            powerUp: power_up.kind,
+          })
+        );
         // Handle power up side effects
         power_up.sideEffects.forEach((sideEffect) => {
           var sideEffectItem = DEFAULT_FROGPOWERUPS_SIDE_EFFECTS[sideEffect];
-          this.inventoryService.handleFrogSideEffect(frogItem.id, sideEffectItem);
+          this.inventoryService.handleFrogSideEffect(
+            frogItem.id,
+            sideEffectItem
+          );
         });
         return;
       }

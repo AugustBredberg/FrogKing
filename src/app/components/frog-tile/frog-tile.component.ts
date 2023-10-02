@@ -19,6 +19,7 @@ import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.co
 import { InventoryService } from 'src/app/services/inventory.service';
 import { InventoryState } from 'src/models/states';
 import { environment } from '../../../environments/environment';
+import { TargetingService } from 'src/app/services/targeting.service';
 
 @Component({
   selector: 'app-frog-tile',
@@ -35,15 +36,19 @@ export class FrogTileComponent implements OnInit {
   productionRate: number;
   nextEvolution: string;
   production = environment.production;
+  targeting: boolean;
 
   constructor(
     private inventoryService: InventoryService,
     private gameService: GameService,
+    private targetingService: TargetingService,
     private shopService: ShopService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
+    this.targeting = this.targetingService.getTargetActive();
+
     this.productionRate = this.gameService.calculateFrogProductionRate(
       this.frogItem
     );
@@ -53,11 +58,12 @@ export class FrogTileComponent implements OnInit {
     this.levelUpCost = Math.round(
       this.gameService.calculateFrogLevelUpCost(this.frogItem)
     );
-    console.log("evolves into: ", this.frogItem.evolves_into, EVOLUTION_SHOP[this.frogItem.evolves_into]?.name)
+
     this.tooltipData = {
       name: this.frogItem.name,
       description: this.frogItem.description,
-      image: '../../../../assets/images/frogs/frog' + this.frogItem.kind + '.png',
+      image:
+        '../../../../assets/images/frogs/frog' + this.frogItem.kind + '.png',
       level: this.frogItem.level,
       negativeText: this.getNegativePowerupTexts(this.frogItem.power_ups),
       positiveText: this.getPositivePowerupTexts(this.frogItem.power_ups),
@@ -71,6 +77,9 @@ export class FrogTileComponent implements OnInit {
     };
   }
   levelUp() {
+    if (this.targetingService.getTargetActive()) {
+      return;
+    }
     var cost = this.levelUpCost;
     var levelUpShopItem = structuredClone(
       SHOP[SHOP_ITEM_TYPES.LEVELUP][this.frogItem.kind]
@@ -93,6 +102,9 @@ export class FrogTileComponent implements OnInit {
   }
 
   openDialog() {
+    if (this.targetingService.getTargetActive()) {
+      return;
+    }
     let dialogRef = this.dialog.open(EvolveDialogComponent, {
       height: '400px',
       width: '600px',
