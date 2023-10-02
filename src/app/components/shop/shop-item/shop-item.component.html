@@ -6,7 +6,7 @@
   class="flex flex-col w-full h-auto m-2"
 >
   <button
-    [disabled]="item.cost > inventoryState.tadpoles || frogCount == 0"
+    [disabled]="item.cost > inventoryState.tadpoles"
     (click)="buyPowerUp(item)"
     class="flex bg-black bg-opacity-40 rounded-md w-[64px] h-[64px] p-2 cursor-pointer"
     [ngClass]="

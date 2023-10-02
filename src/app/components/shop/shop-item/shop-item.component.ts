@@ -36,6 +36,7 @@ export class ShopItemComponent implements OnInit {
     const shopItemSummary: ShopItemSummary = this.shopService.lookupShopItem(
       this.item
     );
+    console.log(this.item.cost, this.inventoryState.tadpoles)
     this.frogCount = Object.keys(this.inventoryState.frogs).length;
     this.tooltipData = {
       header: this.item.name,
@@ -53,6 +54,8 @@ export class ShopItemComponent implements OnInit {
   buyPowerUp(shop_item: ShopItem) {
     // TODO let the user pick a frog to apply the powerup to
     // For now, apply to first frog in inventory
+    console.log("buying")
+
     var frogId = Object.keys(this.inventoryState.frogs)[0];
     this.shopService.buy(shop_item);
     this.inventoryService.add(shop_item, frogId);

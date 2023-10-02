@@ -17,6 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { EvolveDialogComponent } from '../dialogs/evolve-dialog/evolve-dialog.component';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { InventoryState } from 'src/models/states';
 
 @Component({
   selector: 'app-frog-tile',
@@ -25,8 +26,10 @@ import { InventoryService } from 'src/app/services/inventory.service';
 })
 export class FrogTileComponent implements OnInit {
   @Input() frogItem: FrogItem;
+  @Input() inventoryState: InventoryState;
   tooltipData: IFrogTooltip;
   levelUpCost: number;
+  evolutionCost: number;
   TooltipPosition = TooltipPosition;
   productionRate: number;
   nextEvolution: string;
@@ -43,6 +46,7 @@ export class FrogTileComponent implements OnInit {
       this.frogItem
     );
     this.nextEvolution = EVOLUTION_SHOP[this.frogItem.evolves_into]?.name;
+    this.evolutionCost = EVOLUTION_SHOP[this.frogItem.evolves_into]?.cost;
 
     this.levelUpCost = Math.round(
       this.gameService.calculateFrogLevelUpCost(this.frogItem)
@@ -98,7 +102,7 @@ export class FrogTileComponent implements OnInit {
         var evolveShopItem = structuredClone(
           SHOP[SHOP_ITEM_TYPES.EVOLUTION][this.frogItem.evolves_into]
         );
-        this.inventoryService.add(
+        this.shopService.buy(
           evolveShopItem,
           this.frogItem.id,
           evolutionElement

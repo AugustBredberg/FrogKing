@@ -24,7 +24,7 @@
             *ngFor="let frog of inventory.frogs | keyvalue"
             class="w-full max-h-48"
           >
-            <app-frog-tile [frogItem]="frog.value"></app-frog-tile>
+            <app-frog-tile [inventoryState]="inventory" [frogItem]="frog.value"></app-frog-tile>
           </div>
           <div *ngIf="inventory.pond.frog_capacity > frogsInInventory">
             <app-spawn-frog-tile></app-spawn-frog-tile>

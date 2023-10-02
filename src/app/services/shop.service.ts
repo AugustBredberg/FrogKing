@@ -6,22 +6,25 @@ import { add, remove } from '../shop-actions';
 import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, PONDS, POND_ENUM } from 'src/models/items';
 import { DEFAULT_FROGS, DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
 import { InventoryService } from './inventory.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
+  production: boolean = environment.production;
 
   constructor(private store: Store<{ shop: ShopState }>, private invService: InventoryService) { }
 
   // User can buy items that are tied to a specific item.
   // Examples: Frog can be found using uniqueId
   buy(item: ShopItem, uniqueId: string = "", newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE) {
+    var cost = this.production ? item.cost : 0;
     switch (item.type) {
       case SHOP_ITEM_TYPES.POND:
         console.log("Buying pond")
         // Withdraw cost from inventory
-        this.invService.spendTadpoles(item.cost);
+        this.invService.spendTadpoles(cost);
 
         // Remove item from shop
         this.store.dispatch(remove({
@@ -41,7 +44,7 @@ export class ShopService {
       case SHOP_ITEM_TYPES.EVOLUTION:
         console.log("Buying frog")
         // Withdraw cost from inventory
-        this.invService.spendTadpoles(item.cost);
+        this.invService.spendTadpoles(cost);
 
         // Add evolution to inventory
         this.invService.add(item, uniqueId, newFrogElement);
@@ -50,7 +53,7 @@ export class ShopService {
       case SHOP_ITEM_TYPES.FROGPOWERUP:
         console.log("Buying frog juice")
         // Withdraw cost from inventory
-        this.invService.spendTadpoles(item.cost);
+        this.invService.spendTadpoles(cost);
         // PROBLEM: ID IS NOT SAME AS LOOKUP ID (1 VS 11 FOR EXAMPLE. NEED KEY FROM STORE)
         // Remove item from shop
         this.store.dispatch(remove({
@@ -62,7 +65,7 @@ export class ShopService {
       case SHOP_ITEM_TYPES.LEVELUP:
         console.log("Buying level up")
         // Withdraw cost from inventory
-        this.invService.spendTadpoles(item.cost);
+        this.invService.spendTadpoles(cost);
 
         // Withdraw cost from inventory
         this.invService.add(item, uniqueId);
@@ -80,6 +83,7 @@ export class ShopService {
   lookupShopItem(shopItem: ShopItem): ShopItemSummary {
     var item_type = shopItem.type;
     var product = shopItem.defaultItemId;
+    var cost = shopItem.cost; //this.production ? shopItem.cost : 0;
     switch (item_type) {
       //////////////////
       /// POND ITEMS ///
@@ -91,7 +95,7 @@ export class ShopService {
           description: pond.description,
           positiveEffects: ["Increases tadpole capacity to " + pond.tadpole_capacity, "Increases frog capacity to " + pond.frog_capacity],
           negativeEffects: [],
-          cost: shopItem.cost
+          cost: cost
         };
         return itemSummary;
 
@@ -115,7 +119,7 @@ export class ShopService {
           description: powerup.description,
           positiveEffects: ["Increases frog production rate by " + multiplierInPercent + "for " + powerup.duration + " seconds"],
           negativeEffects: negativeEffectsList,
-          cost: shopItem.cost
+          cost: cost
         };
         return itemSummary
 
@@ -129,7 +133,7 @@ export class ShopService {
           description: "",
           positiveEffects: [],
           negativeEffects: [],
-          cost: shopItem.cost
+          cost: cost
         }
 
       default:
@@ -138,7 +142,7 @@ export class ShopService {
           description: "",
           positiveEffects: [],
           negativeEffects: [],
-          cost: shopItem.cost
+          cost: cost
         }
     }
   }
