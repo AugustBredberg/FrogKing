@@ -7,7 +7,9 @@ import {
   evolve_frog,
   level_down_frog,
   level_up_frog,
+  level_up_king,
   power_up_frog,
+  power_up_king,
   remove,
   remove_frog,
   upgrade_pond,
@@ -35,6 +37,23 @@ export class InventoryService {
     var product = item.defaultItemId; // Example: POND_ENUM.FANCY_POND
 
     switch (item_type) {
+      case SHOP_ITEM_TYPES.KINGLEVELUP:
+        console.log('Leveling up king');
+        // Level up king
+        this.store.dispatch(
+          level_up_king()
+        );
+        break;
+      case SHOP_ITEM_TYPES.KINGPOWERUP:
+        console.log('Applying powerup ' + product + ' to king');
+
+        this.store.dispatch(
+          power_up_king({
+            powerUp: product,
+          })
+        );
+        break;
+
       case SHOP_ITEM_TYPES.POND:
         console.log('Adding new pond');
         this.store.dispatch(
@@ -76,7 +95,7 @@ export class InventoryService {
         );
         break;
 
-      case SHOP_ITEM_TYPES.LEVELUP:
+      case SHOP_ITEM_TYPES.FROGLEVELUP:
         console.log('Leveling up frog: ' + uniqueId);
         // Level up frog
         this.store.dispatch(

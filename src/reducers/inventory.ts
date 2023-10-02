@@ -3,13 +3,12 @@ import {
   EVOLUTION_ENUM,
   FrogItem,
   CURRENCY_ENUM,
-  PONDS,
   POND_ENUM,
   PondItem,
   FROG_ELEMENT_ENUM,
 } from '../models/items'; // Inventory is initially empty
 
-import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGS } from '../models/default-items';
+import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGS, DEFAULT_FROG_KING_POWERUPS, DEFAULT_PONDS } from '../models/default-items';
 
 import { createReducer, on } from '@ngrx/store';
 import {
@@ -18,8 +17,11 @@ import {
   evolve_frog,
   level_down_frog,
   level_up_frog,
+  level_up_king,
   power_down_frog,
+  power_down_king,
   power_up_frog,
+  power_up_king,
   remove,
   remove_frog,
   upgrade_pond,
@@ -28,8 +30,13 @@ import {
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 50,
   tadpolesPreviousState: 0,
+  frogKing: {
+    tadpolesPerClick: 1,
+    level: 1,
+    powerUps: [],
+  },
   frogs: {},
-  pond: PONDS[POND_ENUM.WATER_GLASS],
+  pond: DEFAULT_PONDS[POND_ENUM.WATER_GLASS],
 };
 
 // Reduces all inventory actions and automatic updates to inventory
@@ -67,6 +74,46 @@ export const inventoryReducer = createReducer(
           : inventory_state.tadpoles - action.cost,
     };
   }),
+  on(level_up_king, (inventory_state, action) => {
+    // Return inventory with king level increased by 1
+    return {
+      ...inventory_state,
+      frogKing: {
+        ...inventory_state.frogKing,
+        level: inventory_state.frogKing.level + 1,
+      },
+    };
+  }),
+  on(power_up_king, (inventory_state, action) => {
+    // Get powerup from default powerups
+    var powerup = structuredClone(DEFAULT_FROG_KING_POWERUPS[action.powerUp]);
+    var powerExpiration = new Date();
+    debugger
+    powerExpiration.setSeconds(powerExpiration.getSeconds() + powerup.duration);
+    powerup.expiration = powerExpiration;
+
+    // Return inventory with given frog powered up
+    return {
+      ...inventory_state,
+      frogKing: {
+        ...inventory_state.frogKing,
+        powerUps: [...inventory_state.frogKing.powerUps, powerup],
+      },
+    };
+  }),
+  on(power_down_king, (inventory_state, action) => {
+    // Remove given powerup from frog
+    // Return inventory with given powerup removed from given frog
+    return {
+      ...inventory_state,
+      frogKing: {
+        ...inventory_state.frogKing,
+        powerUps: inventory_state.frogKing.powerUps.filter(
+          (power_up) => power_up.kind != action.powerUp
+        ),
+      },
+    };
+  }),
   on(add_frog, (inventory_state, action) => {
     // Put given frog evolution in inventory of frogs
     let new_frog = structuredClone(DEFAULT_FROGS[action.evolution]);
@@ -102,9 +149,7 @@ export const inventoryReducer = createReducer(
     var powerup = structuredClone(DEFAULT_FROGPOWERUPS[action.powerUp]);
     var powerExpiration = new Date();
     powerExpiration.setSeconds(powerExpiration.getSeconds() + powerup.duration);
-    powerup.expiration = powerExpiration; //new Date(Date.now() + powerup.duration * 1000);
-    //var test = powerup.expiration.toTimeString();
-    //var test2 = powerExpiration.toTimeString();
+    powerup.expiration = powerExpiration;
 
     // Return inventory with given frog powered up
     return {
@@ -239,7 +284,7 @@ export const inventoryReducer = createReducer(
   }),
   on(upgrade_pond, (inventory_state, action) => {
     // Set pond to given pond
-    var new_pond = PONDS[action.shop_item.defaultItemId];
+    var new_pond = DEFAULT_PONDS[action.shop_item.defaultItemId];
 
     // Remove tadpoles from inventory
     remove({ cost: action.shop_item.cost });

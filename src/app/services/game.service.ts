@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { add, power_down_frog } from 'src/app/inventory-actions';
+import { add, power_down_frog, power_down_king } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState } from 'src/models/states';
-import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem } from 'src/models/items';
+import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, KING_ACTIONS } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
 import { DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
@@ -52,6 +52,44 @@ export class GameService {
     });
   }
 
+  public calculateKingLevelUpCost() {
+    var king_levelup_shop_item = SHOP[SHOP_ITEM_TYPES.KINGLEVELUP][KING_ACTIONS.LEVELUP];
+    var king = this.inventory.frogKing;
+    var cost = king_levelup_shop_item.cost;
+    cost += cost * king.level * king_levelup_shop_item.cost_multiplier;
+    return +cost.toFixed(2);
+  }
+
+  public calculateKingProductionRate() {
+    var king = this.inventory.frogKing;
+    var tadpole_rate = king.level * king.tadpolesPerClick;
+
+    // Find new production rate after applying powerups
+    if (king.powerUps.length > 0) {
+      var power_up_production = this.calculateKingPowerUpProduction();
+      tadpole_rate = power_up_production;
+    }
+    return +tadpole_rate.toFixed(2);
+  }
+  public calculateKingPowerUpProduction(){
+    var king = this.inventory.frogKing;
+    var power_ups = king.powerUps;
+    var power_up_production = 0;
+    power_ups.forEach( (power_up) => {
+      // Remove power-up if expired
+      if (new Date() > power_up.expiration) {
+        // Remove power-up
+        this.store.dispatch(power_down_king({
+          powerUp: power_up.kind
+        }));
+        return;
+      }
+
+      power_up_production += power_up.productionRateMultiplier;
+    });
+    return power_up_production;
+  }
+
   public calculateTotalProductionRate() {
     let totalTadpoleRate = 0;
 
@@ -92,7 +130,7 @@ export class GameService {
     return +tadpole_rate.toFixed(2);
   }
   public calculateFrogLevelUpCost(frogItem: FrogItem) {
-    var frog_shop_item = SHOP[SHOP_ITEM_TYPES.LEVELUP][frogItem.kind];
+    var frog_shop_item = SHOP[SHOP_ITEM_TYPES.FROGLEVELUP][frogItem.kind];
     var cost = frog_shop_item.cost;
     cost += cost * frogItem.level * frog_shop_item.cost_multiplier;
     return +cost.toFixed(2);

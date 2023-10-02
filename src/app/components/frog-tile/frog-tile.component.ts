@@ -82,7 +82,7 @@ export class FrogTileComponent implements OnInit {
     }
     var cost = this.levelUpCost;
     var levelUpShopItem = structuredClone(
-      SHOP[SHOP_ITEM_TYPES.LEVELUP][this.frogItem.kind]
+      SHOP[SHOP_ITEM_TYPES.FROGLEVELUP][this.frogItem.kind]
     );
 
     // Update levelup cost for this frog

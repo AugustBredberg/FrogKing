@@ -29,22 +29,11 @@ export class ShopComponent {
       this.shop = shop;
       // Extract all shop items, filter by shopType "test," flatten them into an array, and sort them by cost
       this.currentlyAvailablePowerUpShopItems = Object.values(this.shop.items)
-        .flatMap((shopType) => Object.values(shopType).filter(item => item.type === SHOP_ITEM_TYPES.FROGPOWERUP))
+        .flatMap((shopType) => Object.values(shopType).filter(item =>
+          item.type === SHOP_ITEM_TYPES.FROGPOWERUP ||
+          item.type === SHOP_ITEM_TYPES.KINGPOWERUP))
         .sort((a, b) => a.cost - b.cost)
         .slice(0, 12); // Limit the array length to 15 items with shopType FROGPOWERUP
     });
-  }
-
-  upgradePond(shop_item: ShopItem) {
-    this.shopService.buy(shop_item);
-    this.inventoryService.add(shop_item);
-  }
-
-  buyPowerUp(shop_item: ShopItem) {
-    // TODO let the user pick a frog to apply the powerup to
-    // For now, apply to first frog in inventory
-    var frogId = Object.keys(this.inventoryState.frogs)[0];
-    this.shopService.buy(shop_item);
-    this.inventoryService.add(shop_item, frogId);
   }
 }

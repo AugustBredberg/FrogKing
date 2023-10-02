@@ -1,4 +1,24 @@
-import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, FROG_POWERUP_ENUM, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, FrogPowerUpItem, FrogPowerUpSideEffect } from "./items";
+import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, FROG_POWERUP_ENUM, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, FrogPowerUpItem, FrogPowerUpSideEffect, KING_POWERUP_ENUM, KingPowerUpItem, POND_ENUM, PondItem } from "./items";
+
+
+
+///////////////////////////////////////////////////////////
+/// FROG KING POWERUPS
+///////////////////////////////////////////////////////////
+export const DEFAULT_FROG_KING_POWERUPS: { [id: string]: KingPowerUpItem } = {
+  [KING_POWERUP_ENUM.ROYAL_RAGE]: {
+    name: 'Royal Rage',
+    kind: KING_POWERUP_ENUM.ROYAL_RAGE,
+    description:
+      'The king enters a furious state. Clicking produces tadpoles 10x faster for 30 seconds.',
+    statusText: 'Royal Rage!',
+    duration: 30, // 5 seconds
+    //sideEffects: [],
+    productionRateMultiplier: 10,
+    expiration: new Date(), // Is set when powerup is used
+    effectIsPositive: true,
+  }
+}
 
 ///////////////////////////////////////////////////////////
 /// FROGS
@@ -189,6 +209,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     kind: FROG_POWERUP_ENUM.FROGROIDS,
     description:
       "Enhance a frog with frogroids. They'll be more productive for a while. But be careful, they might die afterwards.",
+    statusText: 'Frog is roided up!',
     duration: 5, // 5 seconds
     sideEffects: [
       FROG_POWERUP_SIDE_EFFECT_ENUM.DIE,
@@ -203,6 +224,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     kind: FROG_POWERUP_ENUM.FRODKA,
     description:
       "Treat your frog to some frog vodka. They'll produce more tadpoles for a while, but when the effect wears off they might fall asleep.",
+    statusText: 'Frog is drunk!',
     duration: 5, // 5 seconds
     sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP],
     productionRateMultiplier: 1.5,
@@ -214,6 +236,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     kind: FROG_POWERUP_ENUM.FRABIES,
     description:
       "Inject your frog with frog rabies. They'll produce more tadpoles for a while, but when the effect wears off they get weak for a while",
+    statusText: 'Frog is rabid!',
     duration: 5, // 5 seconds
     sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE],
     productionRateMultiplier: 1.5,
@@ -226,6 +249,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     name: 'Sleeping',
     kind: FROG_POWERUP_ENUM.SLEEPING,
     description: 'Frog is asleep.',
+    statusText: 'Frog is asleep!',
     duration: 60, // 60 seconds
     sideEffects: [],
     productionRateMultiplier: 0,
@@ -236,6 +260,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     name: 'Weak',
     kind: FROG_POWERUP_ENUM.WEAK,
     description: 'Frog is weak, production rate is halved.',
+    statusText: 'Frog is weak!',
     duration: 30, // 60 seconds
     sideEffects: [],
     productionRateMultiplier: 0.5,
@@ -270,6 +295,50 @@ export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: {
     kind: FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE,
     description: "Risk that the frog's production rate is halved.",
     risk: 1, // 100% chance of reducing production rate
+  },
+};
+
+
+export const DEFAULT_PONDS: { [id: string]: PondItem } = {
+  [POND_ENUM.WATER_GLASS]: {
+    id: POND_ENUM.WATER_GLASS,
+    kind: POND_ENUM.WATER_GLASS,
+    description: 'A glass of water.',
+    name: 'Glass of Water',
+    frog_capacity: 1,
+    next_pond: POND_ENUM.TOILET,
+  },
+  [POND_ENUM.TOILET]: {
+    id: POND_ENUM.TOILET,
+    kind: POND_ENUM.TOILET,
+    description: 'A low flow toilet.',
+    name: 'Toilet',
+    frog_capacity: 1,
+    next_pond: POND_ENUM.SIMPLE_POND,
+  },
+  [POND_ENUM.SIMPLE_POND]: {
+    id: POND_ENUM.SIMPLE_POND,
+    kind: POND_ENUM.SIMPLE_POND,
+    description: 'A simple pond.',
+    name: 'Simple pond',
+    frog_capacity: 2,
+    next_pond: POND_ENUM.FANCY_POND,
+  },
+  [POND_ENUM.FANCY_POND]: {
+    id: POND_ENUM.FANCY_POND,
+    kind: POND_ENUM.FANCY_POND,
+    description: 'A fancy pond.',
+    name: 'Fancy pond',
+    frog_capacity: 3,
+    next_pond: POND_ENUM.SPECTACULAR_POND,
+  },
+  [POND_ENUM.SPECTACULAR_POND]: {
+    id: POND_ENUM.SPECTACULAR_POND,
+    kind: POND_ENUM.SPECTACULAR_POND,
+    description: 'A spectacular pond.',
+    name: 'Spectacular pond',
+    frog_capacity: 4,
+    next_pond: POND_ENUM.NO_UPGRADE,
   },
 };
 

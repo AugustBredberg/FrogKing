@@ -55,11 +55,27 @@ export class ShopItemComponent implements OnInit {
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
       image:
-        '../../../assets/images/items/item-image-' +
+        '../../../assets/images/items/' +
+        this.item.type + '/' +
+        'item-image-' +
         this.item.defaultItemId +
         '.png',
       itemId: this.item.defaultItemId,
     };
+  }
+
+  buyItem(shop_item: ShopItem) {
+    switch (shop_item.type) {
+      case SHOP_ITEM_TYPES.FROGPOWERUP:
+        this.buyPowerUp(shop_item);
+        break;
+      case SHOP_ITEM_TYPES.KINGPOWERUP:
+        this.buyKingPowerUp(shop_item);
+        break;
+    }
+  }
+  buyKingPowerUp(shop_item: ShopItem) {
+    this.shopService.buy(shop_item);
   }
 
   buyPowerUp(shop_item: ShopItem) {
@@ -72,7 +88,7 @@ export class ShopItemComponent implements OnInit {
     // Set the center coordinates using targetingService
     this.targetingService.setSourceCoordinates(centerX, centerY);
     this.targetingService.setTargetImage(
-      '../../../assets/images/items/item-image-' +
+      '../../../assets/images/items/' + this.item.type + '/item-image-' +
         this.item.defaultItemId +
         '.png'
     );

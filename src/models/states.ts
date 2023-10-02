@@ -1,10 +1,11 @@
-import { FrogItem, PondItem, PONDS } from './items';
+import { FrogItem, FrogKing, PondItem } from './items';
 import { SHOP_ITEM_TYPES, ShopItem,  } from './shop-items';
-
+import { DEFAULT_PONDS } from './default-items';
 
 export interface InventoryState {
   tadpoles: number;
   tadpolesPreviousState: number;
+  frogKing: FrogKing;
   frogs: { [itemName: string]: FrogItem }, //FrogItem[];//{ [itemName: string]: FrogItem };
   pond: PondItem;
 }

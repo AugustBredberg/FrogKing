@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { ShopState } from 'src/models/states';
 import { add, remove } from '../shop-actions';
-import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, PONDS, POND_ENUM } from 'src/models/items';
-import { DEFAULT_FROGS, DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
+import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, POND_ENUM } from 'src/models/items';
+import { DEFAULT_FROGS, DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS, DEFAULT_PONDS, DEFAULT_FROG_KING_POWERUPS } from 'src/models/default-items';
 import { InventoryService } from './inventory.service';
 import { environment } from 'src/environments/environment';
 
@@ -21,6 +21,30 @@ export class ShopService {
   buy(item: ShopItem, uniqueId: string = "", newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE) {
     var cost = this.production ? item.cost : 0;
     switch (item.type) {
+      case SHOP_ITEM_TYPES.KINGLEVELUP:
+        console.log("Buying level up king")
+        // Withdraw cost from inventory
+        this.invService.spendTadpoles(cost);
+
+        // Level up king
+        this.invService.add(item);
+        break;
+
+      case SHOP_ITEM_TYPES.KINGPOWERUP:
+        console.log("Buying king powerup")
+        // Withdraw cost from inventory
+        this.invService.spendTadpoles(cost);
+
+        // Add powerup to frog in inventory
+        this.invService.add(item);
+
+        // Remove item from shop
+        this.store.dispatch(remove({
+          item_type: SHOP_ITEM_TYPES.KINGPOWERUP,
+          product: item.id
+        }));
+        break;
+
       case SHOP_ITEM_TYPES.POND:
         console.log("Buying pond")
         // Withdraw cost from inventory
@@ -33,8 +57,8 @@ export class ShopService {
         }));
 
         // Add next pond upgrade to shop
-        if(PONDS[item.defaultItemId].next_pond == -1) break;
-        var next_pond = PONDS[item.id].next_pond;
+        if(DEFAULT_PONDS[item.defaultItemId].next_pond == -1) break;
+        var next_pond = DEFAULT_PONDS[item.id].next_pond;
         this.store.dispatch(add({
           item_type: SHOP_ITEM_TYPES.POND,
           product: next_pond
@@ -65,8 +89,8 @@ export class ShopService {
         }));
         break;
 
-      case SHOP_ITEM_TYPES.LEVELUP:
-        console.log("Buying level up")
+      case SHOP_ITEM_TYPES.FROGLEVELUP:
+        console.log("Buying level up frog")
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -88,11 +112,29 @@ export class ShopService {
     var product = shopItem.defaultItemId;
     var cost = shopItem.cost; //this.production ? shopItem.cost : 0;
     switch (item_type) {
+      ////////////////////////
+      /// KING POWERUPS ///
+      ////////////////////////
+      case SHOP_ITEM_TYPES.KINGPOWERUP:
+        var kingPowerup = DEFAULT_FROG_KING_POWERUPS[product];
+        var negativeEffectsList: string[] = [];
+
+        // Convert multiplier to string percentage
+        var multiplier = kingPowerup.productionRateMultiplier;
+        var itemSummary = {
+          name: kingPowerup.name,
+          description: kingPowerup.description,
+          positiveEffects: ["Increases king production rate by " + multiplier + "x for " + kingPowerup.duration + " seconds"],
+          negativeEffects: [],
+          cost: cost
+        };
+        return itemSummary
+
       //////////////////
       /// POND ITEMS ///
       //////////////////
       case SHOP_ITEM_TYPES.POND:
-        var pond = PONDS[product];
+        var pond = DEFAULT_PONDS[product];
         var itemSummary = {
           name: pond.name,
           description: pond.description,
