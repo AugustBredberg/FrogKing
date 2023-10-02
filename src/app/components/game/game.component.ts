@@ -54,20 +54,5 @@ export class GameComponent implements OnInit {
   @HostListener('mousemove', ['$event'])
   onMouseMove($event: MouseEvent): void {
     this.targetingService.setTargetCoordinates($event.clientX, $event.clientY);
-  }
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent) {
-    console.log('click');
-
-    const target = event.target as HTMLElement;
-
-    // Check if the target element or any of its ancestors has the ID "frogTile"
-    if (target.closest('#frogTile')) {
-      console.log('Target is a child of #frogTile');
-    } else {
-      console.log('Target is NOT a child of #frogTile');
-    }
-  }
-
-  // Use nativeElement to access the DOM element directly
+  } // Use nativeElement to access the DOM element directly
 }

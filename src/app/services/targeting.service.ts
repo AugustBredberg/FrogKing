@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ShopItem } from 'src/models/shop-items';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ export class TargetingService {
   private targetCoordinatesSubject = new Subject<{ x: number; y: number }>();
   private sourceCoordinatesSubject = new Subject<{ x: number; y: number }>();
   private vectorImageSubject = new Subject<string>();
+  private vectorItemSubject = new Subject<ShopItem>();
   private targetActiveSubject = new Subject<boolean>();
 
   constructor() {}
@@ -23,6 +25,10 @@ export class TargetingService {
 
   getTargetImage() {
     return this.vectorImageSubject.asObservable();
+  }
+
+  getTargetItem() {
+    return this.vectorItemSubject.asObservable();
   }
 
   getTargetActive() {
@@ -42,7 +48,23 @@ export class TargetingService {
   setTargetImage(image: string) {
     this.vectorImageSubject.next(image);
   }
+
+  setTargetItem(item: ShopItem) {
+    this.vectorItemSubject.next(item);
+  }
+
   setTargetActive(active: boolean) {
     this.targetActiveSubject.next(active);
+  }
+
+  // Method to check if targeting is active
+  isTargetingActive(): boolean {
+    console.log('called');
+    let isActive = false;
+    this.targetActiveSubject.subscribe((active) => {
+      console.log('active', active);
+      isActive = active;
+    });
+    return isActive;
   }
 }

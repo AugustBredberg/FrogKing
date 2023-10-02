@@ -6,7 +6,9 @@ import {
   Renderer2,
 } from '@angular/core';
 import { combineLatest } from 'rxjs';
+import { ShopService } from 'src/app/services/shop.service';
 import { TargetingService } from 'src/app/services/targeting.service';
+import { ShopItem } from 'src/models/shop-items';
 
 interface Coordinates {
   x: number;
@@ -19,11 +21,13 @@ interface Coordinates {
 })
 export class TargetComponent implements OnInit {
   targetActive: boolean = false;
+  targetItem: ShopItem;
   targetElementStyle: { [key: string]: any } = {}; // Initialize an empty object
 
   constructor(
     private targetingService: TargetingService,
     private el: ElementRef,
+    private shopService: ShopService,
     private renderer: Renderer2
   ) {}
 
@@ -34,9 +38,16 @@ export class TargetComponent implements OnInit {
       this.targetingService.getSourceCoordinates(),
       this.targetingService.getTargetCoordinates(),
       this.targetingService.getTargetImage(),
+      this.targetingService.getTargetItem(),
       this.targetingService.getTargetActive(),
     ]).subscribe(
-      ([sourceCoordinates, targetCoordinates, targetImage, active]) => {
+      ([
+        sourceCoordinates,
+        targetCoordinates,
+        targetImage,
+        targetItem,
+        active,
+      ]) => {
         if (active) {
           // Calculate the distance between the two points
           const distance = this.calculateDistance(
@@ -53,6 +64,8 @@ export class TargetComponent implements OnInit {
             distance
           );
           this.setTargetVisible(active);
+
+          this.targetItem = targetItem;
 
           // Now you can use the 'distance' variable as needed.
         } else {
@@ -136,5 +149,32 @@ export class TargetComponent implements OnInit {
 
   onMouseClick(): void {
     this.targetingService.setTargetActive(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    console.log('click');
+
+    const target = event.target as HTMLElement;
+
+    // Check if the target element or any of its ancestors has the ID "frogTile"
+    if (target.closest('#frogTile')) {
+      const frogTileElement = target.closest('#frogTile') as HTMLElement;
+      const frogChild = frogTileElement.firstElementChild as HTMLElement;
+
+      if (frogChild) {
+        console.log('Target is a child of #frogTile', frogChild.id);
+
+        this.shopService.buy(this.targetItem, frogChild.id);
+
+        this.targetingService.setTargetActive(false);
+      } else {
+        console.log(
+          'Target is a child of #frogTile, but no first child element found'
+        );
+      }
+    } else {
+      console.log('Target is NOT a child of #frogTile');
+    }
   }
 }

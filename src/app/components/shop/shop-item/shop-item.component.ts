@@ -76,6 +76,7 @@ export class ShopItemComponent implements OnInit {
         this.item.defaultItemId +
         '.png'
     );
+    this.targetingService.setTargetItem(shop_item);
     this.targetingService.setTargetActive(true);
 
     // Rest of your code
