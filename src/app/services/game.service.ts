@@ -66,15 +66,15 @@ export class GameService {
 
     // Find new production rate after applying powerups
     if (king.powerUps.length > 0) {
-      var power_up_production = this.calculateKingPowerUpProduction();
+      var power_up_production = this.calculateKingPowerUpProduction(tadpole_rate);
       tadpole_rate = power_up_production;
     }
     return +tadpole_rate.toFixed(2);
   }
-  public calculateKingPowerUpProduction(){
+  public calculateKingPowerUpProduction(tadpole_rate: number){
     var king = this.inventory.frogKing;
     var power_ups = king.powerUps;
-    var power_up_production = 0;
+    var power_up_production = tadpole_rate;
     power_ups.forEach( (power_up) => {
       // Remove power-up if expired
       if (new Date() > power_up.expiration) {
@@ -85,7 +85,7 @@ export class GameService {
         return;
       }
 
-      power_up_production += power_up.productionRateMultiplier;
+      power_up_production *= power_up.productionRateMultiplier;
     });
     return power_up_production;
   }
