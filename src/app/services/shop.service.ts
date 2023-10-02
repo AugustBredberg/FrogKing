@@ -93,7 +93,7 @@ export class ShopService {
         var itemSummary = {
           name: pond.name,
           description: pond.description,
-          positiveEffects: ["Increases tadpole capacity to " + pond.tadpole_capacity, "Increases frog capacity to " + pond.frog_capacity],
+          positiveEffects: ["Increases frog capacity to " + pond.frog_capacity],
           negativeEffects: [],
           cost: cost
         };

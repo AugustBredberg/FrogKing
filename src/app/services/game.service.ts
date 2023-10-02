@@ -39,10 +39,6 @@ export class GameService {
       var tadpole_rate = this.calculateFrogProductionRate(frogItem);
       totalTadpoleRate += tadpole_rate;
 
-      // Don't dispatch if tadpole capacity is full
-      if (this.inventory.pond.tadpole_capacity == this.inventory.tadpoles) {
-        return;
-      }
       // Make one dispatch with this frog's accumulated tadpole rate
       store.dispatch(
       add({

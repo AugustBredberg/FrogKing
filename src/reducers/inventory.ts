@@ -42,11 +42,7 @@ export const inventoryReducer = createReducer(
     return {
       ...inventory_state,
       tadpolesPreviousState: inventory_state.tadpoles,
-      tadpoles:
-        inventory_state.pond.tadpole_capacity <
-        inventory_state.tadpoles + action.production_rate // If tadpole capacity is reached, max out tadpoles
-          ? inventory_state.pond.tadpole_capacity
-          : inventory_state.tadpoles + action.production_rate,
+      tadpoles: inventory_state.tadpoles + action.production_rate,
       frogs: action.frogId
         ? {
             ...inventory_state.frogs,
