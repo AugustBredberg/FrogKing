@@ -52,6 +52,9 @@
       (click)="levelUpKing()">Level up king {{getKingLevelUpCost()}}
     </button>
   </div>
+  <div *ngFor="let power of inventory.frogKing.powerUps">
+    {{power.name}}
+  </div>
 </div>
 
 <div

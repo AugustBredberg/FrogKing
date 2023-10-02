@@ -88,6 +88,7 @@ export const inventoryReducer = createReducer(
     // Get powerup from default powerups
     var powerup = structuredClone(DEFAULT_FROG_KING_POWERUPS[action.powerUp]);
     var powerExpiration = new Date();
+    debugger
     powerExpiration.setSeconds(powerExpiration.getSeconds() + powerup.duration);
     powerup.expiration = powerExpiration;
 

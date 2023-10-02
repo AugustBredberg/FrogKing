@@ -46,6 +46,7 @@ export class InventoryService {
         break;
       case SHOP_ITEM_TYPES.KINGPOWERUP:
         console.log('Applying powerup ' + product + ' to king');
+
         this.store.dispatch(
           power_up_king({
             powerUp: product,

@@ -42,7 +42,7 @@ export class FrogKingSectionComponent {
     private store: Store<{ inventory: InventoryState }>,
     private inventoryService: InventoryService,
     private shopService: ShopService,
-    private gameService: GameService,
+    public gameService: GameService,
     private elementRef: ElementRef
   ) {
     this.inventory$ = store.select('inventory');

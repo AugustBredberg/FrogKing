@@ -36,17 +36,4 @@ export class ShopComponent {
         .slice(0, 12); // Limit the array length to 15 items with shopType FROGPOWERUP
     });
   }
-
-  upgradePond(shop_item: ShopItem) {
-    this.shopService.buy(shop_item);
-    this.inventoryService.add(shop_item);
-  }
-
-  buyPowerUp(shop_item: ShopItem) {
-    // TODO let the user pick a frog to apply the powerup to
-    // For now, apply to first frog in inventory
-    var frogId = Object.keys(this.inventoryState.frogs)[0];
-    this.shopService.buy(shop_item);
-    this.inventoryService.add(shop_item, frogId);
-  }
 }

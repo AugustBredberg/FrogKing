@@ -24,11 +24,11 @@ export const level_up_king = createAction(
   '[King] Level Up'
 );
 export const power_up_king = createAction(
-  '[Frog] Power Up',
+  '[King] Power Up',
   props<{ powerUp: KING_POWERUP_ENUM }>()
 );
 export const power_down_king = createAction(
-  '[Frog] Power Down',
+  '[King] Power Down',
   props<{ powerUp: KING_POWERUP_ENUM }>()
 );
 

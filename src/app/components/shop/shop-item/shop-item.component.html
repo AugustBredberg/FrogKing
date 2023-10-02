@@ -8,7 +8,7 @@
 >
   <button
     [disabled]="item.cost > inventoryState.tadpoles"
-    (click)="buyPowerUp(item)"
+    (click)="buyItem(item)"
     class="flex bg-black bg-opacity-40 rounded-md w-[80px] h-[80px] p-2 cursor-pointer"
     [ngClass]="
       item.cost > inventoryState.tadpoles ? 'opacity-50' : 'hover:bg-opacity-70'
