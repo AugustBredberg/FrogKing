@@ -10,7 +10,7 @@ export class TargetingService {
   private sourceCoordinatesSubject = new Subject<{ x: number; y: number }>();
   private vectorImageSubject = new Subject<string>();
   private vectorItemSubject = new Subject<ShopItem>();
-  private targetActiveSubject = new Subject<boolean>();
+  private targetActive: boolean = false;
 
   constructor() {}
 
@@ -32,7 +32,7 @@ export class TargetingService {
   }
 
   getTargetActive() {
-    return this.targetActiveSubject.asObservable();
+    return this.targetActive;
   }
 
   // Method to set target coordinates
@@ -41,7 +41,6 @@ export class TargetingService {
   }
 
   setSourceCoordinates(x: number, y: number) {
-    console.log('set source x y ', x, y);
     this.sourceCoordinatesSubject.next({ x, y });
   }
 
@@ -54,17 +53,6 @@ export class TargetingService {
   }
 
   setTargetActive(active: boolean) {
-    this.targetActiveSubject.next(active);
-  }
-
-  // Method to check if targeting is active
-  isTargetingActive(): boolean {
-    console.log('called');
-    let isActive = false;
-    this.targetActiveSubject.subscribe((active) => {
-      console.log('active', active);
-      isActive = active;
-    });
-    return isActive;
+    this.targetActive = active;
   }
 }

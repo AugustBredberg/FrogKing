@@ -33,22 +33,15 @@ export class TargetComponent implements OnInit {
 
   ngOnInit(): void {
     // Create an observable that combines both source and target coordinates
-
+    this.targetActive = this.targetingService.getTargetActive();
     combineLatest([
       this.targetingService.getSourceCoordinates(),
       this.targetingService.getTargetCoordinates(),
       this.targetingService.getTargetImage(),
       this.targetingService.getTargetItem(),
-      this.targetingService.getTargetActive(),
     ]).subscribe(
-      ([
-        sourceCoordinates,
-        targetCoordinates,
-        targetImage,
-        targetItem,
-        active,
-      ]) => {
-        if (active) {
+      ([sourceCoordinates, targetCoordinates, targetImage, targetItem]) => {
+        if (this.targetActive) {
           // Calculate the distance between the two points
           const distance = this.calculateDistance(
             sourceCoordinates,
@@ -63,13 +56,13 @@ export class TargetComponent implements OnInit {
             targetCoordinates,
             distance
           );
-          this.setTargetVisible(active);
+          this.setTargetVisible(this.targetActive);
 
           this.targetItem = targetItem;
 
           // Now you can use the 'distance' variable as needed.
         } else {
-          this.setTargetVisible(active);
+          this.setTargetVisible(this.targetActive);
         }
       }
     );
@@ -153,28 +146,35 @@ export class TargetComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    console.log('click');
+    this.targetActive = this.targetingService.getTargetActive();
+    console.log('click', this.targetActive);
+    if (this.targetActive) {
+      const target = event.target as HTMLElement;
 
-    const target = event.target as HTMLElement;
+      // Check if the target element or any of its ancestors has the ID "frogTile"
+      if (target.closest('#frogTile')) {
+        const frogTileElement = target.closest('#frogTile') as HTMLElement;
+        const frogChild = frogTileElement.firstElementChild as HTMLElement;
 
-    // Check if the target element or any of its ancestors has the ID "frogTile"
-    if (target.closest('#frogTile')) {
-      const frogTileElement = target.closest('#frogTile') as HTMLElement;
-      const frogChild = frogTileElement.firstElementChild as HTMLElement;
+        if (frogChild) {
+          console.log('Target is a child of #frogTile', frogChild.id);
 
-      if (frogChild) {
-        console.log('Target is a child of #frogTile', frogChild.id);
+          this.shopService.buy(this.targetItem, frogChild.id);
 
-        this.shopService.buy(this.targetItem, frogChild.id);
-
-        this.targetingService.setTargetActive(false);
+          this.targetingService.setTargetActive(false);
+          this.targetActive = false;
+        } else {
+          console.log(
+            'Target is a child of #frogTile, but no first child element found'
+          );
+        }
       } else {
-        console.log(
-          'Target is a child of #frogTile, but no first child element found'
-        );
+        console.log('Target is NOT a child of #frogTile');
+        if (!target.closest('#shopItem')) {
+          this.targetActive = false;
+          this.targetingService.setTargetActive(false);
+        }
       }
-    } else {
-      console.log('Target is NOT a child of #frogTile');
     }
   }
 }

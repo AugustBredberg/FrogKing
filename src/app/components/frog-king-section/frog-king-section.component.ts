@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { GameService } from 'src/app/services/game.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { InventoryState } from 'src/models/states';
 
@@ -30,11 +31,12 @@ export class FrogKingSectionComponent {
   inventory: InventoryState;
 
   hitmarks: { tp: number; x: number; y: number; visible: boolean }[] = [];
-
+  productionRate: number = 0;
   constructor(
     private store: Store<{ inventory: InventoryState }>,
     private inventoryService: InventoryService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    public gameService: GameService
   ) {
     this.inventory$ = store.select('inventory');
     this.inventory$.subscribe((inventory) => {

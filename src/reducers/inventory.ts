@@ -37,7 +37,7 @@ export const inventoryReducer = createReducer(
   INVENTORY_INITIAL_STATE,
   on(add, (inventory_state, action) => {
     // If we recieved a frog ID, add tadpoles to that frog's lifetime production AND the inventory
-    console.log('frogId: ' + action.frogId);
+
     // Return inventory updated tadpoles and with given frog's lifetime production increased
     return {
       ...inventory_state,
@@ -50,7 +50,7 @@ export const inventoryReducer = createReducer(
               ...inventory_state.frogs[action.frogId],
               lifetime_tadpoles_produced:
                 inventory_state.frogs[action.frogId]
-                  .lifetime_tadpoles_produced + action.production_rate,
+                  ?.lifetime_tadpoles_produced + action.production_rate,
             },
           }
         : inventory_state.frogs,
@@ -75,7 +75,9 @@ export const inventoryReducer = createReducer(
     // Set next possible element choices for frog (all elements, shuffled)
     new_frog.next_possible_element_choices = Object.values(
       FROG_ELEMENT_ENUM
-    ).filter((element) => element != FROG_ELEMENT_ENUM.NONE) as FROG_ELEMENT_ENUM[];
+    ).filter(
+      (element) => element != FROG_ELEMENT_ENUM.NONE
+    ) as FROG_ELEMENT_ENUM[];
     new_frog.next_possible_element_choices.sort(() => Math.random() - 0.5);
 
     return {
@@ -221,9 +223,10 @@ export const inventoryReducer = createReducer(
     else {
       new_frog.next_possible_element_choices = Object.values(
         FROG_ELEMENT_ENUM
-      ).filter((element) => element != FROG_ELEMENT_ENUM.NONE) as FROG_ELEMENT_ENUM[];
+      ).filter(
+        (element) => element != FROG_ELEMENT_ENUM.NONE
+      ) as FROG_ELEMENT_ENUM[];
     }
-
 
     // Return inventory with given frog evolved and new element if applicable
     return {

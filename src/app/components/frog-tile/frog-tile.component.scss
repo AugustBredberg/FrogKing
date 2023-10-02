@@ -2,4 +2,13 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  padding: 12px;
+}
+
+.bg-evolve {
+  position: relative;
+  background-size: contain;
+  background-image: url("../../../assets/images/evolve-sphere.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }

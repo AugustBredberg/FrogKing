@@ -15,17 +15,18 @@
         ></div>
       </div>
       <!-- Middle Column ( Frogs section and header) -->
-      <div
-        class="w-1/2 min-h-screen h-full flex flex-col overflow-y-scroll scrollbar-hide"
-      >
+      <div class="w-1/2 h-full flex flex-col overflow-y-scroll scrollbar-hide">
         <!-- Header -->
         <app-header-section></app-header-section>
-        <div class="pt-4">
+        <div class="mb-72">
           <div
             *ngFor="let frog of inventory.frogs | keyvalue"
-            class="w-full max-h-48"
+            class="w-full h-[230px]"
           >
-            <app-frog-tile [inventoryState]="inventory" [frogItem]="frog.value"></app-frog-tile>
+            <app-frog-tile
+              [inventoryState]="inventory"
+              [frogItem]="frog.value"
+            ></app-frog-tile>
           </div>
           <div *ngIf="inventory.pond.frog_capacity > frogsInInventory">
             <app-spawn-frog-tile></app-spawn-frog-tile>
@@ -37,7 +38,7 @@
       </div>
       <!-- Right Column ( Shop ) -->
       <div
-        class="w-1/4 min-h-screen h-full flex flex-col bg-black bg-opacity-40 overflow-y-scroll scrollbar-hide backdrop-blur-sm"
+        class="w-1/4 min-w-[350px] min-h-screen h-full flex flex-col bg-black bg-opacity-40 overflow-y-scroll scrollbar-hide backdrop-blur-sm"
       >
         <app-shop [inventoryState]="inventory"></app-shop>
       </div>
