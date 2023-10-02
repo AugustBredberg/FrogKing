@@ -7,6 +7,8 @@ import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
 import { DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
 import { SHOP } from 'src/models/default-shop-items';
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +24,7 @@ export class GameService {
 
   init() {
     console.log('GameService init');
+    console.log('Environment prod: ' + environment.production);
     setInterval(() => this.calculate(), 1000);
   }
 
