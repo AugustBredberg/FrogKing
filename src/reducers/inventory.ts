@@ -8,7 +8,12 @@ import {
   FROG_ELEMENT_ENUM,
 } from '../models/items'; // Inventory is initially empty
 
-import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGS, DEFAULT_FROG_KING_POWERUPS, DEFAULT_PONDS } from '../models/default-items';
+import {
+  DEFAULT_FROGPOWERUPS,
+  DEFAULT_FROGS,
+  DEFAULT_FROG_KING_POWERUPS,
+  DEFAULT_PONDS,
+} from '../models/default-items';
 
 import { createReducer, on } from '@ngrx/store';
 import {

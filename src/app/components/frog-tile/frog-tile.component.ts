@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { ShopService } from 'src/app/services/shop.service';
 import {
@@ -23,6 +28,7 @@ import { TargetingService } from 'src/app/services/targeting.service';
 
 @Component({
   selector: 'app-frog-tile',
+
   templateUrl: './frog-tile.component.html',
   styleUrls: ['./frog-tile.component.scss'],
 })
@@ -106,7 +112,7 @@ export class FrogTileComponent implements OnInit {
       return;
     }
     let dialogRef = this.dialog.open(EvolveDialogComponent, {
-      height: '400px',
+      height: '600px',
       width: '600px',
       panelClass: 'evolve-dialog-class',
       data: { frogItem: this.frogItem },

@@ -41,19 +41,24 @@
       Tadpoles / s
     </p>
   </div>
-  <div class="flex flex-col h-auto w-full leading-tight">
+  <div class="flex flex-row h-auto w-full justify-evenly">
     <p
-      class="flex text-white w-full text-center text-md primaryText justify-center"
+      class="flex primaryText w-full bg-black bg-opacity-20 text-center text-md primaryText justify-center primaryText h-full items-center"
     >
-      King level: {{inventory.frogKing.level}}
+      King level: {{ inventory.frogKing.level }}
     </p>
     <button
+      class="flex w-full h-full primaryText bg-black bg-opacity-20 justify-center hover:bg-opacity-40"
       [disabled]="production && inventory.tadpoles < getKingLevelUpCost()"
-      (click)="levelUpKing()">Level up king {{getKingLevelUpCost()}}
+      (click)="levelUpKing()"
+    >
+      <p class="primaryText flex h-full items-center">
+        Upgrade king {{ getKingLevelUpCost() }}
+      </p>
     </button>
   </div>
   <div *ngFor="let power of inventory.frogKing.powerUps">
-    {{power.name}}
+    {{ power.name }}
   </div>
 </div>
 

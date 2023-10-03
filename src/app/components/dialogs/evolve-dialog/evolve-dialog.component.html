@@ -1,8 +1,13 @@
-<div class="p-4 class flex-col">
+<div class="p-4 class flex-col h-full">
   <p class="primaryText text-xl flex">Choose an evolution</p>
-  <div class="flex flex-col">
+  <div class="flex flex-col h-full">
     <div class="flex flex-row">
-      <ng-container *ngFor="let element of frogItem.next_possible_element_choices; let i = index">
+      <ng-container
+        *ngFor="
+          let element of frogItem.next_possible_element_choices;
+          let i = index
+        "
+      >
         <div
           *ngIf="i < 3 && element !== ''"
           class="flex flex-col w-full mx-2 bg-black bg-opacity-40 h-auto rounded-md cursor-pointer p-4"
@@ -16,7 +21,7 @@
           <div class="w-full h-full">
             <img
               class="frog-evolve-icon w-full"
-              src="../../../assets/images/elements/element{{element}}.png"
+              src="../../../assets/images/elements/element{{ element }}.png"
             />
           </div>
         </div>
@@ -26,18 +31,24 @@
       <p *ngIf="selectedOption" class="primaryText text-md">
         {{ frogTexts[selectedOption] }}
       </p>
+
+      <ul *ngIf="selectedOption">
+        <li>
+          <p class="primaryText">
+            Generates {{ EVOLUTION_SHOP[frogItem.evolves_into].rate }} Tadpoles
+            / s
+          </p>
+        </li>
+      </ul>
     </div>
     <div class="w-full h-auto">
       <button
         [mat-dialog-close]="selectedOption"
         *ngIf="selectedOption"
-        class="bg-green-600 py-2 px-5 rounded-md justify-center items-end flex m-auto"
+        class="bg-green-600 py-2 px-5 rounded-md items-end flex m-auto justify-end"
       >
         <div class="primaryText flex h-full m-auto">Confirm Evolution</div>
       </button>
     </div>
   </div>
-
-  <!-- [ngClass]="{ selected: selectedOption === 0 }"
-      [ngStyle]="{ border: selectedOption === 0 ? '2px solid white' : '' }" -->
 </div>
