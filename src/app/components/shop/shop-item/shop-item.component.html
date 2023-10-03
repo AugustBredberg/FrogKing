@@ -3,15 +3,17 @@
 <div
   [tooltip]="tooltipData"
   [position]="TooltipPosition.DYNAMICLEFT"
-  class="flex flex-col h-16 w-16 my-2"
+  class="flex flex-col h-14 w-14 my-2"
   id="shopItem"
 >
   <button
     [disabled]="item.cost > inventoryState.tadpoles"
     (click)="buyItem(item)"
-    class="flex bg-black bg-opacity-40 rounded-md w-full h-full cursor-pointer p-2"
+    class="flex bg-black bg-opacity-40 rounded-md w-full h-full cursor-pointer p-1"
     [ngClass]="
-      item.cost > inventoryState.tadpoles ? 'opacity-50' : 'hover:bg-opacity-70'
+      item.cost > inventoryState.tadpoles
+        ? 'opacity-50 item-border--' + item.tier
+        : 'hover:bg-opacity-70 item-border--' + item.tier
     "
   >
     <div

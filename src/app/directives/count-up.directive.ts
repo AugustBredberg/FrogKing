@@ -19,6 +19,7 @@ import {
   takeUntil,
   takeWhile,
 } from 'rxjs';
+import { NumberParserService } from '../services/number-parser.service';
 
 /**
  * Quadratic Ease-Out Function: f(x) = x * (2 - x)
@@ -81,7 +82,8 @@ export class CountUpDirective implements OnInit {
   constructor(
     private readonly elementRef: ElementRef,
     private readonly renderer: Renderer2,
-    private readonly destroy$: Destroy
+    private readonly destroy$: Destroy,
+    private numberParserSerivce: NumberParserService
   ) {}
 
   ngOnInit(): void {
@@ -96,7 +98,7 @@ export class CountUpDirective implements OnInit {
         this.renderer.setProperty(
           this.elementRef.nativeElement,
           'innerHTML',
-          currentCount
+          this.numberParserSerivce.convertToReadableNumber(currentCount)
         );
       });
   }

@@ -1,6 +1,16 @@
-import { EVOLUTION_ENUM, FROG_ELEMENT_ENUM, FROG_POWERUP_ENUM, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, FrogPowerUpItem, FrogPowerUpSideEffect, KING_POWERUP_ENUM, KingPowerUpItem, POND_ENUM, PondItem } from "./items";
-
-
+import {
+  EVOLUTION_ENUM,
+  FROG_ELEMENT_ENUM,
+  FROG_POWERUP_ENUM,
+  FROG_POWERUP_SIDE_EFFECT_ENUM,
+  FrogItem,
+  FrogPowerUpItem,
+  FrogPowerUpSideEffect,
+  KING_POWERUP_ENUM,
+  KingPowerUpItem,
+  POND_ENUM,
+  PondItem,
+} from './items';
 
 ///////////////////////////////////////////////////////////
 /// FROG KING POWERUPS
@@ -17,20 +27,20 @@ export const DEFAULT_FROG_KING_POWERUPS: { [id: string]: KingPowerUpItem } = {
     productionRateMultiplier: 10,
     expiration: new Date(), // Is set when powerup is used
     effectIsPositive: true,
-  }
-}
+  },
+};
 
 ///////////////////////////////////////////////////////////
 /// FROGS
 ///////////////////////////////////////////////////////////
 var emptyElements = {
-      [FROG_ELEMENT_ENUM.UNDEAD]: 0,
-      [FROG_ELEMENT_ENUM.HOLY]: 0,
-      [FROG_ELEMENT_ENUM.DARK]: 0,
-      [FROG_ELEMENT_ENUM.SPIRIT]: 0,
-      [FROG_ELEMENT_ENUM.PSYCHIC]: 0,
-      [FROG_ELEMENT_ENUM.MIGHTY]: 0,
-    }
+  [FROG_ELEMENT_ENUM.UNDEAD]: 0,
+  [FROG_ELEMENT_ENUM.HOLY]: 0,
+  [FROG_ELEMENT_ENUM.DARK]: 0,
+  [FROG_ELEMENT_ENUM.SPIRIT]: 0,
+  [FROG_ELEMENT_ENUM.PSYCHIC]: 0,
+  [FROG_ELEMENT_ENUM.MIGHTY]: 0,
+};
 export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
   [EVOLUTION_ENUM.TIER1]: {
     id: crypto.randomUUID(),
@@ -45,13 +55,13 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER2]: {
     id: crypto.randomUUID(),
     name: 'Red frog',
     description:
-      "The frog has undergone a remarkable transformation. Its body is now adorned with vibrant brown-red skin that gives it a fiery appearance. What sets it apart is the striking contrast with its underbelly, which is a brilliant bright orange.",
+      'The frog has undergone a remarkable transformation. Its body is now adorned with vibrant brown-red skin that gives it a fiery appearance. What sets it apart is the striking contrast with its underbelly, which is a brilliant bright orange.',
     kind: EVOLUTION_ENUM.TIER2,
     evolves_into: EVOLUTION_ENUM.TIER3,
     level: 1,
@@ -60,13 +70,13 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER3]: {
     id: crypto.randomUUID(),
     name: 'Gigantoad',
     description:
-      "The frog has undergone a mutation, growing to the size of a cat. Its sheer size is intimidating, but it still retains the appearance of a typical frog.",
+      'The frog has undergone a mutation, growing to the size of a cat. Its sheer size is intimidating, but it still retains the appearance of a typical frog.',
     kind: EVOLUTION_ENUM.TIER3,
     evolves_into: EVOLUTION_ENUM.TIER4,
     level: 1,
@@ -75,7 +85,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER4]: {
     id: crypto.randomUUID(),
@@ -90,7 +100,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER5]: {
     id: crypto.randomUUID(),
@@ -105,7 +115,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER6]: {
     id: crypto.randomUUID(),
@@ -120,11 +130,11 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER7]: {
     id: crypto.randomUUID(),
-    name: 'Frogdom\'s Elected Ruler',
+    name: "Frogdom's Elected Ruler",
     description:
       "The Sage of the Marsh's wisdom becomes legendary, and humans elect the frog as their leader. It serves as a symbol of unity and wisdom, guiding the village and fostering peace among its inhabitants.",
     kind: EVOLUTION_ENUM.TIER7,
@@ -135,7 +145,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER8]: {
     id: crypto.randomUUID(),
@@ -150,7 +160,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER9]: {
     id: crypto.randomUUID(),
@@ -165,13 +175,13 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER10]: {
     id: crypto.randomUUID(),
     name: 'Frogdivinity',
     description:
-      "The Celestial Amphibian ascends to god-like status, shaping worlds and dimensions with its boundless power. It has become a deity worshiped by beings across the cosmos, embodying the ultimate frog-like entity, a symbol of creation and wisdom beyond mortal comprehension.",
+      'The Celestial Amphibian ascends to god-like status, shaping worlds and dimensions with its boundless power. It has become a deity worshiped by beings across the cosmos, embodying the ultimate frog-like entity, a symbol of creation and wisdom beyond mortal comprehension.',
     kind: EVOLUTION_ENUM.TIER10,
     evolves_into: EVOLUTION_ENUM.TIER11,
     level: 1,
@@ -180,13 +190,13 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
   [EVOLUTION_ENUM.TIER11]: {
     id: crypto.randomUUID(),
     name: 'Azathoth, the Froggod',
     description:
-      "Azathoth is an eldritch deity in the form of a colossal, writhing frog. Its gaping maw consumes entire galaxies, and its croak births new universes. It exists beyond comprehension, a nightmare made flesh—or in this case, amphibian.",
+      'Azathoth is an eldritch deity in the form of a colossal, writhing frog. Its gaping maw consumes entire galaxies, and its croak births new universes. It exists beyond comprehension, a nightmare made flesh—or in this case, amphibian.',
     kind: EVOLUTION_ENUM.TIER11,
     evolves_into: EVOLUTION_ENUM.NO_EVOLUTION,
     level: 1,
@@ -195,10 +205,9 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
-    next_possible_element_choices: []
+    next_possible_element_choices: [],
   },
 };
-
 
 ///////////////////////////////////////////////////////////
 /// FROG POWERUPS
@@ -298,7 +307,6 @@ export const DEFAULT_FROGPOWERUPS_SIDE_EFFECTS: {
   },
 };
 
-
 export const DEFAULT_PONDS: { [id: string]: PondItem } = {
   [POND_ENUM.WATER_GLASS]: {
     id: POND_ENUM.WATER_GLASS,
@@ -313,32 +321,115 @@ export const DEFAULT_PONDS: { [id: string]: PondItem } = {
     kind: POND_ENUM.TOILET,
     description: 'A low flow toilet.',
     name: 'Toilet',
-    frog_capacity: 1,
+    frog_capacity: 2,
+    next_pond: POND_ENUM.GUPPY_BOWL,
+  },
+  [POND_ENUM.GUPPY_BOWL]: {
+    id: POND_ENUM.GUPPY_BOWL,
+    kind: POND_ENUM.GUPPY_BOWL,
+    description: 'A small guppy bowl.',
+    name: 'Guppy Bowl',
+    frog_capacity: 3,
+    next_pond: POND_ENUM.AQUARIUM,
+  },
+  [POND_ENUM.AQUARIUM]: {
+    id: POND_ENUM.AQUARIUM,
+    kind: POND_ENUM.AQUARIUM,
+    description: 'A larger aquarium.',
+    name: 'Aquarium',
+    frog_capacity: 4,
+    next_pond: POND_ENUM.SWIMMING_POOL,
+  },
+  [POND_ENUM.SWIMMING_POOL]: {
+    id: POND_ENUM.SWIMMING_POOL,
+    kind: POND_ENUM.SWIMMING_POOL,
+    description: 'An entire swimming pool for all of your frogs.',
+    name: 'Swimming pool',
+    frog_capacity: 5,
+    next_pond: POND_ENUM.HOT_SPRING,
+  },
+  [POND_ENUM.HOT_SPRING]: {
+    id: POND_ENUM.HOT_SPRING,
+    kind: POND_ENUM.HOT_SPRING,
+    description:
+      'A hot spring where your frogs can relax and let off some steam.',
+    name: 'Hot Spring',
+    frog_capacity: 6,
+    next_pond: POND_ENUM.WATERFALL,
+  },
+  [POND_ENUM.WATERFALL]: {
+    id: POND_ENUM.WATERFALL,
+    kind: POND_ENUM.WATERFALL,
+    description: 'A splashing waterfall, perfect for frogs.',
+    name: 'Waterfall',
+    frog_capacity: 7,
+    next_pond: POND_ENUM.DESERT_ISLAND,
+  },
+  [POND_ENUM.DESERT_ISLAND]: {
+    id: POND_ENUM.DESERT_ISLAND,
+    kind: POND_ENUM.DESERT_ISLAND,
+    description: 'A deserted island where your frogs can live in peace.',
+    name: 'Deserted Island',
+    frog_capacity: 8,
+    next_pond: POND_ENUM.COASTLINE,
+  },
+  [POND_ENUM.COASTLINE]: {
+    id: POND_ENUM.COASTLINE,
+    kind: POND_ENUM.COASTLINE,
+    description: 'A wide coastline where your frogs can evolve and have fun.',
+    name: 'Coastline',
+    frog_capacity: 9,
     next_pond: POND_ENUM.SIMPLE_POND,
   },
   [POND_ENUM.SIMPLE_POND]: {
     id: POND_ENUM.SIMPLE_POND,
     kind: POND_ENUM.SIMPLE_POND,
-    description: 'A simple pond.',
-    name: 'Simple pond',
-    frog_capacity: 2,
-    next_pond: POND_ENUM.FANCY_POND,
+    description: 'A frog pond. The perfect habitat for all types of frogs.',
+    name: 'Normal Pond',
+    frog_capacity: 10,
+    next_pond: POND_ENUM.LAKE,
   },
-  [POND_ENUM.FANCY_POND]: {
-    id: POND_ENUM.FANCY_POND,
-    kind: POND_ENUM.FANCY_POND,
-    description: 'A fancy pond.',
-    name: 'Fancy pond',
-    frog_capacity: 3,
-    next_pond: POND_ENUM.SPECTACULAR_POND,
+  [POND_ENUM.LAKE]: {
+    id: POND_ENUM.LAKE,
+    kind: POND_ENUM.LAKE,
+    description: 'A small lake where your frogs can thrive and conquer.',
+    name: 'Lake',
+    frog_capacity: 11,
+    next_pond: POND_ENUM.SEA,
   },
-  [POND_ENUM.SPECTACULAR_POND]: {
-    id: POND_ENUM.SPECTACULAR_POND,
-    kind: POND_ENUM.SPECTACULAR_POND,
-    description: 'A spectacular pond.',
-    name: 'Spectacular pond',
-    frog_capacity: 4,
+  [POND_ENUM.SEA]: {
+    id: POND_ENUM.SEA,
+    kind: POND_ENUM.SEA,
+    description:
+      'An entire sea for your frogs to develop new societies and cultures.',
+    name: 'Sea',
+    frog_capacity: 12,
+    next_pond: POND_ENUM.OCEAN,
+  },
+  [POND_ENUM.OCEAN]: {
+    id: POND_ENUM.OCEAN,
+    kind: POND_ENUM.OCEAN,
+    description: 'A massive ocean larger than any nation on the planet.',
+    name: 'Ocean',
+    frog_capacity: 13,
+    next_pond: POND_ENUM.NEPTUNE,
+  },
+  [POND_ENUM.NEPTUNE]: {
+    id: POND_ENUM.NEPTUNE,
+    kind: POND_ENUM.NEPTUNE,
+    description:
+      'Your frogs populate the planet of Neptune. The main base for the first known intergalactic species.',
+    name: 'Neptune',
+    frog_capacity: 14,
+    next_pond: POND_ENUM.FROG_GALAXY,
+  },
+  [POND_ENUM.FROG_GALAXY]: {
+    id: POND_ENUM.FROG_GALAXY,
+    kind: POND_ENUM.FROG_GALAXY,
+    description:
+      'Your frogs travel further into space, populating an entire amphibian galaxy.',
+    name: 'Frog Galaxy',
+    frog_capacity: 15,
     next_pond: POND_ENUM.NO_UPGRADE,
   },
 };
-

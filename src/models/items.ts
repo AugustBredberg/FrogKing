@@ -14,7 +14,7 @@ export interface FrogKing {
 }
 export enum KING_ACTIONS {
   LEVELUP,
-  POWERUP
+  POWERUP,
 }
 export enum KING_POWERUP_ENUM {
   ROYAL_RAGE,
@@ -87,7 +87,19 @@ export interface PondItem extends Item {
 export enum POND_ENUM {
   WATER_GLASS,
   TOILET,
+  GUPPY_BOWL,
+  AQUARIUM,
+  SWIMMING_POOL,
+  HOT_SPRING,
+  WATERFALL,
+  DESERT_ISLAND,
+  COASTLINE,
   SIMPLE_POND,
+  LAKE,
+  SEA,
+  OCEAN,
+  NEPTUNE,
+  FROG_GALAXY,
   FANCY_POND,
   SPECTACULAR_POND,
   NO_UPGRADE = -1,

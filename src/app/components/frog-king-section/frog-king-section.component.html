@@ -7,7 +7,7 @@
         duration: duration of animation in milliseconds.
       -->
     <p
-      class="flex text-white w-full text-center text-4xl primaryText justify-center"
+      class="flex primaryText w-full text-center text-4xl primaryText justify-center"
       [from]="inventory.tadpolesPreviousState"
       [countUp]="inventory.tadpoles"
       [duration]="1000"
@@ -33,7 +33,7 @@
     <p
       class="flex text-white w-full text-center text-4xl primaryText justify-center"
     >
-      {{ gameService.calculateTotalProductionRate() }}
+      {{ parseCost(gameService.calculateTotalProductionRate()) }}
     </p>
     <p
       class="flex text-white w-full text-center text-md primaryText justify-center"

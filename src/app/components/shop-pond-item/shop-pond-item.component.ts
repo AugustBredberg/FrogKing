@@ -4,7 +4,11 @@ import { ShopItemSummary, ShopService } from 'src/app/services/shop.service';
 import { InventoryState, ShopState } from 'src/models/states';
 import { SHOP_ITEM_TYPES, ShopItem } from 'src/models/shop-items';
 import { Store } from '@ngrx/store';
-import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
+import {
+  IItemTooltip,
+  ITooltip,
+  TooltipPosition,
+} from 'src/models/components/tooltips';
 import { DEFAULT_FROGPOWERUPS } from 'src/models/default-items';
 import { environment } from 'src/environments/environment';
 @Component({
@@ -20,7 +24,7 @@ export class ShopPondItemComponent implements OnInit {
   TooltipPosition = TooltipPosition;
   production: boolean = environment.production;
   environment = environment;
-  tooltipData: ITooltip;
+  tooltipData: IItemTooltip;
 
   constructor(
     private store: Store<{ shop: ShopState }>,
@@ -45,10 +49,11 @@ export class ShopPondItemComponent implements OnInit {
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
       image:
-        this.environment.assetsPath + 'images/bowls/bowl-icon-' +
+        this.environment.assetsPath +
+        'images/bowls/bowl-icon-' +
         this.item.defaultItemId +
         '.png',
-
+      type: 'item',
       itemId: this.item.defaultItemId,
     };
   }

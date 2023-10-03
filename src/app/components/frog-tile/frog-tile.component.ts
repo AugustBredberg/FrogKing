@@ -25,6 +25,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { InventoryState } from 'src/models/states';
 import { environment } from '../../../environments/environment';
 import { TargetingService } from 'src/app/services/targeting.service';
+import { NumberParserService } from 'src/app/services/number-parser.service';
 
 @Component({
   selector: 'app-frog-tile',
@@ -50,9 +51,13 @@ export class FrogTileComponent implements OnInit {
     private gameService: GameService,
     private targetingService: TargetingService,
     private shopService: ShopService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private numberParserService: NumberParserService
   ) {}
 
+  parseCost(cost: number): string {
+    return this.numberParserService.convertToReadableNumber(cost);
+  }
   ngOnInit() {
     this.targeting = this.targetingService.getTargetActive();
 
@@ -75,7 +80,7 @@ export class FrogTileComponent implements OnInit {
       level: this.frogItem.level,
       negativeText: this.getNegativePowerupTexts(this.frogItem.power_ups),
       positiveText: this.getPositivePowerupTexts(this.frogItem.power_ups),
-      evolveStage: this.frogItem.evolves_into,
+      evolveStage: this.frogItem.evolves_into - 1,
       evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into]?.cost,
       evolvesInto: EVOLUTION_SHOP[this.frogItem.evolves_into]?.name,
       tps: this.productionRate,

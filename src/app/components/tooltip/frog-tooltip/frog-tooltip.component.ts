@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { environment } from 'src/environments/environment';
+import { NumberParserService } from 'src/app/services/number-parser.service';
 import {
   IFrogTooltip,
   ITooltip,
@@ -19,10 +20,19 @@ export class FrogTooltipComponent implements OnInit {
   position: TooltipPosition = TooltipPosition.DEFAULT;
   tadpolesProduced: number;
   environment = environment;
-  constructor(private gameService: GameService) {}
 
+  constructor(
+    private gameService: GameService,
+    private numberParserService: NumberParserService
+  ) {}
+
+  parseCost(cost: number): string {
+    return this.numberParserService.convertToReadableNumber(cost);
+  }
   ngOnInit(): void {
-    var totalProduced = this.gameService.getFrogTotalProduced(this.tooltip.frogId as string);
-    this.tadpolesProduced =  Math.round(totalProduced)
+    var totalProduced = this.gameService.getFrogTotalProduced(
+      this.tooltip.frogId as string
+    );
+    this.tadpolesProduced = Math.round(totalProduced);
   }
 }

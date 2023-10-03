@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { NumberParserService } from 'src/app/services/number-parser.service';
 import { ShopService } from 'src/app/services/shop.service';
 import { environment } from 'src/environments/environment';
 import { KING_LEVEL_SHOP } from 'src/models/default-shop-items';
@@ -64,6 +65,7 @@ export class FrogKingSectionComponent {
     private store: Store<{ inventory: InventoryState }>,
     private inventoryService: InventoryService,
     private shopService: ShopService,
+    private numberParserService: NumberParserService,
     public gameService: GameService,
     private elementRef: ElementRef
   ) {
@@ -80,7 +82,9 @@ export class FrogKingSectionComponent {
       }
     }, 2000); // Hide after 2 seconds
   }
-
+  parseCost(cost: number): string {
+    return this.numberParserService.convertToReadableNumber(cost);
+  }
   spawn(event: MouseEvent) {
     // Capture the mouse coordinates
     const mouseX = event.clientX;
