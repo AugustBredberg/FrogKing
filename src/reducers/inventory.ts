@@ -88,7 +88,6 @@ export const inventoryReducer = createReducer(
     // Get powerup from default powerups
     var powerup = structuredClone(DEFAULT_FROG_KING_POWERUPS[action.powerUp]);
     var powerExpiration = new Date();
-    debugger
     powerExpiration.setSeconds(powerExpiration.getSeconds() + powerup.duration);
     powerup.expiration = powerExpiration;
 
@@ -224,6 +223,10 @@ export const inventoryReducer = createReducer(
     new_frog.element_type = structuredClone(
       inventory_state.frogs[action.frogId].element_type
     );
+
+    // Set total produced to previous frog's total produced
+    new_frog.lifetime_tadpoles_produced =
+      inventory_state.frogs[action.frogId].lifetime_tadpoles_produced;
 
     // If we recieved a new element, add the new element to the frog
     var newElement = action.newElement;

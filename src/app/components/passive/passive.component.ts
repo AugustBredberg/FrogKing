@@ -16,12 +16,10 @@ export class PassiveComponent implements OnInit {
   TooltipPosition = TooltipPosition;
   ngOnInit(): void {
     this.tooltipData = {
-      name: this.passive.name,
+      element: this.passive.element,
       description: this.passive.description,
-      bonus: this.passive.bonus,
-      levels: this.passive.levels,
-      obtained: this.passive.obtained,
-      type: 'passive',
+      amount: this.passive.amount,
+      image: '../../../assets/images/elements/element'+this.passive.element+ '.png', //'../../../sr' + this.passive.element + '.png',
     };
   }
 }

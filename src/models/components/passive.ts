@@ -1,9 +1,9 @@
+import { FROG_ELEMENT_ENUM } from "../items";
+
 export interface IPassive {
-  name?: string;
+  element: FROG_ELEMENT_ENUM;
   description?: string;
-  element?: string;
-  id?: string;
-  levels: number[];
-  obtained: number;
-  bonus?: { [level: number]: { required: number; text: string } };
+  amount: number;
+  //obtained: number;
+  //bonus?: { [level: number]: { required: number; text: string } };
 }

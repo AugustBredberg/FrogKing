@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 import {
   IFrogTooltip,
   ITooltip,
@@ -17,7 +18,10 @@ export class FrogTooltipComponent implements OnInit {
   position: TooltipPosition = TooltipPosition.DEFAULT;
   tadpolesProduced: number;
 
+  constructor(private gameService: GameService) {}
+
   ngOnInit(): void {
-    this.tadpolesProduced = Math.round(this.tooltip.tadpolesProduced);
+    var totalProduced = this.gameService.getFrogTotalProduced(this.tooltip.frogId as string);
+    this.tadpolesProduced =  Math.round(totalProduced)
   }
 }
