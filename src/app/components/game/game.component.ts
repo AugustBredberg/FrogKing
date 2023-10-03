@@ -59,6 +59,7 @@ export class GameComponent implements OnInit {
 
   trackFrog(index: number, frog: KeyValue<string, FrogItem>) {
     // Check for changes to frog level and evolution
-    return frog.value ? frog.value.level + frog.value.evolves_into + frog.value.power_ups.length : undefined;
+    var frogPowerupChanges = frog.value.power_ups.map(powerup => powerup.kind).join('');
+    return frog.value ? frog.value.level + frog.value.evolves_into + frogPowerupChanges : undefined;
   }
 }
