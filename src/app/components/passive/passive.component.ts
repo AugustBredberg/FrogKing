@@ -4,6 +4,7 @@ import {
   IPassiveTooltip,
   TooltipPosition,
 } from 'src/models/components/tooltips';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-passive',
@@ -14,12 +15,13 @@ export class PassiveComponent implements OnInit {
   @Input() passive: IPassive;
   tooltipData: IPassiveTooltip;
   TooltipPosition = TooltipPosition;
+  environment = environment;
   ngOnInit(): void {
     this.tooltipData = {
       element: this.passive.element,
       description: this.passive.description,
       amount: this.passive.amount,
-      image: '../../../assets/images/elements/element'+this.passive.element+ '.png', //'../../../sr' + this.passive.element + '.png',
+      image: environment.assetsPath + 'images/elements/element'+this.passive.element+ '.png', //'../../../sr' + this.passive.element + '.png',
     };
   }
 }

@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
 import { DEFAULT_FROGPOWERUPS } from 'src/models/default-items';
 import { TargetingService } from 'src/app/services/targeting.service';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-shop-item',
   templateUrl: './shop-item.component.html',
@@ -27,6 +27,7 @@ export class ShopItemComponent implements OnInit {
   shop: ShopState;
   TooltipPosition = TooltipPosition;
   tooltipData: ITooltip;
+  environment = environment;
 
   frogCount: number;
   constructor(
@@ -55,7 +56,7 @@ export class ShopItemComponent implements OnInit {
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
       image:
-        '../../../assets/images/items/' +
+        this.environment.assetsPath + 'images/items/' +
         this.item.type + '/' +
         'item-image-' +
         this.item.defaultItemId +
@@ -88,7 +89,7 @@ export class ShopItemComponent implements OnInit {
     // Set the center coordinates using targetingService
     this.targetingService.setSourceCoordinates(centerX, centerY);
     this.targetingService.setTargetImage(
-      '../../../assets/images/items/' + this.item.type + '/item-image-' +
+      this.environment.assetsPath + 'images/items/' + this.item.type + '/item-image-' +
         this.item.defaultItemId +
         '.png'
     );

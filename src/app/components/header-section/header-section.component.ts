@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
 import { InventoryState } from 'src/models/states';
 
 @Component({
@@ -9,6 +10,7 @@ import { InventoryState } from 'src/models/states';
 })
 export class HeaderSectionComponent {
   inventory: InventoryState;
+  environment = environment;
 
   constructor(private store: Store<{ inventory: InventoryState }>) {
     var inventory_state = this.store.select('inventory');

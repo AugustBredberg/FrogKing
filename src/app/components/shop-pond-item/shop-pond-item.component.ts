@@ -19,7 +19,7 @@ export class ShopPondItemComponent implements OnInit {
   shop: ShopState;
   TooltipPosition = TooltipPosition;
   production: boolean = environment.production;
-
+  environment = environment;
   tooltipData: ITooltip;
 
   constructor(
@@ -45,7 +45,7 @@ export class ShopPondItemComponent implements OnInit {
       body: shopItemSummary.description,
       price: shopItemSummary.cost,
       image:
-        '../../../assets/images/bowls/bowl-icon-' +
+        this.environment.assetsPath + 'images/bowls/bowl-icon-' +
         this.item.defaultItemId +
         '.png',
 

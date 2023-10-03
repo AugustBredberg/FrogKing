@@ -8,7 +8,7 @@ import { InventoryState, ShopState } from 'src/models/states';
 import { Store } from '@ngrx/store';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-spawn-frog-tile',
   templateUrl: './spawn-frog-tile.component.html',
@@ -22,7 +22,7 @@ export class SpawnFrogTileComponent implements OnInit {
   shop: ShopState;
   tooltipData: ITooltip;
   TooltipPosition = TooltipPosition;
-
+  environment = environment;
   constructor(
     private shopService: ShopService,
     private store: Store<{ inventory: InventoryState; shop: ShopState }>,
@@ -46,7 +46,7 @@ export class SpawnFrogTileComponent implements OnInit {
       negativeText: [],
       body: '',
       price: 20,
-      image: '../../../assets/images/frogs/frog1.png',
+      image: this.environment.assetsPath + 'images/frogs/frog1.png',
       itemId: 0,
     };
   }

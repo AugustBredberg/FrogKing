@@ -42,6 +42,7 @@ export class FrogTileComponent implements OnInit {
   productionRate: number;
   nextEvolution: string;
   production = environment.production;
+  environment = environment;
   targeting: boolean;
 
   constructor(
@@ -70,7 +71,7 @@ export class FrogTileComponent implements OnInit {
       description: this.frogItem.description,
       frogId: this.frogItem.id,
       image:
-        '../../../../assets/images/frogs/frog' + this.frogItem.kind + '.png',
+        this.environment.assetsPath + 'images/frogs/frog' + this.frogItem.kind + '.png',
       level: this.frogItem.level,
       negativeText: this.getNegativePowerupTexts(this.frogItem.power_ups),
       positiveText: this.getPositivePowerupTexts(this.frogItem.power_ups),

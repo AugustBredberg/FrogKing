@@ -2,7 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FROG_ELEMENT_ENUM, FrogItem } from 'src/models/items';
 import { EVOLUTION_SHOP } from 'src/models/default-shop-items';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-evolve-dialog',
   templateUrl: './evolve-dialog.component.html',
@@ -12,6 +12,7 @@ export class EvolveDialogComponent {
   selectedOption: string | null = null;
   elements = FROG_ELEMENT_ENUM;
   frogItem: FrogItem;
+  environment = environment;
   //@Inject(MAT_DIALOG_DATA) public data: { frogItem: FrogItem };
 
   EVOLUTION_SHOP = EVOLUTION_SHOP;
