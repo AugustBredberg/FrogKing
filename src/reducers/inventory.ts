@@ -33,7 +33,7 @@ import {
 } from '../app/inventory-actions';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
-  tadpoles: 50,
+  tadpoles: 0,
   tadpolesPreviousState: 0,
   frogKing: {
     tadpolesPerClick: 1,
@@ -258,7 +258,7 @@ export const inventoryReducer = createReducer(
       }
     });
     // Case 1: Frog has 4 different elements.
-    if (elementCount == 4) {
+    if (elementCount >= 4) {
       // Set next possible element choices to the 4 elements the frog has
       new_frog.next_possible_element_choices = Object.keys(
         new_frog.element_type
@@ -289,6 +289,8 @@ export const inventoryReducer = createReducer(
       ).filter(
         (element) => element != FROG_ELEMENT_ENUM.NONE
       ) as FROG_ELEMENT_ENUM[];
+      // Shuffle the elements
+      new_frog.next_possible_element_choices.sort(() => Math.random() - 0.5);
     }
 
     // Return inventory with given frog evolved and new element if applicable

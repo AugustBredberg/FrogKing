@@ -104,7 +104,7 @@ export class TooltipDirective {
 
     if (!this.componentRef) {
       const componentFactory =
-        this.componentFactoryResolver.resolveComponentFactory(tooltipComponent);
+        this.componentFactoryResolver.resolveComponentFactory(tooltipComponent as any);
       this.componentRef = componentFactory.create(this.injector);
 
       this.appRef.attachView(this.componentRef.hostView);

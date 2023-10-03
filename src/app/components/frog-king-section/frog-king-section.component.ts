@@ -116,8 +116,6 @@ export class FrogKingSectionComponent {
     setTimeout(() => {
       this.pulsateState = 'normal';
     }, 75);
-
-    this.inventoryService.kingClicked(1);
   }
   levelUpKing() {
     // Create copy of king level up shop item
