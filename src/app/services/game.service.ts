@@ -167,4 +167,10 @@ export class GameService {
     });
     return currentTadpoleRate;
   }
+
+  public getFrogTotalProduced(frogId: string) {
+    var frog = this.inventory.frogs[frogId];
+    var totalProduced = frog.lifetime_tadpoles_produced;
+    return totalProduced;
+  }
 }

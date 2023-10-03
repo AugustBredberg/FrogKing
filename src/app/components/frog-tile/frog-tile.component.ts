@@ -62,6 +62,7 @@ export class FrogTileComponent implements OnInit {
     this.tooltipData = {
       name: this.frogItem.name,
       description: this.frogItem.description,
+      frogId: this.frogItem.id,
       image:
         '../../../../assets/images/frogs/frog' + this.frogItem.kind + '.png',
       level: this.frogItem.level,
@@ -71,7 +72,6 @@ export class FrogTileComponent implements OnInit {
       evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into]?.cost,
       evolvesInto: EVOLUTION_SHOP[this.frogItem.evolves_into]?.name,
       tps: this.productionRate,
-      tadpolesProduced: this.frogItem.lifetime_tadpoles_produced,
       elements: this.frogItem.element_type,
       type: 'frog',
     };

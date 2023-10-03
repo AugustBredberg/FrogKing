@@ -7,9 +7,10 @@ import { GameService } from '../../services/game.service';
 import { ShopService } from 'src/app/services/shop.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
-import { EVOLUTION_ENUM } from 'src/models/items';
+import { EVOLUTION_ENUM, FrogItem } from 'src/models/items';
 import { SHOP } from 'src/models/default-shop-items';
 import { TargetingService } from 'src/app/services/targeting.service';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-game',
@@ -55,4 +56,9 @@ export class GameComponent implements OnInit {
   onMouseMove($event: MouseEvent): void {
     this.targetingService.setTargetCoordinates($event.clientX, $event.clientY);
   } // Use nativeElement to access the DOM element directly
+
+  trackFrog(index: number, frog: KeyValue<string, FrogItem>) {
+    // Check for changes to frog level and evolution
+    return frog.value ? frog.value.level + frog.value.evolves_into : undefined;
+  }
 }

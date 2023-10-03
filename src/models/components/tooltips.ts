@@ -1,3 +1,5 @@
+import { FROG_ELEMENT_ENUM } from "../items";
+
 export interface ITooltip {
   header?: string;
   positiveText?: string[];
@@ -12,11 +14,11 @@ export interface ITooltip {
 
 export interface IFrogTooltip extends ITooltip {
   name: string;
+  frogId?: string;
   description: string;
   image: string;
   level: number;
   tps: number;
-  tadpolesProduced: number;
   evolveCost?: number;
   evolveStage: number;
   evolvesInto?: string;
@@ -25,14 +27,9 @@ export interface IFrogTooltip extends ITooltip {
 }
 
 export interface IPassiveTooltip extends ITooltip {
-  name?: string;
+  element: FROG_ELEMENT_ENUM;
   description?: string;
-  element?: string;
-  id?: string;
-  levels: number[];
-  obtained: number;
-  bonus?: { [level: number]: { required: number; text: string } };
-  type: string;
+  amount: number;
 }
 
 export interface ITooltipActions {

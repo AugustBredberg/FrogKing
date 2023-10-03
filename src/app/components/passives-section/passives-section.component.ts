@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IPassive } from 'src/models/components/passive';
+import { InventoryState } from 'src/models/states';
+import { FROG_ELEMENT_ENUM, FrogItem } from 'src/models/items';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-passives-section',
@@ -7,72 +11,46 @@ import { IPassive } from 'src/models/components/passive';
   styleUrls: ['./passives-section.component.scss'],
 })
 export class PassivesSectionComponent {
-  passives: IPassive[] = [
-    {
-      name: 'Undead',
-      element: 'Undead',
-      levels: [1, 2, 3],
-      obtained: 2,
-      bonus: {
-        1: { required: 1, text: 'bonus for having 1 Undead frog' },
-        2: { required: 2, text: 'bonus for having 2 Undead frogs' },
-        3: { required: 4, text: 'bonus for having 4 Undead frogs' },
-      },
-    },
-    {
-      name: 'Holy',
-      element: 'Holy',
-      levels: [1, 2, 3],
-      obtained: 0,
-      bonus: {
-        1: { required: 1, text: 'bonus for having 1 Holy frog' },
-        2: { required: 3, text: 'bonus for having 3 Holy frogs' },
-        3: { required: 5, text: 'bonus for having 5 Holy frogs' },
-      },
-    },
-    {
-      name: 'Dark',
-      element: 'Dark',
-      levels: [1, 2, 3],
-      obtained: 1,
-      bonus: {
-        1: { required: 1, text: 'bonus for having 1 Dark frog' },
-        2: { required: 3, text: 'bonus for having 3 Dark frogs' },
-        3: { required: 5, text: 'bonus for having 5 Dark frogs' },
-      },
-    },
-    {
-      name: 'Spirit',
-      element: 'Spirit',
-      levels: [1, 2, 3],
-      obtained: 0,
-      bonus: {
-        1: { required: 1, text: 'bonus for having 1 Spirit frog' },
-        2: { required: 3, text: 'bonus for having 3 Spirit frogs' },
-        3: { required: 5, text: 'bonus for having 5 Spirit frogs' },
-      },
-    },
-    {
-      name: 'Worker',
-      element: 'Worker',
-      levels: [1, 2, 3],
-      obtained: 0,
-      bonus: {
-        1: { required: 1, text: 'bonus for having 1 Worker frog' },
-        2: { required: 3, text: 'bonus for having 3 Worker frogs' },
-        3: { required: 5, text: 'bonus for having 5 Worker frogs' },
-      },
-    },
-    {
-      name: 'Paladin',
-      element: 'Paladin',
-      levels: [1, 2, 3],
-      obtained: 0,
-      bonus: {
-        1: { required: 1, text: 'bonus for having 1 Paladin frog' },
-        2: { required: 3, text: 'bonus for having 3 Paladin frogs' },
-        3: { required: 5, text: 'bonus for having 5 Paladin frogs' },
-      },
-    },
-  ];
+  inventory$: Observable<InventoryState>;
+  inventory: InventoryState;
+  passives: IPassive[] = [];
+
+  constructor(private store: Store<{ inventory: InventoryState }>) {
+    this.inventory$ = store.select('inventory');
+    this.inventory$.subscribe((inventory) => {
+      this.inventory = inventory;
+
+      // Loop through frogs and count how many of each element we have
+      // Then set the obtained property of each passive
+      this.passives = [];
+      Object.values(this.inventory.frogs).forEach((frog) => {
+        // Loop through each frog's elements and add them to the passives array
+        Object.keys(frog.element_type).forEach((element: string) => {
+          var currentPassive = this.passives?.find(
+            (p) => p.element === element
+          );
+          // If first time seeing passive, create a new passive object
+          if (!currentPassive) {
+            const passive: IPassive = {
+              element: element as FROG_ELEMENT_ENUM,
+              amount: frog.element_type[element],
+            };
+            this.passives?.push(passive);
+          }
+          // If the element is already in the passives array, add to the amount
+          else {
+            currentPassive.amount += frog.element_type[element];
+          }
+        });
+      });
+      // If all passives are 0, set the array to empty
+      if (this.passives.every((p) => p.amount === 0)) {
+        this.passives = [];
+      }
+    });
+  }
+
+  trackElement(index: number, passive: IPassive) {
+    return passive ? passive.amount : undefined;
+  }
 }
