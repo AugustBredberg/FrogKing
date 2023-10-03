@@ -3,7 +3,7 @@
 >
   <div class="grid grid-cols-3 grid-flow-row w-full justify-evenly">
     <ng-container *ngFor="let passive of passives; trackBy: trackElement">
-      <app-passive [passive]="passive"></app-passive>
+      <app-passive *ngIf="passive.amount > 0" [passive]="passive"></app-passive>
     </ng-container>
   </div>
 </div>

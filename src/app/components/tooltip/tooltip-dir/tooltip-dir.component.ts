@@ -19,6 +19,8 @@ import {
   ITooltip,
   TooltipPosition,
 } from 'src/models/components/tooltips';
+import { NumberParserService } from 'src/app/services/number-parser.service';
+import { ItemTooltipComponent } from '../item-tooltip/item-tooltip.component';
 
 @Directive({
   selector: '[tooltip]',
@@ -85,7 +87,7 @@ export class TooltipDirective {
 
     switch (this.tooltip.type) {
       case 'item':
-        tooltipComponent = TooltipComponent;
+        tooltipComponent = ItemTooltipComponent;
         break;
       case 'frog':
         tooltipComponent = FrogTooltipComponent;
@@ -93,6 +95,7 @@ export class TooltipDirective {
       case 'passive':
         tooltipComponent = PassiveTooltipComponent;
         break;
+
       default:
         // Handle other cases if needed
         tooltipComponent = TooltipComponent;

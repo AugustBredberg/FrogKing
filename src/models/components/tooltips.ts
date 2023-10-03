@@ -1,4 +1,4 @@
-import { FROG_ELEMENT_ENUM } from "../items";
+import { FROG_ELEMENT_ENUM } from '../items';
 
 export interface ITooltip {
   header?: string;
@@ -11,6 +11,8 @@ export interface ITooltip {
   itemId?: number;
   type?: string;
 }
+
+export interface IItemTooltip extends ITooltip {}
 
 export interface IFrogTooltip extends ITooltip {
   name: string;

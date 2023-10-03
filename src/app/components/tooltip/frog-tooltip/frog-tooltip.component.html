@@ -27,7 +27,7 @@
             <li
               class="w-full text-left justify-center items-center primaryText text-xs px-2"
             >
-              {{ tooltip.tps }} Tadpoles / s
+              {{ parseCost(tooltip.tps) }} Tadpoles / s
             </li>
             <li
               class="w-full text-left justify-center items-center primaryText text-xs px-2"
@@ -37,7 +37,7 @@
             <li
               class="w-full text-left justify-center items-center primaryText text-xs px-2"
             >
-              Total produced: {{ tadpolesProduced }}
+              Total produced: {{ parseCost(tadpolesProduced) }}
             </li>
           </ul>
           <ul class="list-disc mt-2">
@@ -92,7 +92,7 @@
           class="h-[24px] w-[24px] mr-2"
           src="{{environment.assetsPath}}images/tadpole-currency.png"
         />
-        {{ tooltip.evolveCost }}
+        {{ parseCost(tooltip.evolveCost) }}
       </p>
     </div>
     <div *ngIf="!tooltip.evolvesInto" class="flex w-full h-1/4 flex-col">
