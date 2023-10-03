@@ -9,10 +9,19 @@ export var SHOP_INITIAL_STATE: ShopState = {
   items: INITIAL_SHOP
 };
 
+function getShopState() {
+  // Try to gave state from cache
+  var cached_state = localStorage.getItem('shop_state');
+  console.log("getting cached shop state", cached_state)
+  if (cached_state) {
+    SHOP_INITIAL_STATE = JSON.parse(cached_state);
+  }
+  return SHOP_INITIAL_STATE;
+}
 
 // Reduces all inventory actions and automatic updates to inventory
 export const shopReducer = createReducer(
-  SHOP_INITIAL_STATE,
+  getShopState(),
   on(add, (shop_state, action) => {
     // Get item type
     let item_type = action.item_type;

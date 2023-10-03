@@ -44,9 +44,19 @@ export var INVENTORY_INITIAL_STATE: InventoryState = {
   pond: DEFAULT_PONDS[POND_ENUM.WATER_GLASS],
 };
 
+function getInventoryState() {
+  // Try to gave state from cache
+  var cached_state = localStorage.getItem('inventory_state');
+  console.log("getting cached inventory state", cached_state)
+  if (cached_state) {
+    INVENTORY_INITIAL_STATE = JSON.parse(cached_state);
+  }
+  return INVENTORY_INITIAL_STATE;
+}
+
 // Reduces all inventory actions and automatic updates to inventory
 export const inventoryReducer = createReducer(
-  INVENTORY_INITIAL_STATE,
+  getInventoryState(),
   on(add, (inventory_state, action) => {
     // If we recieved a frog ID, add tadpoles to that frog's lifetime production AND the inventory
 

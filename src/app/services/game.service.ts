@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { add, power_down_frog, power_down_king } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
-import { InventoryState } from 'src/models/states';
+import { InventoryState, ShopState } from 'src/models/states';
 import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, KING_ACTIONS } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
@@ -13,20 +13,38 @@ import { SHOP } from 'src/models/default-shop-items';
 })
 export class GameService {
   inventory: InventoryState;
+  shop: ShopState;
 
   constructor(
-    private store: Store<{ inventory: InventoryState }>,
+    private store: Store<{ inventory: InventoryState, shop: ShopState }>,
     private inventoryService: InventoryService
   ) {
     var inventory_state = this.store.select('inventory');
     inventory_state.subscribe((inventory) => {
       this.inventory = inventory;
     });
+
+    var shop_state = this.store.select('shop');
+    shop_state.subscribe((shop) => {
+      this.shop = shop;
+    });
   }
 
   init() {
     console.log('GameService init');
     setInterval(() => this.calculate(), 1000);
+
+    // Cache game state every 5 seconds
+    setInterval(() => this.save(), 5000);
+  }
+
+  private save() {
+    // Save inventory state
+    localStorage.setItem('inventory_state', JSON.stringify(this.inventory));
+
+    // Save shop state
+    localStorage.setItem('shop_state', JSON.stringify(this.shop));
+    console.log("cached gamestate")
   }
 
   private calculate() {
