@@ -279,6 +279,7 @@ tierKeys.forEach((tier) => {
         id: powerUpId,
         defaultItemId: powerup,
         name: DEFAULT_FROGPOWERUPS[powerup].name + ' tier: ' + tier,
+        tier: tier,
         type: SHOP_ITEM_TYPES.FROGPOWERUP,
         cost: 2 * Math.pow(10, tier), // Costs 20 tadpoles
         rate: 0, // Tadpoles per second
