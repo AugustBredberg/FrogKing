@@ -75,7 +75,7 @@ export class FrogTileComponent implements OnInit {
       level: this.frogItem.level,
       negativeText: this.getNegativePowerupTexts(this.frogItem.power_ups),
       positiveText: this.getPositivePowerupTexts(this.frogItem.power_ups),
-      evolveStage: this.frogItem.evolves_into,
+      evolveStage: this.frogItem.evolves_into - 1,
       evolveCost: EVOLUTION_SHOP[this.frogItem.evolves_into]?.cost,
       evolvesInto: EVOLUTION_SHOP[this.frogItem.evolves_into]?.name,
       tps: this.productionRate,
