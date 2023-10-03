@@ -12,3 +12,39 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.frog-bg-gradient {
+  &--1 {
+    background-image: linear-gradient(to bottom right, #48bb78, #0d9488);
+  }
+  &--2 {
+    background-image: linear-gradient(to bottom right, #ff5733, #33ff57);
+  }
+  &--3 {
+    background-image: linear-gradient(to bottom right, #ff3366, #3366ff);
+  }
+  &--4 {
+    background-image: linear-gradient(to bottom right, #ffcc00, #00ccff);
+  }
+  &--5 {
+    background-image: linear-gradient(to bottom right, #9900cc, #cc0099);
+  }
+  &--6 {
+    background-image: linear-gradient(to bottom right, #ff9966, #66ff99);
+  }
+  &--7 {
+    background-image: linear-gradient(to bottom right, #ff99cc, #cc99ff);
+  }
+  &--8 {
+    background-image: linear-gradient(to bottom right, #99ff66, #66ffcc);
+  }
+  &--9 {
+    background-image: linear-gradient(to bottom right, #ff3300, #00ff33);
+  }
+  &--10 {
+    background-image: linear-gradient(to bottom right, #ff3399, #99ff33);
+  }
+  &--11 {
+    background-image: linear-gradient(to bottom right, #cc00ff, #ff00cc);
+  }
+}

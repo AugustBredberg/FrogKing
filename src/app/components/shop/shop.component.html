@@ -1,13 +1,15 @@
 <!-- Available shop items -->
-<div class="flex flex-col w-full py-2 pl-4 leading-3">
+<div class="flex flex-col w-full py-2 px-4 leading-3">
   <p class="text-2xl primaryText">Shop</p>
   <div class="flex flex-col w-full h-auto overflow-y-scroll">
     <div upgradesSection class="flex w-full flex-col">
       <p class="flex text-xl primaryText">Frog Consumables</p>
       <div class="flex w-full h-auto max-h-[50vh]">
-        <div class="grid grid-flow-row grid-cols-3">
+        <div
+          class="grid w-full h-full grid-flow-row grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 justify-between"
+        >
           <ng-container *ngFor="let item of currentlyAvailablePowerUpShopItems">
-            <div >
+            <div>
               <app-shop-item
                 [inventoryState]="inventoryState"
                 [item]="item"
