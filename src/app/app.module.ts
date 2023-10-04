@@ -27,6 +27,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PassivesSectionComponent } from './components/passives-section/passives-section.component';
 import { PassiveComponent } from './components/passive/passive.component';
 import { TargetComponent } from './components/target/target.component';
+import { FrogKingPowerUpComponent } from './components/frog-king-power-up/frog-king-power-up.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TargetComponent } from './components/target/target.component';
     PassivesSectionComponent,
     PassiveComponent,
     TargetComponent,
+    FrogKingPowerUpComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {
   ITooltip,
   TooltipPosition,
 } from 'src/models/components/tooltips';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-tooltip',
@@ -18,7 +19,7 @@ export class ItemTooltipComponent {
   left: number;
   top: number;
   position: TooltipPosition = TooltipPosition.DYNAMICLEFT;
-
+  environment = environment;
   constructor(private numberParserService: NumberParserService) {}
 
   parseCost(cost: number): string {

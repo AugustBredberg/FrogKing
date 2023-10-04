@@ -11,6 +11,7 @@ export class TargetingService {
   private vectorImageSubject = new Subject<string>();
   private vectorItemSubject = new Subject<ShopItem>();
   private targetActive: boolean = false;
+  private targetTooltipText: string = 'Apply';
 
   constructor() {}
 
@@ -35,6 +36,10 @@ export class TargetingService {
     return this.targetActive;
   }
 
+  getTargetTooltipText() {
+    return 'Give item to this frog';
+  }
+
   // Method to set target coordinates
   setTargetCoordinates(x: number, y: number) {
     this.targetCoordinatesSubject.next({ x, y });
@@ -54,5 +59,9 @@ export class TargetingService {
 
   setTargetActive(active: boolean) {
     this.targetActive = active;
+  }
+
+  setTargetTooltipText(text: string) {
+    this.targetTooltipText = text;
   }
 }

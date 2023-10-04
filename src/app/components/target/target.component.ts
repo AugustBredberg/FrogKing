@@ -144,6 +144,18 @@ export class TargetComponent implements OnInit {
     this.targetingService.setTargetActive(false);
   }
 
+  onEscKey() {
+    // Implement your logic here
+    console.log('ESC key pressed');
+    this.targetActive = false;
+    this.targetingService.setTargetActive(false);
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    this.onEscKey();
+  }
+
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     this.targetActive = this.targetingService.getTargetActive();
@@ -170,7 +182,10 @@ export class TargetComponent implements OnInit {
         }
       } else {
         console.log('Target is NOT a child of #frogTile');
+
         if (!target.closest('#shopItem')) {
+          const targetTooltipText = 'Invalid target!';
+          this.targetingService.setTargetTooltipText(targetTooltipText);
           this.targetActive = false;
           this.targetingService.setTargetActive(false);
         }

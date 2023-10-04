@@ -30,7 +30,7 @@
             <p class="text-xs primaryText">{{ productionRate }} Tadpoles / S</p>
           </div>
         </div>
-        <div class="flex w-full h-1/2">
+        <div class="flex w-full h-1/2 flex-col overflow-y-clip">
           <ul class="list-disc mt-2 ml-4">
             <li
               *ngFor="
@@ -41,7 +41,7 @@
               {{ positiveText }}
             </li>
           </ul>
-          <ul class="list-disc mt-2">
+          <ul class="list-disc mt-2 ml-4">
             <li
               *ngFor="
                 let negativeText of getNegativePowerupTexts(frogItem.power_ups)
