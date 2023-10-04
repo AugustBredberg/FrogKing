@@ -14,6 +14,15 @@ export interface ITooltip {
 
 export interface IItemTooltip extends ITooltip {}
 
+export interface ITargetTooltip extends ITooltip {
+  validTarget?: boolean;
+  name?: string;
+  frogId?: string;
+}
+export interface IKingPowerUpTooltip extends ITooltip {
+  name?: string;
+}
+
 export interface IFrogTooltip extends ITooltip {
   name: string;
   frogId?: string;

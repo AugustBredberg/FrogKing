@@ -9,7 +9,7 @@
   <button
     [disabled]="item.cost > inventoryState.tadpoles"
     (click)="buyItem(item)"
-    class="flex bg-black bg-opacity-40 rounded-md w-full h-full cursor-pointer p-1"
+    class="flex bg-black bg-opacity-40 rounded-md w-full h-full cursor-pointer p-1 item-border"
     [ngClass]="
       item.cost > inventoryState.tadpoles
         ? 'opacity-50 item-border--' + item.tier
@@ -20,7 +20,9 @@
       itemImage
       class="w-full h-full itemImage"
       [style.background-image]="
-        'url(' + environment.assetsPath + 'images/items/' +
+        'url(' +
+        environment.assetsPath +
+        'images/items/' +
         item.type +
         '/' +
         'item-image-' +

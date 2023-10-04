@@ -21,6 +21,9 @@ import {
 } from 'src/models/components/tooltips';
 import { NumberParserService } from 'src/app/services/number-parser.service';
 import { ItemTooltipComponent } from '../item-tooltip/item-tooltip.component';
+import { TargetingService } from 'src/app/services/targeting.service';
+import { TargetTooltipComponent } from '../target-tooltip/target-tooltip.component';
+import { KingPowerUpTooltipComponent } from '../king-power-up-tooltip/king-power-up-tooltip.component';
 
 @Directive({
   selector: '[tooltip]',
@@ -38,14 +41,14 @@ export class TooltipDirective {
     private elementRef: ElementRef,
     private appRef: ApplicationRef,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector
+    private injector: Injector,
+    private targetingService: TargetingService
   ) {}
 
   private setTooltipComponentProperties() {
     if (this.componentRef) {
       this.componentRef.instance.tooltip = this.tooltip;
       this.componentRef.instance.position = this.position;
-
       const { left, right, top, bottom } =
         this.elementRef.nativeElement.getBoundingClientRect();
 
@@ -90,12 +93,19 @@ export class TooltipDirective {
         tooltipComponent = ItemTooltipComponent;
         break;
       case 'frog':
-        tooltipComponent = FrogTooltipComponent;
+        const targeting = this.targetingService.getTargetActive();
+        if (targeting) {
+          tooltipComponent = TargetTooltipComponent;
+        } else {
+          tooltipComponent = FrogTooltipComponent;
+        }
         break;
       case 'passive':
         tooltipComponent = PassiveTooltipComponent;
         break;
-
+      case 'kingPowerUp':
+        tooltipComponent = KingPowerUpTooltipComponent;
+        break;
       default:
         // Handle other cases if needed
         tooltipComponent = TooltipComponent;

@@ -21,7 +21,11 @@ export class PassiveComponent implements OnInit {
       element: this.passive.element,
       description: this.passive.description,
       amount: this.passive.amount,
-      image: environment.assetsPath + 'images/elements/element'+this.passive.element+ '.png', //'../../../sr' + this.passive.element + '.png',
+      image:
+        environment.assetsPath +
+        'images/elements/element' +
+        this.passive.element +
+        '.png',
     };
   }
 }

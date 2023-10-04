@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NumberParserService } from 'src/app/services/number-parser.service';
 import { ITooltip, TooltipPosition } from 'src/models/components/tooltips';
+import { TargetingService } from 'src/app/services/targeting.service';
 @Component({
   selector: 'tooltip',
   templateUrl: './tooltip.component.html',
@@ -13,4 +14,5 @@ export class TooltipComponent {
   top: number = 0;
   position: TooltipPosition = TooltipPosition.DEFAULT;
   environment?: any = environment;
+  tooltipText?: string;
 }
