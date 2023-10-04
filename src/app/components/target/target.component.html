@@ -1,8 +1,8 @@
-<div class="max-w-[100vw] max-h-[100vh] overflow-hidden">
+<div class="max-w-[100vw] max-h-[100vh] overflow-hidden z-[10000]">
   <div
     [ngClass]="!targetActive ? 'hidden' : ''"
     id="targetSource"
-    class="absolute w-[100px] h-[100px] targetSource"
+    class="absolute w-[100px] h-[100px] targetSource z-[10000]"
   ></div>
 
   <svg id="targetLineSvg" class="absolute targetLineSvg">

@@ -28,6 +28,7 @@ import { PassivesSectionComponent } from './components/passives-section/passives
 import { PassiveComponent } from './components/passive/passive.component';
 import { TargetComponent } from './components/target/target.component';
 import { FrogKingPowerUpComponent } from './components/frog-king-power-up/frog-king-power-up.component';
+import { FrogPortraitComponent } from './components/frog-portrait/frog-portrait.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FrogKingPowerUpComponent } from './components/frog-king-power-up/frog-k
     PassiveComponent,
     TargetComponent,
     FrogKingPowerUpComponent,
+    FrogPortraitComponent,
   ],
   imports: [
     BrowserModule,
