@@ -1,0 +1,35 @@
+<div
+  class="flex flex-col h-full p-3 w-full text-center rounded-l-md justify-center items-center"
+  [ngClass]="'frog-bg-gradient--' + frogItem.kind"
+>
+  <div class="relative z-10">
+    <img
+      class="frog-tile-icon max-h-full z-10"
+      src="{{ environment.assetsPath }}images/frogs/frog{{ frogItem.kind }}.png"
+    />
+    <ng-container
+      *ngFor="
+        let element of getElementsWithValue(frogItem.element_type) | keyvalue;
+        trackBy: trackElement;
+        let index = index
+      "
+    >
+      <ng-container *ngIf="element.value !== 0">
+        <div
+          *ngIf="elementPositions[index % elementPositions.length]"
+          class="absolute top-0 left-0 opacity-60 -z-10"
+          [style.top]="elementPositions[index % elementPositions.length].top"
+          [style.left]="elementPositions[index % elementPositions.length].left"
+        >
+          <img
+            class="w-16 h-16 -z-10"
+            src="{{ environment.assetsPath }}images/elements/element{{
+              element.key
+            }}.png"
+            [ngStyle]="getImageScaling(element)"
+          />
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

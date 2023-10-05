@@ -7,7 +7,7 @@
         duration: duration of animation in milliseconds.
       -->
     <p
-      class="flex primaryText w-full text-center text-4xl primaryText justify-center"
+      class="flex primaryText w-full text-center text-3xl primaryText justify-center"
       [from]="inventory.tadpolesPreviousState"
       [countUp]="inventory.tadpoles"
       [duration]="1000"
@@ -42,23 +42,49 @@
     </p>
   </div>
   <div class="flex flex-row h-auto w-full justify-evenly">
-    <p
+    <div
       class="flex primaryText w-full bg-black bg-opacity-20 text-center text-md primaryText justify-center primaryText h-full items-center"
     >
-      King level: {{ inventory.frogKing.level }}
-    </p>
+      <div class="flex w-full flex-col h-auto py-2">
+        <p
+          class="primaryText flex w-full h-1/2 items-center justify-center no-margin"
+        >
+          King level
+        </p>
+        <p
+          class="primaryText flex w-full h-1/2 items-center text-center justify-center no-margin"
+        >
+          {{ inventory.frogKing.level }}
+        </p>
+      </div>
+    </div>
     <button
       class="flex w-full h-full primaryText bg-black bg-opacity-20 justify-center hover:bg-opacity-40"
       [disabled]="production && inventory.tadpoles < getKingLevelUpCost()"
       (click)="levelUpKing()"
     >
-      <p class="primaryText flex h-full items-center">
-        Upgrade king {{ getKingLevelUpCost() }}
-      </p>
+      <div class="flex w-full flex-col h-auto py-2 -mb-2">
+        <p
+          class="primaryText flex w-full h-full items-center justify-center no-margin"
+        >
+          Upgrade king
+        </p>
+        <p
+          class="h-auto text-left primaryText text-sm flex items-center justify-center no-margin"
+        >
+          <img
+            class="h-[24px] w-[24px] mr-2"
+            src="{{ environment.assetsPath }}images/tadpole-currency.png"
+          />
+          {{ getKingLevelUpCost() }}
+        </p>
+      </div>
     </button>
   </div>
-  <div *ngFor="let power of inventory.frogKing.powerUps">
-    {{ power.name }}
+  <div class="flex flex-col w-32 absolute top-12 left-2">
+    <div *ngFor="let power of inventory.frogKing.powerUps" class="flex mt-2">
+      <app-frog-king-power-up [power]="power"></app-frog-king-power-up>
+    </div>
   </div>
 </div>
 

@@ -14,11 +14,12 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { NumberParserService } from 'src/app/services/number-parser.service';
 import { ShopService } from 'src/app/services/shop.service';
 import { environment } from 'src/environments/environment';
+import { IKingPowerUpTooltip } from 'src/models/components/tooltips';
 import { KING_LEVEL_SHOP } from 'src/models/default-shop-items';
 import { KING_ACTIONS } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryState } from 'src/models/states';
-
+import { TooltipPosition } from 'src/models/components/tooltips';
 @Component({
   selector: 'app-frog-king-section',
   templateUrl: './frog-king-section.component.html',
@@ -58,9 +59,11 @@ export class FrogKingSectionComponent {
   inventory: InventoryState;
   production: boolean = environment.production;
   pulsateState = 'normal';
-
+  environment = environment;
+  tooltipPosition = TooltipPosition;
   hitmarks: { tp: number; x: number; y: number; visible: boolean }[] = [];
   productionRate: number = 0;
+  tooltipData: IKingPowerUpTooltip;
   constructor(
     private store: Store<{ inventory: InventoryState }>,
     private inventoryService: InventoryService,

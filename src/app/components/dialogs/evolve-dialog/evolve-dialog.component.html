@@ -21,7 +21,9 @@
           <div class="w-full h-full">
             <img
               class="frog-evolve-icon w-full"
-              src="{{environment.assetsPath}}images/elements/element{{ element }}.png"
+              src="{{ environment.assetsPath }}images/elements/element{{
+                element
+              }}.png"
             />
           </div>
         </div>
@@ -41,11 +43,11 @@
         </li>
       </ul>
     </div>
-    <div class="w-full h-auto">
+    <div class="w-full h-full justify-center items-center flex">
       <button
         [mat-dialog-close]="selectedOption"
         *ngIf="selectedOption"
-        class="bg-green-600 py-2 px-5 rounded-md items-end flex m-auto justify-end"
+        class="bg-green-600 py-2 px-5 rounded-md flex mx-auto"
       >
         <div class="primaryText flex h-full m-auto">Confirm Evolution</div>
       </button>
