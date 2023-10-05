@@ -43,7 +43,6 @@ export class GameComponent implements OnInit {
   }
 
   spawn() {
-    console.log('Spawn');
     this.inventoryService.kingClicked(1);
   }
 

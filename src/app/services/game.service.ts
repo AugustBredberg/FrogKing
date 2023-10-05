@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
-import { add, power_down_frog, power_down_king } from 'src/app/inventory-actions';
+import {
+  add,
+  power_down_frog,
+  power_down_king,
+} from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState, ShopState } from 'src/models/states';
-import { ElementPowerUpItem, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, KING_ACTIONS } from 'src/models/items';
+import {
+  ElementPowerUpItem,
+  FROG_POWERUP_SIDE_EFFECT_ENUM,
+  FrogItem,
+  FrogPowerUpItem,
+  KING_ACTIONS,
+  KingPowerUpItem,
+} from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
 import { DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
@@ -16,7 +27,7 @@ export class GameService {
   shop: ShopState;
 
   constructor(
-    private store: Store<{ inventory: InventoryState, shop: ShopState }>,
+    private store: Store<{ inventory: InventoryState; shop: ShopState }>,
     private inventoryService: InventoryService
   ) {
     var inventory_state = this.store.select('inventory');
@@ -44,13 +55,18 @@ export class GameService {
 
     // Save shop state
     localStorage.setItem('shop_state', JSON.stringify(this.shop));
-    console.log("cached gamestate")
   }
 
   private calculate() {
     var frogs = this.inventory.frogs;
     var store = this.store;
     var frogKeys = Object.keys(frogs);
+
+    // Check if king powers are expired
+    var king = this.inventory.frogKing;
+    king.powerUps.forEach((power_up) => {
+      this.checkKingPowerUpExpiration(power_up);
+    });
 
     var totalTadpoleRate = 0;
     frogKeys.forEach((frogKey: string) => {
@@ -71,7 +87,8 @@ export class GameService {
   }
 
   public calculateKingLevelUpCost() {
-    var king_levelup_shop_item = SHOP[SHOP_ITEM_TYPES.KINGLEVELUP][KING_ACTIONS.LEVELUP];
+    var king_levelup_shop_item =
+      SHOP[SHOP_ITEM_TYPES.KINGLEVELUP][KING_ACTIONS.LEVELUP];
     var king = this.inventory.frogKing;
     var cost = king_levelup_shop_item.cost;
     cost += cost * king.level * king_levelup_shop_item.cost_multiplier;
@@ -84,25 +101,17 @@ export class GameService {
 
     // Find new production rate after applying powerups
     if (king.powerUps.length > 0) {
-      var power_up_production = this.calculateKingPowerUpProduction(tadpole_rate);
+      var power_up_production =
+        this.calculateKingPowerUpProduction(tadpole_rate);
       tadpole_rate = power_up_production;
     }
     return +tadpole_rate.toFixed(2);
   }
-  public calculateKingPowerUpProduction(tadpole_rate: number){
+  public calculateKingPowerUpProduction(tadpole_rate: number) {
     var king = this.inventory.frogKing;
     var power_ups = king.powerUps;
     var power_up_production = tadpole_rate;
-    power_ups.forEach( (power_up) => {
-      // Remove power-up if expired
-      if (new Date() > power_up.expiration) {
-        // Remove power-up
-        this.store.dispatch(power_down_king({
-          powerUp: power_up.kind
-        }));
-        return;
-      }
-
+    power_ups.forEach((power_up) => {
       power_up_production *= power_up.productionRateMultiplier;
     });
     return power_up_production;
@@ -149,12 +158,11 @@ export class GameService {
     // Check if user has any element powerups
     if (Object.values(this.inventory.elementPowerUps).length > 0) {
       // Find new frog production rate after applying element powerups
-        tadpole_rate = this.calculateElementPowerUpProduction(
-          frogItem,
-          tadpole_rate // 100
-        );
+      tadpole_rate = this.calculateElementPowerUpProduction(
+        frogItem,
+        tadpole_rate // 100
+      );
     }
-
 
     return +tadpole_rate.toFixed(2);
   }
@@ -175,12 +183,8 @@ export class GameService {
       // Remove power-up if expired
       if (new Date() > power_up.expiration) {
         // Remove power-up
-        this.store.dispatch(
-          power_down_frog({
-            frogId: frogItem.id,
-            powerUp: power_up.kind,
-          })
-        );
+        this.checkFrogPowerUpExpiration(frogItem, power_up);
+
         // Handle power up side effects
         power_up.sideEffects.forEach((sideEffect) => {
           var sideEffectItem = DEFAULT_FROGPOWERUPS_SIDE_EFFECTS[sideEffect];
@@ -197,7 +201,35 @@ export class GameService {
     return currentTadpoleRate;
   }
 
-  public calculateElementPowerUpProduction(frogItem: FrogItem, tadpole_rate: number) {
+  private checkKingPowerUpExpiration(power_up: KingPowerUpItem) {
+    if (new Date() > power_up.expiration) {
+      // Remove power-up
+      this.store.dispatch(
+        power_down_king({
+          powerUp: power_up.kind,
+        })
+      );
+    }
+  }
+  private checkFrogPowerUpExpiration(
+    frogItem: FrogItem,
+    power_up: FrogPowerUpItem
+  ) {
+    if (new Date() > power_up.expiration) {
+      // Remove power-up
+      this.store.dispatch(
+        power_down_frog({
+          frogId: frogItem.id,
+          powerUp: power_up.kind,
+        })
+      );
+    }
+  }
+
+  public calculateElementPowerUpProduction(
+    frogItem: FrogItem,
+    tadpole_rate: number
+  ) {
     var accumulated_element_power_up_percent = 0;
 
     // Loop through frog's elements
@@ -208,11 +240,17 @@ export class GameService {
 
       // Check if frog has an element that the current powerup affects
       var frog_current_element_count = frogElementsObj[element];
-      if (frog_current_element_count > 0 && current_element_power_ups?.length > 0) {
+      if (
+        frog_current_element_count > 0 &&
+        current_element_power_ups?.length > 0
+      ) {
         // Add powerup bonus to accumulated_element_power_up_percent
         current_element_power_ups.forEach((element_power_up) => {
-          var total_current_element_count = this.inventory.allElementCount[element];
-          accumulated_element_power_up_percent += element_power_up.productionRatePercent * total_current_element_count;
+          var total_current_element_count =
+            this.inventory.allElementCount[element];
+          accumulated_element_power_up_percent +=
+            element_power_up.productionRatePercent *
+            total_current_element_count;
         });
       }
     });

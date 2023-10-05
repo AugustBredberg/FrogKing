@@ -256,7 +256,7 @@ export class ShopService {
         var negativeEffectsList: string[] = [];
         var itemSummary = {
           name: elementPowerup?.name,
-          description: elementPowerup?.description + " (" + this.inventory.allElementCount[elementstring] + " %)",
+          description: elementPowerup?.description + " (" + this.inventory.allElementCount[elementstring] * elementPowerup.productionRatePercent + " %)",
           positiveEffects: [
             'Increases production rate of ' +
               elementPowerup?.kind +

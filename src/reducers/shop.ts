@@ -13,7 +13,6 @@ export var SHOP_INITIAL_STATE: ShopState = {
 function getShopState() {
   // Try to gave state from cache
   var cached_state = localStorage.getItem('shop_state');
-  console.log('getting cached shop state', cached_state);
   if (cached_state) {
     SHOP_INITIAL_STATE = JSON.parse(cached_state);
   }

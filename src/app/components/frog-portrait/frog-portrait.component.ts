@@ -30,8 +30,6 @@ export class FrogPortraitComponent implements OnInit {
       { top: '60%', left: '5%' },
       { top: '5%', left: '70%' },
     ];
-
-    console.log(this.elementPositions);
   }
 
   getElementsWithValue(elements: { [id: string]: number }): {

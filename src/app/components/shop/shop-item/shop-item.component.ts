@@ -52,7 +52,6 @@ export class ShopItemComponent implements OnInit {
     const shopItemSummary: ShopItemSummary = this.shopService.lookupShopItem(
       this.item
     );
-    console.log(this.item.cost, this.inventoryState.tadpoles);
     this.frogCount = Object.keys(this.inventoryState.frogs).length;
     this.tooltipData = {
       header: this.item.name,
@@ -112,11 +111,5 @@ export class ShopItemComponent implements OnInit {
     );
     this.targetingService.setTargetItem(shop_item);
     this.targetingService.setTargetActive(true);
-
-    // Rest of your code
-    console.log('buy');
-    // var frogId = Object.keys(this.inventoryState.frogs)[0];
-    // this.shopService.buy(shop_item);
-    // this.inventoryService.add(shop_item, frogId);
   }
 }

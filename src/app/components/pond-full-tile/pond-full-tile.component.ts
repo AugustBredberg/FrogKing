@@ -30,7 +30,6 @@ export class PondFullTileComponent {
   }
 
   spawnFrog() {
-    console.log('Evolve tadpole');
     this.shopService.buy(this.evolveTadpoleShopItem);
   }
 }
