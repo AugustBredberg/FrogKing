@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { ShopState } from 'src/models/states';
 import {
   add,
+  add_element_powerup,
   add_frog,
   evolve_frog,
   level_down_frog,
@@ -22,7 +23,7 @@ import {
   FROG_POWERUP_SIDE_EFFECT_ENUM,
   FrogPowerUpSideEffect,
 } from 'src/models/items';
-import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
+import { DEFAULT_ELEMENTPOWERUPS, DEFAULT_FROGPOWERUPS, DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
 
 @Injectable({
   providedIn: 'root',
@@ -104,6 +105,30 @@ export class InventoryService {
           })
         );
         break;
+
+      ////////////////////////
+      /// ELEMENT POWERUPS ///
+      ////////////////////////
+      case SHOP_ITEM_TYPES.ELEMENTPOWERUP:
+        console.log('Applying element powerup ' + product + ' ' + item_type);
+        // get element string (Undead etc) using product int 0,1,2,3 etc
+        var elementstring: string = "";
+        Object.values(FROG_ELEMENT_ENUM).forEach(
+          (element, index) => {
+            if (index == product) {
+              elementstring = element;
+            }
+          }
+        );
+
+        var elementPowerup = DEFAULT_ELEMENTPOWERUPS[elementstring];
+
+        // Add element powerup to inventory
+        this.store.dispatch(
+          add_element_powerup({
+            elementPowerup: elementPowerup,
+          })
+        );
     }
   }
 

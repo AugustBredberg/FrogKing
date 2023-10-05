@@ -34,6 +34,7 @@ export class PassivesSectionComponent {
             const passive: IPassive = {
               element: element as FROG_ELEMENT_ENUM,
               amount: frog.element_type[element],
+              description: this.calculateElementProductionPercentIncrease(element),
             };
             this.passives?.push(passive);
           }
@@ -50,7 +51,18 @@ export class PassivesSectionComponent {
     });
   }
 
+  private calculateElementProductionPercentIncrease(element: string){
+    var totalPercentIncrease = 0;
+    this.inventory.elementPowerUps[element]?.forEach((powerUp) => {
+      totalPercentIncrease += powerUp.productionRatePercent * this.inventory.allElementCount[element];
+    });
+
+    var desc = element + "  frogs have " + totalPercentIncrease + " % increased production rate";
+
+    return desc
+  }
+
   trackElement(index: number, passive: IPassive) {
-    return passive ? passive.amount : undefined;
+    return passive ? passive.amount + passive.description  : undefined;
   }
 }

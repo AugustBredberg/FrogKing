@@ -57,9 +57,12 @@ export class GameComponent implements OnInit {
     this.targetingService.setTargetCoordinates($event.clientX, $event.clientY);
   } // Use nativeElement to access the DOM element directly
 
-  trackFrog(index: number, frog: KeyValue<string, FrogItem>) {
+  trackFrog(inventory: InventoryState, index: number, frog: KeyValue<string, FrogItem>) {
     // Check for changes to frog level and evolution
     var frogPowerupChanges = frog.value.power_ups.map(powerup => powerup.kind).join('');
-    return frog.value ? frog.value.level + frog.value.evolves_into + frogPowerupChanges : undefined;
+
+    // Get length of inventory.elementPowerUps
+    var elementPowerupChanges = Object.values(this.inventory.elementPowerUps).map(powerups => powerups.map(powerup => powerup.kind).join('')).join('');
+    return frog.value ? frog.value.level + frog.value.evolves_into + frogPowerupChanges + elementPowerupChanges : undefined;
   }
 }

@@ -9,6 +9,7 @@ export enum SHOP_ITEM_TYPES {
   KINGPOWERUP, // Levels up the king
   FROGLEVELUP, // Levels up a specific frog
   FROGPOWERUP, // Powers up the frog type that it is applied on (e.g. Runners shoes, FrogRoids, etc.)
+  ELEMENTPOWERUP, // Powers up a specific element (e.g. Holy, Dark, etc.)
   POND, // Increases the capacity of the pond
 }
 

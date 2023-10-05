@@ -81,9 +81,15 @@ export class ShopItemComponent implements OnInit {
       case SHOP_ITEM_TYPES.KINGPOWERUP:
         this.buyKingPowerUp(shop_item);
         break;
+      case SHOP_ITEM_TYPES.ELEMENTPOWERUP:
+        this.buyElementPowerUp(shop_item);
+        break;
     }
   }
   buyKingPowerUp(shop_item: ShopItem) {
+    this.shopService.buy(shop_item);
+  }
+  buyElementPowerUp(shop_item: ShopItem) {
     this.shopService.buy(shop_item);
   }
 

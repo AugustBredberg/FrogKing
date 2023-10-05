@@ -1,5 +1,6 @@
 import {
   EVOLUTION_ENUM,
+  ElementPowerUpItem,
   FROG_ELEMENT_ENUM,
   FROG_POWERUP_ENUM,
   FROG_POWERUP_SIDE_EFFECT_ENUM,
@@ -207,6 +208,61 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     element_type: emptyElements,
     next_possible_element_choices: [],
   },
+};
+
+///////////////////////////////////////////////////////////
+/// ELEMENT POWERUPS
+///////////////////////////////////////////////////////////
+export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
+  [FROG_ELEMENT_ENUM.UNDEAD]: {
+    name: 'Marsch of the dead',
+    kind: FROG_ELEMENT_ENUM.UNDEAD,
+    description:
+      'All ' + FROG_ELEMENT_ENUM.UNDEAD + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.UNDEAD + ' element in the pond.',
+    statusText: 'Part of the dead marsch',
+    productionRatePercent: 1,
+  },
+  [FROG_ELEMENT_ENUM.HOLY]: {
+    name: 'Holy water',
+    kind: FROG_ELEMENT_ENUM.HOLY,
+    description:
+      'All ' + FROG_ELEMENT_ENUM.HOLY + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.HOLY + ' element in the pond.',
+    statusText: 'Baptised in Holy water',
+    productionRatePercent: 1,
+  },
+  [FROG_ELEMENT_ENUM.DARK]: {
+    name: 'Dark magic',
+    kind: FROG_ELEMENT_ENUM.DARK,
+    description:
+      'All ' + FROG_ELEMENT_ENUM.DARK + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.DARK + ' element in the pond.',
+    statusText: 'Dark magic',
+    productionRatePercent: 1,
+  },
+  [FROG_ELEMENT_ENUM.SPIRIT]: {
+    name: 'Spiritual guidance',
+    kind: FROG_ELEMENT_ENUM.SPIRIT,
+    description:
+      'All ' + FROG_ELEMENT_ENUM.SPIRIT + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.SPIRIT + ' element in the pond.',
+    statusText: 'Spiritual guidance',
+    productionRatePercent: 1,
+  },
+  [FROG_ELEMENT_ENUM.PSYCHIC]: {
+    name: 'Psychic powers',
+    kind: FROG_ELEMENT_ENUM.PSYCHIC,
+    description:
+      'All ' + FROG_ELEMENT_ENUM.PSYCHIC + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.PSYCHIC + ' element in the pond.',
+    statusText: 'Psychic powers',
+    productionRatePercent: 1,
+  },
+  [FROG_ELEMENT_ENUM.MIGHTY]: {
+    name: 'Mighty strength',
+    kind: FROG_ELEMENT_ENUM.MIGHTY,
+    description:
+      'All ' + FROG_ELEMENT_ENUM.MIGHTY + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.MIGHTY + ' element in the pond.',
+    statusText: 'Mighty strength',
+    productionRatePercent: 1,
+  },
+
 };
 
 ///////////////////////////////////////////////////////////

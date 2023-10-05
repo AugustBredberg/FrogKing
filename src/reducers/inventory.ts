@@ -18,6 +18,7 @@ import {
 import { createReducer, on } from '@ngrx/store';
 import {
   add,
+  add_element_powerup,
   add_frog,
   evolve_frog,
   level_down_frog,
@@ -31,6 +32,8 @@ import {
   remove_frog,
   upgrade_pond,
 } from '../app/inventory-actions';
+import { generateElementPowerupShopItem } from 'src/models/default-shop-items';
+import { ShopService } from 'src/app/services/shop.service';
 
 export var INVENTORY_INITIAL_STATE: InventoryState = {
   tadpoles: 0,
@@ -42,6 +45,15 @@ export var INVENTORY_INITIAL_STATE: InventoryState = {
   },
   frogs: {},
   pond: DEFAULT_PONDS[POND_ENUM.WATER_GLASS],
+  elementPowerUps: {},
+  allElementCount: {
+    [FROG_ELEMENT_ENUM.UNDEAD]: 0,
+    [FROG_ELEMENT_ENUM.HOLY]: 0,
+    [FROG_ELEMENT_ENUM.DARK]: 0,
+    [FROG_ELEMENT_ENUM.SPIRIT]: 0,
+    [FROG_ELEMENT_ENUM.PSYCHIC]: 0,
+    [FROG_ELEMENT_ENUM.MIGHTY]: 0,
+  },
 };
 
 function getInventoryState() {
@@ -293,12 +305,31 @@ export const inventoryReducer = createReducer(
       new_frog.next_possible_element_choices.sort(() => Math.random() - 0.5);
     }
 
-    // Return inventory with given frog evolved and new element if applicable
+    // Return inventory with given frog evolved and new element if applicable AND with allElementCount updated
     return {
       ...inventory_state,
       frogs: {
         ...inventory_state.frogs,
         [action.frogId]: new_frog,
+      },
+      allElementCount: {
+        ...inventory_state.allElementCount,
+        [newElement]: inventory_state.allElementCount[newElement] + 1,
+      },
+
+    };
+  }),
+  on(add_element_powerup, (inventory_state, action) => {
+    var new_element_powerup = structuredClone(action.elementPowerup);
+    // Add element to list of element-type powerups in inventory
+    return {
+      ...inventory_state,
+      elementPowerUps: {
+        ...inventory_state.elementPowerUps,
+        [new_element_powerup.kind]: [
+          ...(inventory_state.elementPowerUps[new_element_powerup.kind] || []),
+          new_element_powerup,
+        ],
       },
     };
   }),

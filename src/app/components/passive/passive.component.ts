@@ -18,8 +18,9 @@ export class PassiveComponent implements OnInit {
   environment = environment;
   ngOnInit(): void {
     this.tooltipData = {
+      type: 'passive',
       element: this.passive.element,
-      description: this.passive.description,
+      description: this.passive.description || '',
       amount: this.passive.amount,
       image: environment.assetsPath + 'images/elements/element'+this.passive.element+ '.png', //'../../../sr' + this.passive.element + '.png',
     };

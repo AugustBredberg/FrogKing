@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { add, power_down_frog, power_down_king } from 'src/app/inventory-actions';
 import { Store } from '@ngrx/store';
 import { InventoryState, ShopState } from 'src/models/states';
-import { FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, KING_ACTIONS } from 'src/models/items';
+import { ElementPowerUpItem, FROG_POWERUP_SIDE_EFFECT_ENUM, FrogItem, KING_ACTIONS } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryService } from './inventory.service';
 import { DEFAULT_FROGPOWERUPS_SIDE_EFFECTS } from 'src/models/default-items';
@@ -145,6 +145,17 @@ export class GameService {
       );
       tadpole_rate = power_up_production;
     }
+
+    // Check if user has any element powerups
+    if (Object.values(this.inventory.elementPowerUps).length > 0) {
+      // Find new frog production rate after applying element powerups
+        tadpole_rate = this.calculateElementPowerUpProduction(
+          frogItem,
+          tadpole_rate // 100
+        );
+    }
+
+
     return +tadpole_rate.toFixed(2);
   }
   public calculateFrogLevelUpCost(frogItem: FrogItem) {
@@ -184,6 +195,35 @@ export class GameService {
       currentTadpoleRate *= power_up.productionRateMultiplier;
     });
     return currentTadpoleRate;
+  }
+
+  public calculateElementPowerUpProduction(frogItem: FrogItem, tadpole_rate: number) {
+    var accumulated_element_power_up_percent = 0;
+
+    // Loop through frog's elements
+    var frogElementsObj = frogItem.element_type;
+    Object.keys(frogElementsObj).forEach((element) => {
+      // Get list of powerups for current element
+      var current_element_power_ups = this.inventory.elementPowerUps[element];
+
+      // Check if frog has an element that the current powerup affects
+      var frog_current_element_count = frogElementsObj[element];
+      if (frog_current_element_count > 0 && current_element_power_ups?.length > 0) {
+        // Add powerup bonus to accumulated_element_power_up_percent
+        current_element_power_ups.forEach((element_power_up) => {
+          var total_current_element_count = this.inventory.allElementCount[element];
+          accumulated_element_power_up_percent += element_power_up.productionRatePercent * total_current_element_count;
+        });
+      }
+    });
+
+    // Convert percent to multiplier
+    accumulated_element_power_up_percent /= 100;
+
+    // Apply element powerup bonus
+    tadpole_rate += tadpole_rate * accumulated_element_power_up_percent;
+
+    return tadpole_rate;
   }
 
   public getFrogTotalProduced(frogId: string) {

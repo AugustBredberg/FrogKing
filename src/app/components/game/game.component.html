@@ -20,7 +20,7 @@
         <app-header-section></app-header-section>
         <div class="mb-72">
           <div
-            *ngFor="let frog of inventory.frogs | keyvalue; trackBy: trackFrog"
+            *ngFor="let frog of inventory.frogs | keyvalue; trackBy: trackFrog.bind(this, this.inventory)"
             class="w-full min-h-[180px]"
           >
             <app-frog-tile

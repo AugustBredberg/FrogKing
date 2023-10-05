@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {
   EVOLUTION_ENUM,
+  ElementPowerUpItem,
   FROG_ELEMENT_ENUM,
   FROG_POWERUP_ENUM,
   FrogItem,
@@ -71,4 +72,9 @@ export const power_down_frog = createAction(
 export const upgrade_pond = createAction(
   '[Pond] Upgrade',
   props<{ shop_item: ShopItem }>()
+);
+
+export const add_element_powerup = createAction(
+  '[Element Powerup] Add',
+  props<{ elementPowerup: ElementPowerUpItem }>()
 );

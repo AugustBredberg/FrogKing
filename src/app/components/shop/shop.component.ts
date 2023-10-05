@@ -31,7 +31,8 @@ export class ShopComponent {
       this.currentlyAvailablePowerUpShopItems = Object.values(this.shop.items)
         .flatMap((shopType) => Object.values(shopType).filter(item =>
           item.type === SHOP_ITEM_TYPES.FROGPOWERUP ||
-          item.type === SHOP_ITEM_TYPES.KINGPOWERUP))
+          item.type === SHOP_ITEM_TYPES.KINGPOWERUP ||
+          item.type === SHOP_ITEM_TYPES.ELEMENTPOWERUP))
         .sort((a, b) => a.cost - b.cost)
         .slice(0, 12); // Limit the array length to 15 items with shopType FROGPOWERUP
     });

@@ -105,8 +105,21 @@ export enum POND_ENUM {
   NO_UPGRADE = -1,
 }
 
+
 ////////////////////////////////////////////////////////////
-/// POWERUPS
+/// ELEMENT POWERUPS
+////////////////////////////////////////////////////////////
+export interface ElementPowerUpItem extends Item {
+  name: string; // Name of the powerup
+  kind: FROG_ELEMENT_ENUM; // Which element this powerup affects
+  description: string; // Description of the powerup
+  statusText: string; // Text to show in the status bar
+  productionRatePercent: number; // How much the production rate percent is increased by
+}
+
+
+////////////////////////////////////////////////////////////
+/// FROG POWERUPS
 ////////////////////////////////////////////////////////////
 export interface FrogPowerUpItem extends Item {
   name: string;

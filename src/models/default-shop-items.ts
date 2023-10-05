@@ -5,8 +5,9 @@ import {
   FROG_POWERUP_ENUM,
   KING_ACTIONS,
   KING_POWERUP_ENUM,
+  FROG_ELEMENT_ENUM,
 } from './items';
-import { DEFAULT_FROGPOWERUPS, DEFAULT_FROGS } from './default-items';
+import { DEFAULT_ELEMENTPOWERUPS, DEFAULT_FROGPOWERUPS, DEFAULT_FROGS } from './default-items';
 import { SHOP_ITEM_TIER, SHOP_ITEM_TYPES, ShopItem } from './shop-items';
 
 // Each FROG Enum binds to all their related shop items (evolutions, level-ups, frogjuice)
@@ -303,6 +304,29 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
   },
 };
 
+
+export const ELEMENT_POWERUP_SHOP: { [id: string]: ShopItem }  = {};
+
+export function generateElementPowerupShopItem(
+  element: FROG_ELEMENT_ENUM, // Which element this powerup is for
+  amountOfElements: number, // How many 'Dark..' elements the user has gathered
+  previouslyGeneratedPowerups: number, // How many powerups have been generated for any element
+) {
+  var elementIndex: number = Object.keys(FROG_ELEMENT_ENUM).indexOf(element.toUpperCase()); // 1, 2 etc
+  var uniqueElementIndex = elementIndex + amountOfElements * 1000; // 1001, 1002 etc
+  return {
+    id: uniqueElementIndex,
+    defaultItemId: elementIndex,
+    name: DEFAULT_ELEMENTPOWERUPS[element].name,
+    type: SHOP_ITEM_TYPES.ELEMENTPOWERUP,
+    cost: previouslyGeneratedPowerups ? 1000 : Math.pow(100, previouslyGeneratedPowerups + 1) ,
+    // Costs 1000, 10 000, 1 000 000, 100 000 000 tadpoles
+    rate: 0, // Tadpoles per second
+    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
+    cost_multiplier: 0, // Cost multiplier
+  } as ShopItem;
+}
+
 // Automatically populate FROGPOWERUP_SHOP with every DEFAULT_FROGPOWERUP for every SHOP_ITEM_TIER
 export const FROG_POWERUP_SHOP: { [id: string]: ShopItem } = {};
 // Loop through all shop tiers (1-12)
@@ -329,47 +353,9 @@ tierKeys.forEach((tier) => {
       for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
       cost_multiplier: 0, // Cost multiplier
     };
-    console.log('Created powerUp: ', powerUpId);
   });
 });
 
-console.log(tierKeys);
-console.log(powerupKeys);
-
-/*
-export const FROGPOWERUP_SHOP: { [id: string]: ShopItem } = {
-  [FROG_POWERUP_ENUM.FROGROIDS]: {
-    id: FROG_POWERUP_ENUM.FROGROIDS,
-    defaultItemId: FROG_POWERUP_ENUM.FROGROIDS,
-    name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FROGROIDS].name,
-    type: SHOP_ITEM_TYPES.FROGPOWERUP,
-    cost: 20, // Costs 20 tadpoles
-    rate: 0, // Tadpoles per second
-    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0, // Cost multiplier
-  },
-  [FROG_POWERUP_ENUM.FRODKA]: {
-    id: FROG_POWERUP_ENUM.FRODKA,
-    defaultItemId: FROG_POWERUP_ENUM.FRODKA,
-    name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FRODKA].name,
-    type: SHOP_ITEM_TYPES.FROGPOWERUP,
-    cost: 10, // Costs 20 tadpoles
-    rate: 0, // Tadpoles per second
-    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0, // Cost multiplier
-  },
-  [FROG_POWERUP_ENUM.FRABIES]: {
-    id: FROG_POWERUP_ENUM.FRABIES,
-    defaultItemId: FROG_POWERUP_ENUM.FRABIES,
-    name: DEFAULT_FROGPOWERUPS[FROG_POWERUP_ENUM.FRABIES].name,
-    type: SHOP_ITEM_TYPES.FROGPOWERUP,
-    cost: 15, // Costs 20 tadpoles
-    rate: 0, // Tadpoles per second
-    for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0, // Cost multiplier
-  },
-};
-*/
 
 export const POND_SHOP: { [id: string]: ShopItem } = {
   [POND_ENUM.TOILET]: {
@@ -524,6 +510,7 @@ export const SHOP: {
   [SHOP_ITEM_TYPES.EVOLUTION]: EVOLUTION_SHOP,
   [SHOP_ITEM_TYPES.FROGLEVELUP]: LEVEL_SHOP,
   [SHOP_ITEM_TYPES.FROGPOWERUP]: FROG_POWERUP_SHOP,
+  [SHOP_ITEM_TYPES.ELEMENTPOWERUP]: ELEMENT_POWERUP_SHOP,
   [SHOP_ITEM_TYPES.POND]: POND_SHOP,
 };
 
@@ -537,6 +524,7 @@ export const INITIAL_SHOP: {
   [SHOP_ITEM_TYPES.EVOLUTION]: EVOLUTION_SHOP,
   [SHOP_ITEM_TYPES.FROGLEVELUP]: {},
   [SHOP_ITEM_TYPES.FROGPOWERUP]: FROG_POWERUP_SHOP,
+  [SHOP_ITEM_TYPES.ELEMENTPOWERUP]: ELEMENT_POWERUP_SHOP,
   [SHOP_ITEM_TYPES.POND]: {
     [POND_ENUM.TOILET]: POND_SHOP[POND_ENUM.TOILET],
   },

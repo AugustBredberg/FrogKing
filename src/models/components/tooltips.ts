@@ -30,7 +30,7 @@ export interface IFrogTooltip extends ITooltip {
 
 export interface IPassiveTooltip extends ITooltip {
   element: FROG_ELEMENT_ENUM;
-  description?: string;
+  description: string;
   amount: number;
 }
 
