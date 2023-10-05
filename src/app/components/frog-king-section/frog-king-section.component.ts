@@ -20,6 +20,7 @@ import { KING_ACTIONS } from 'src/models/items';
 import { SHOP_ITEM_TYPES } from 'src/models/shop-items';
 import { InventoryState } from 'src/models/states';
 import { TooltipPosition } from 'src/models/components/tooltips';
+import { SoundService } from 'src/app/services/sound.service';
 @Component({
   selector: 'app-frog-king-section',
   templateUrl: './frog-king-section.component.html',
@@ -70,6 +71,7 @@ export class FrogKingSectionComponent {
     private shopService: ShopService,
     private numberParserService: NumberParserService,
     public gameService: GameService,
+    private soundService: SoundService,
     private elementRef: ElementRef
   ) {
     this.inventory$ = store.select('inventory');
@@ -88,7 +90,10 @@ export class FrogKingSectionComponent {
   parseCost(cost: number): string {
     return this.numberParserService.convertToReadableNumber(cost);
   }
+
   spawn(event: MouseEvent) {
+    this.soundService.playClickSound();
+
     // Capture the mouse coordinates
     const mouseX = event.clientX;
     const mouseY = event.clientY;

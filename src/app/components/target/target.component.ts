@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { ShopService } from 'src/app/services/shop.service';
+import { SoundService } from 'src/app/services/sound.service';
 import { TargetingService } from 'src/app/services/targeting.service';
+import { environment } from 'src/environments/environment';
 import { ShopItem } from 'src/models/shop-items';
 
 interface Coordinates {
@@ -28,6 +30,7 @@ export class TargetComponent implements OnInit {
     private targetingService: TargetingService,
     private el: ElementRef,
     private shopService: ShopService,
+    private soundService: SoundService,
     private renderer: Renderer2
   ) {}
 
@@ -173,6 +176,7 @@ export class TargetComponent implements OnInit {
 
           this.shopService.buy(this.targetItem, frogChild.id);
 
+          this.soundService.playFrogSound();
           this.targetingService.setTargetActive(false);
           this.targetActive = false;
         } else {

@@ -45,43 +45,10 @@
     </div>
   </div>
 </div>
-<!-- Centered  -->
-<!-- <div class="flex justify-center">
-    <div class="text-3xl font-bold">
-      Current Tadpoles: -->
-
-<!--
-        from: previous value.
-        countUp: current value.
-        duration: duration of animation in milliseconds.
-      -->
-<!-- <p
-        [from]="inventory.tadpolesPreviousState"
-        [countUp]="(inventory.tadpoles)"
-        [duration]="1000">
-      </p>
-
-    </div>
-  </div>
-  <div class="flex justify-center">
-    <button class="w-20 h-10 bg-slate-300" (click)="spawn()">Spawn</button>
-  </div>
-  <div class="flex justify-center">
-    <button
-      [disabled]="
-        inventory.tadpoles < evolveTadpoleShopItem.cost ||
-        inventory.pond.frog_capacity <= frogsInInventory
-      "
-      (click)="evolveTadpole()"
-      class="rounded-md bg-green-800 p-2"
-    >
-      Evolve tadpole
-    </button>
-  </div>
-
-  <div *ngIf="inventory">
-    <div class="w-full justify-center flex">
-      <app-pond class="w-full"></app-pond>
-    </div>
-    <app-shop [inventoryState]="inventory"></app-shop>
-  </div> -->
+<div class="absolute top-0 right-2 flex flex-row">
+  <button class="flex h-12 w-12 p-1" (click)="openSettings()">
+    <img
+      [src]="environment.assetsPath + 'images/interface/settings-stroke.png'"
+    />
+  </button>
+</div>

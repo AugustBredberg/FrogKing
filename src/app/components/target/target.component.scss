@@ -18,11 +18,13 @@
 }
 
 .targetLine {
+  position: absolute;
   pointer-events: none;
   z-index: 10000;
 }
 
 .targetLineSvg {
+  position: absolute;
   z-index: 10000;
   pointer-events: none;
 }

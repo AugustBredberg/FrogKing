@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 import { inventoryReducer } from '../reducers/inventory';
 import { GameComponent } from './components/game/game.component';
@@ -29,6 +30,8 @@ import { PassiveComponent } from './components/passive/passive.component';
 import { TargetComponent } from './components/target/target.component';
 import { FrogKingPowerUpComponent } from './components/frog-king-power-up/frog-king-power-up.component';
 import { FrogPortraitComponent } from './components/frog-portrait/frog-portrait.component';
+import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { FrogPortraitComponent } from './components/frog-portrait/frog-portrait.
     TargetComponent,
     FrogKingPowerUpComponent,
     FrogPortraitComponent,
+    SettingsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,8 @@ import { FrogPortraitComponent } from './components/frog-portrait/frog-portrait.
     MatButtonModule,
     TooltipModule,
     MatDialogModule,
+    MatSliderModule,
+    FormsModule,
   ],
 
   providers: [MatDialogModule],

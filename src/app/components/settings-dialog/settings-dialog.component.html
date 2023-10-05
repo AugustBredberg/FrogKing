@@ -1,0 +1,70 @@
+<div class="w-full h-full px-6 py-4">
+  <p class="primaryText text-2xl pb-12">Settings</p>
+
+  <div class="flex flex-col w-full h-auto">
+    <p class="primaryText text-lg pb-4">Audio Settings</p>
+    <p class="primaryText text-sm pl-4">Music</p>
+    <div class="relative flex w-full justify-center flex-row">
+      <div class="flex w-12 h-12">
+        <button (click)="toggleMusicMute()">
+          <img [src]="getMusicSoundImage()" />
+        </button>
+      </div>
+      <mat-slider
+        id="soundSlider"
+        min="0"
+        max="10"
+        step="1"
+        showTickMarks
+        discrete
+      >
+        <input
+          #slider
+          matSliderThumb
+          (ngModelChange)="updateMusicSound($event)"
+          [(ngModel)]="musicSliderValue"
+        />
+      </mat-slider>
+
+      <div class="flex w-12 h-12"></div>
+    </div>
+    <div class="flex w-full h-12 justify-end">
+      <p *ngIf="musicSliderValue" class="flex primaryText text-xs opacity-50">
+        Now playing: Shy Little Frog - sushisingz
+      </p>
+    </div>
+    <p class="primaryText text-sm pl-4">Effects</p>
+    <div class="relative flex w-full justify-center flex-row">
+      <div class="flex w-12 h-12">
+        <button (click)="toggleGeneralMute()">
+          <img [src]="getGeneralSoundImage()" />
+        </button>
+      </div>
+      <mat-slider
+        id="soundSlider"
+        min="0"
+        max="10"
+        step="1"
+        showTickMarks
+        discrete
+      >
+        <input
+          #slider
+          matSliderThumb
+          (ngModelChange)="updateGeneralSound($event)"
+          [(ngModel)]="generalSoundSliderValue"
+        />
+      </mat-slider>
+
+      <div class="flex w-12 h-12"></div>
+    </div>
+  </div>
+  <div class="w-full h-12 flex mt-12">
+    <button
+      class="bg-black bg-opacity-40 rounded-md hover:bg-opacity-80"
+      (click)="clearCache()"
+    >
+      <p class="primaryText no-margin px-4 py-2">Clear cache</p>
+    </button>
+  </div>
+</div>
