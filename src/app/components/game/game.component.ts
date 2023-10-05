@@ -47,7 +47,6 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.gameService.init();
-    this.openSettings();
   }
 
   spawn() {
@@ -70,15 +69,14 @@ export class GameComponent implements OnInit {
     frog: KeyValue<string, FrogItem>
   ) {
     // Check for changes to frog level and evolution
-
     var frogPowerupChanges = frog.value.power_ups
       .map((powerup) => powerup.kind)
       .join('');
 
+    // Get length of inventory.elementPowerUps
     var elementPowerupChanges = Object.values(this.inventory.elementPowerUps)
       .map((powerups) => powerups.map((powerup) => powerup.kind).join(''))
       .join('');
-
     return frog.value
       ? frog.value.level +
           frog.value.evolves_into +

@@ -80,5 +80,6 @@ export class SettingsDialogComponent implements OnInit {
   clearCache() {
     window.location.reload();
     localStorage.removeItem('inventory_state');
+    localStorage.removeItem('shop_state');
   }
 }
