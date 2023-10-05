@@ -52,7 +52,7 @@ export const DEFAULT_FROGS: { [id: string]: FrogItem } = {
     evolves_into: EVOLUTION_ENUM.TIER2,
     level: 1,
     level_multiplier: 0.1,
-    production_rate: 2,
+    production_rate: 0.2,
     lifetime_tadpoles_produced: 0,
     power_ups: [],
     element_type: emptyElements,
@@ -218,7 +218,11 @@ export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
     name: 'Marsch of the dead',
     kind: FROG_ELEMENT_ENUM.UNDEAD,
     description:
-      'All ' + FROG_ELEMENT_ENUM.UNDEAD + ' frogs gain 10 % production rate for every ' + FROG_ELEMENT_ENUM.UNDEAD + ' element in the pond.',
+      'All ' +
+      FROG_ELEMENT_ENUM.UNDEAD +
+      ' frogs gain 10 % production rate for every ' +
+      FROG_ELEMENT_ENUM.UNDEAD +
+      ' element in the pond.',
     statusText: 'Part of the dead marsch',
     productionRatePercent: 10,
   },
@@ -226,7 +230,11 @@ export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
     name: 'Holy water',
     kind: FROG_ELEMENT_ENUM.HOLY,
     description:
-      'All ' + FROG_ELEMENT_ENUM.HOLY + ' frogs gain + 10 % production rate for every ' + FROG_ELEMENT_ENUM.HOLY + ' element in the pond.',
+      'All ' +
+      FROG_ELEMENT_ENUM.HOLY +
+      ' frogs gain + 10 % production rate for every ' +
+      FROG_ELEMENT_ENUM.HOLY +
+      ' element in the pond.',
     statusText: 'Baptised in Holy water',
     productionRatePercent: 10,
   },
@@ -234,7 +242,11 @@ export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
     name: 'Dark magic',
     kind: FROG_ELEMENT_ENUM.DARK,
     description:
-      'All ' + FROG_ELEMENT_ENUM.DARK + ' frogs gain + 10 % production rate for every ' + FROG_ELEMENT_ENUM.DARK + ' element in the pond.',
+      'All ' +
+      FROG_ELEMENT_ENUM.DARK +
+      ' frogs gain + 10 % production rate for every ' +
+      FROG_ELEMENT_ENUM.DARK +
+      ' element in the pond.',
     statusText: 'Dark magic',
     productionRatePercent: 10,
   },
@@ -242,7 +254,11 @@ export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
     name: 'Spiritual guidance',
     kind: FROG_ELEMENT_ENUM.SPIRIT,
     description:
-      'All ' + FROG_ELEMENT_ENUM.SPIRIT + ' frogs gain + 10 % production rate for every ' + FROG_ELEMENT_ENUM.SPIRIT + ' element in the pond.',
+      'All ' +
+      FROG_ELEMENT_ENUM.SPIRIT +
+      ' frogs gain + 10 % production rate for every ' +
+      FROG_ELEMENT_ENUM.SPIRIT +
+      ' element in the pond.',
     statusText: 'Spiritual guidance',
     productionRatePercent: 10,
   },
@@ -250,7 +266,11 @@ export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
     name: 'Psychic powers',
     kind: FROG_ELEMENT_ENUM.PSYCHIC,
     description:
-      'All ' + FROG_ELEMENT_ENUM.PSYCHIC + ' frogs gain + 10 % production rate for every ' + FROG_ELEMENT_ENUM.PSYCHIC + ' element in the pond.',
+      'All ' +
+      FROG_ELEMENT_ENUM.PSYCHIC +
+      ' frogs gain + 10 % production rate for every ' +
+      FROG_ELEMENT_ENUM.PSYCHIC +
+      ' element in the pond.',
     statusText: 'Psychic powers',
     productionRatePercent: 10,
   },
@@ -258,11 +278,14 @@ export const DEFAULT_ELEMENTPOWERUPS: { [id: string]: ElementPowerUpItem } = {
     name: 'Mighty strength',
     kind: FROG_ELEMENT_ENUM.MIGHTY,
     description:
-      'All ' + FROG_ELEMENT_ENUM.MIGHTY + ' frogs gain + 1% production rate for every ' + FROG_ELEMENT_ENUM.MIGHTY + ' element in the pond.',
+      'All ' +
+      FROG_ELEMENT_ENUM.MIGHTY +
+      ' frogs gain + 1% production rate for every ' +
+      FROG_ELEMENT_ENUM.MIGHTY +
+      ' element in the pond.',
     statusText: 'Mighty strength',
     productionRatePercent: 10,
   },
-
 };
 
 ///////////////////////////////////////////////////////////
