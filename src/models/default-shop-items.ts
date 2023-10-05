@@ -15,13 +15,13 @@ import {
 import { SHOP_ITEM_TIER, SHOP_ITEM_TYPES, ShopItem } from './shop-items';
 
 const baseFrogCost: number = 20;
-const cost_multiplier = 0.124;
+const cost_multiplier = 0.02;//0.124;
 function calculateFrogCost(tier: EVOLUTION_ENUM) {
   return baseFrogCost * Math.pow(11, tier - 1);
 }
 
 function calculateFrogUpgradeCost(tier: EVOLUTION_ENUM) {
-  return calculateFrogCost(tier) * 0.03;
+  return calculateFrogCost(tier+1) * 0.03;
 }
 
 // Each FROG Enum binds to all their related shop items (evolutions, level-ups, frogjuice)
@@ -211,30 +211,30 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     defaultItemId: EVOLUTION_ENUM.TIER1,
     name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER1].name,
     type: SHOP_ITEM_TYPES.FROGLEVELUP,
-    cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER2),
+    cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER1),
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER2]: {
     id: EVOLUTION_ENUM.TIER2,
     defaultItemId: EVOLUTION_ENUM.TIER2,
     name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER2].name,
     type: SHOP_ITEM_TYPES.FROGLEVELUP,
-    cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER3),
+    cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER2),
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER3]: {
     id: EVOLUTION_ENUM.TIER3,
     defaultItemId: EVOLUTION_ENUM.TIER3,
     name: 'Level up ' + DEFAULT_FROGS[EVOLUTION_ENUM.TIER3].name,
     type: SHOP_ITEM_TYPES.FROGLEVELUP,
-    cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER4), // Evolution costs 800 tadpoles, so level up costs 480 (60%)
+    cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER3), // Evolution costs 800 tadpoles, so level up costs 480 (60%)
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER4]: {
     id: EVOLUTION_ENUM.TIER4,
@@ -244,7 +244,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER4), // Evolution costs 3600 tadpoles, so level up costs 2160 (60%)
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER5]: {
     id: EVOLUTION_ENUM.TIER5,
@@ -254,7 +254,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER5), // Evolution costs 14400 tadpoles, so level up costs 8640 (60%)
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER6]: {
     id: EVOLUTION_ENUM.TIER6,
@@ -264,7 +264,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER6), // Evolution costs 57600 tadpoles, so level up costs 34560 (60%)
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER7]: {
     id: EVOLUTION_ENUM.TIER7,
@@ -274,7 +274,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER7), // Evolution costs 230400 tadpoles, so level up costs 138240 (60%)
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER8]: {
     id: EVOLUTION_ENUM.TIER8,
@@ -284,7 +284,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER8), // Evolution costs 921600 tadpoles, so level up costs 552960 (60%)
     rate: 0, // 0 tadpoles per second
     for: CURRENCY_ENUM.TADPOLE, // Costs tadpoles
-    cost_multiplier: 0.15, // Cost multiplier
+    cost_multiplier: cost_multiplier, // Cost multiplier
   },
   [EVOLUTION_ENUM.TIER9]: {
     id: EVOLUTION_ENUM.TIER9,
@@ -294,7 +294,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER9), // Evolution costs 3686400 tadpoles, so level up costs 2211840 (60%)
     rate: 0,
     for: CURRENCY_ENUM.TADPOLE,
-    cost_multiplier: 0.15,
+    cost_multiplier: cost_multiplier,
   },
   [EVOLUTION_ENUM.TIER10]: {
     id: EVOLUTION_ENUM.TIER10,
@@ -304,7 +304,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER10), // Evolution costs 14745600 tadpoles, so level up costs 8847360 (60%)
     rate: 0,
     for: CURRENCY_ENUM.TADPOLE,
-    cost_multiplier: 0.15,
+    cost_multiplier: cost_multiplier
   },
   [EVOLUTION_ENUM.TIER11]: {
     id: EVOLUTION_ENUM.TIER11,
@@ -314,7 +314,7 @@ export const LEVEL_SHOP: { [id: string]: ShopItem } = {
     cost: calculateFrogUpgradeCost(EVOLUTION_ENUM.TIER11), // Evolution costs 58982400 tadpoles, so level up costs 35389440 (60%)
     rate: 0,
     for: CURRENCY_ENUM.TADPOLE,
-    cost_multiplier: 0.15,
+    cost_multiplier: cost_multiplier
   },
 };
 

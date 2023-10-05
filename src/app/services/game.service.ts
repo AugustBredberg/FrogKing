@@ -168,8 +168,18 @@ export class GameService {
   }
   public calculateFrogLevelUpCost(frogItem: FrogItem) {
     var frog_shop_item = SHOP[SHOP_ITEM_TYPES.FROGLEVELUP][frogItem.kind];
-    var cost = frog_shop_item.cost;
-    cost += cost * frogItem.level * frog_shop_item.cost_multiplier;
+    var cost = frog_shop_item.cost; // 6.6 first time with first frog
+    // Calculate cost of leveling up frog
+    // For each level
+    for(var i=0; i<frogItem.level; i++){
+      // Add cost
+      cost += frog_shop_item.cost * Math.pow(frog_shop_item.cost_multiplier+1, i); // 1.124^level
+    }
+
+    console.log(cost, Math.pow(frog_shop_item.cost_multiplier+1, frogItem.level))
+    // Multiplier^level * base cost + base cost
+    //frog_shop_item.cost_multiplier
+    //cost += cost * frogItem.level * frog_shop_item.cost_multiplier;
     return +cost.toFixed(2);
   }
 
