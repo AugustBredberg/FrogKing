@@ -77,11 +77,16 @@ export class GameComponent implements OnInit {
     var elementPowerupChanges = Object.values(this.inventory.elementPowerUps)
       .map((powerups) => powerups.map((powerup) => powerup.kind).join(''))
       .join('');
+
+    // Check for changes to current elements in inventory
+    var elementChanges = Object.values(this.inventory.allElementCount).join('');
+    console.log("elementChanges: ", elementChanges)
     return frog.value
       ? frog.value.level +
           frog.value.evolves_into +
           frogPowerupChanges +
-          elementPowerupChanges
+          elementPowerupChanges +
+          elementChanges
       : undefined;
   }
 

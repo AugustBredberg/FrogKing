@@ -298,12 +298,12 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     description:
       "Enhance a frog with frogroids. They'll be more productive for a while. But be careful, they might die afterwards.",
     statusText: 'Frog is roided up!',
-    duration: 5, // 5 seconds
+    duration: 60, // 60 seconds
     sideEffects: [
       FROG_POWERUP_SIDE_EFFECT_ENUM.DIE,
       FROG_POWERUP_SIDE_EFFECT_ENUM.LOSE_ALL_LEVELS,
     ],
-    productionRateMultiplier: 3,
+    productionRateMultiplier: 4,
     expiration: new Date(), // Is set when powerup is used
     effectIsPositive: true,
   },
@@ -313,7 +313,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     description:
       "Treat your frog to some frog vodka. They'll produce more tadpoles for a while, but when the effect wears off they might fall asleep.",
     statusText: 'Frog is drunk!',
-    duration: 5, // 5 seconds
+    duration: 90, // 90 seconds
     sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.SLEEP],
     productionRateMultiplier: 1.5,
     expiration: new Date(), // Is set when powerup is used
@@ -325,7 +325,7 @@ export const DEFAULT_FROGPOWERUPS: { [id: string]: FrogPowerUpItem } = {
     description:
       "Inject your frog with frog rabies. They'll produce more tadpoles for a while, but when the effect wears off they get weak for a while",
     statusText: 'Frog is rabid!',
-    duration: 5, // 5 seconds
+    duration: 120, // 120 seconds
     sideEffects: [FROG_POWERUP_SIDE_EFFECT_ENUM.REDUCE_PRODUCTION_RATE],
     productionRateMultiplier: 1.5,
     expiration: new Date(), // Is set when powerup is used
