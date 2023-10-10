@@ -144,6 +144,10 @@ export const inventoryReducer = createReducer(
     let new_frog = structuredClone(DEFAULT_FROGS[action.evolution]);
     new_frog.id = crypto.randomUUID();
 
+    // Add index of frog to start of id (needed to make sure they appear in the right order)
+    var frog_amount = Object.keys(inventory_state.frogs).length || 0;
+    new_frog.id = frog_amount + new_frog.id;
+
     // Set next possible element choices for frog (all elements, shuffled)
     new_frog.next_possible_element_choices = Object.values(
       FROG_ELEMENT_ENUM
