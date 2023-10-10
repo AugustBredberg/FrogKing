@@ -47,6 +47,9 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.gameService.init();
+
+    // Send google analytics event
+    gtag('event', "FrogKing initialized", {});
   }
 
   spawn() {

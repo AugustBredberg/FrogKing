@@ -40,6 +40,9 @@ export class ShopService {
     newFrogElement: FROG_ELEMENT_ENUM = FROG_ELEMENT_ENUM.NONE
   ) {
     var cost = this.production ? item.cost : 0;
+
+    const shopItemTypeAsString = SHOP_ITEM_TYPES[item.type];
+    gtag('event', "Shop_" + shopItemTypeAsString, {});
     switch (item.type) {
       case SHOP_ITEM_TYPES.KINGLEVELUP:
         // Withdraw cost from inventory
