@@ -54,7 +54,6 @@ export class GameComponent implements OnInit {
   }
 
   evolveTadpole() {
-    console.log('Evolve tadpole');
     this.shopService.buy(this.evolveTadpoleShopItem);
   }
 
@@ -80,7 +79,6 @@ export class GameComponent implements OnInit {
 
     // Check for changes to current elements in inventory
     var elementChanges = Object.values(this.inventory.allElementCount).join('');
-    console.log("elementChanges: ", elementChanges)
     return frog.value
       ? frog.value.level +
           frog.value.evolves_into +

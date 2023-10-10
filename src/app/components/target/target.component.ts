@@ -162,7 +162,6 @@ export class TargetComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
     this.targetActive = this.targetingService.getTargetActive();
-    console.log('click', this.targetActive);
     if (this.targetActive) {
       const target = event.target as HTMLElement;
 
@@ -172,7 +171,6 @@ export class TargetComponent implements OnInit {
         const frogChild = frogTileElement.firstElementChild as HTMLElement;
 
         if (frogChild) {
-          console.log('Target is a child of #frogTile', frogChild.id);
 
           this.shopService.buy(this.targetItem, frogChild.id);
 
@@ -180,12 +178,14 @@ export class TargetComponent implements OnInit {
           this.targetingService.setTargetActive(false);
           this.targetActive = false;
         } else {
+          /*
           console.log(
             'Target is a child of #frogTile, but no first child element found'
           );
+          */
         }
       } else {
-        console.log('Target is NOT a child of #frogTile');
+        //console.log('Target is NOT a child of #frogTile');
 
         if (!target.closest('#shopItem')) {
           const targetTooltipText = 'Invalid target!';

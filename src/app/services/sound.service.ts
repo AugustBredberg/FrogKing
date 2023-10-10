@@ -67,7 +67,6 @@ export class SoundService {
   }
 
   toggleEffectsLevel(level: number) {
-    console.log('level', level);
     // Set the volume level of the audio
     this.effectSoundLevel = level;
   }

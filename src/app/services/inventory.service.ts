@@ -39,14 +39,12 @@ export class InventoryService {
 
     switch (item_type) {
       case SHOP_ITEM_TYPES.KINGLEVELUP:
-        console.log('Leveling up king');
         // Level up king
         this.store.dispatch(
           level_up_king()
         );
         break;
       case SHOP_ITEM_TYPES.KINGPOWERUP:
-        console.log('Applying powerup ' + product + ' to king');
 
         this.store.dispatch(
           power_up_king({
@@ -56,7 +54,6 @@ export class InventoryService {
         break;
 
       case SHOP_ITEM_TYPES.POND:
-        console.log('Adding new pond');
         this.store.dispatch(
           upgrade_pond({
             shop_item: item,
@@ -87,7 +84,6 @@ export class InventoryService {
         break;
 
       case SHOP_ITEM_TYPES.FROGPOWERUP:
-        console.log('Applying powerup ' + product + ' ' + item_type);
         this.store.dispatch(
           power_up_frog({
             frogId: uniqueId,
@@ -97,7 +93,6 @@ export class InventoryService {
         break;
 
       case SHOP_ITEM_TYPES.FROGLEVELUP:
-        console.log('Leveling up frog: ' + uniqueId);
         // Level up frog
         this.store.dispatch(
           level_up_frog({
@@ -110,7 +105,6 @@ export class InventoryService {
       /// ELEMENT POWERUPS ///
       ////////////////////////
       case SHOP_ITEM_TYPES.ELEMENTPOWERUP:
-        console.log('Applying element powerup ' + product + ' ' + item_type);
         // get element string (Undead etc) using product int 0,1,2,3 etc
         var elementstring: string = "";
         Object.values(FROG_ELEMENT_ENUM).forEach(
@@ -195,7 +189,6 @@ export class InventoryService {
   }
 
   spendTadpoles(tadpoles: number) {
-    console.log('Spending ' + tadpoles + ' tadpoles');
     // Remove item from shop
     this.store.dispatch(
       remove({

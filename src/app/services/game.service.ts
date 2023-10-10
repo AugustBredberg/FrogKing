@@ -42,7 +42,6 @@ export class GameService {
   }
 
   init() {
-    console.log('GameService init');
     setInterval(() => this.calculate(), 1000);
 
     // Cache game state every 5 seconds
@@ -176,10 +175,6 @@ export class GameService {
       cost += frog_shop_item.cost * Math.pow(frog_shop_item.cost_multiplier+1, i); // 1.124^level
     }
 
-    console.log(cost, Math.pow(frog_shop_item.cost_multiplier+1, frogItem.level))
-    // Multiplier^level * base cost + base cost
-    //frog_shop_item.cost_multiplier
-    //cost += cost * frogItem.level * frog_shop_item.cost_multiplier;
     return +cost.toFixed(2);
   }
 

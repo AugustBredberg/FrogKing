@@ -23,7 +23,7 @@ export const DEFAULT_FROG_KING_POWERUPS: { [id: string]: KingPowerUpItem } = {
     description:
       'The king enters a furious state. Clicking produces tadpoles 10x faster for 30 seconds.',
     statusText: 'Royal Rage!',
-    duration: 5, // 5 seconds
+    duration: 30, // 30 seconds
     //sideEffects: [],
     productionRateMultiplier: 10,
     expiration: new Date(), // Is set when powerup is used

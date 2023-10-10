@@ -42,7 +42,6 @@ export class ShopService {
     var cost = this.production ? item.cost : 0;
     switch (item.type) {
       case SHOP_ITEM_TYPES.KINGLEVELUP:
-        console.log('Buying level up king');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -51,7 +50,6 @@ export class ShopService {
         break;
 
       case SHOP_ITEM_TYPES.KINGPOWERUP:
-        console.log('Buying king powerup');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -68,7 +66,6 @@ export class ShopService {
         break;
 
       case SHOP_ITEM_TYPES.POND:
-        console.log('Buying pond');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -92,7 +89,6 @@ export class ShopService {
         break;
 
       case SHOP_ITEM_TYPES.EVOLUTION:
-        console.log('Buying frog');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -111,7 +107,6 @@ export class ShopService {
         break;
 
       case SHOP_ITEM_TYPES.FROGPOWERUP:
-        console.log('Buying frog juice');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -128,7 +123,6 @@ export class ShopService {
         break;
 
       case SHOP_ITEM_TYPES.FROGLEVELUP:
-        console.log('Buying level up frog');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
@@ -143,7 +137,6 @@ export class ShopService {
       /// ELEMENT POWERUPS ///
       ////////////////////////
       case SHOP_ITEM_TYPES.ELEMENTPOWERUP:
-        console.log('Buying element powerup');
         // Withdraw cost from inventory
         this.invService.spendTadpoles(cost);
 
